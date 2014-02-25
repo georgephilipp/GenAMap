@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Serine</name>
+   <abbreviation>ser</abbreviation>
+   <symbol>s</symbol>
+   <molecular-formula>C3H7NO3</molecular-formula>
+   <molecular-weight>105.09</molecular-weight>
+   <isoelectric-point>5.68</isoelectric-point>
+   <CAS-registry-number>56-45-1</CAS-registry-number>
+</amino-acid>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Glutamine</name>
+   <abbreviation>gln</abbreviation>
+   <symbol>q</symbol>
+   <molecular-formula>C5H10N2O3</molecular-formula>
+   <molecular-weight>146.15</molecular-weight>
+   <isoelectric-point>5.65</isoelectric-point>
+   <CAS-registry-number>56-85-9</CAS-registry-number>
+</amino-acid>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Valine</name>
+   <abbreviation>val</abbreviation>
+   <symbol>v</symbol>
+   <molecular-formula>C5H11NO2</molecular-formula>
+   <molecular-weight>117.15</molecular-weight>
+   <isoelectric-point>5.96</isoelectric-point>
+   <CAS-registry-number>72-18-4</CAS-registry-number>
+</amino-acid>

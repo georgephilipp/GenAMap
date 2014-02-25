@@ -1,0 +1,78 @@
+#set($numberFormat = '##0.0')
+
+#set($package = "JSci.awt")
+#set($api = "AWT")
+#set($className = "Graph2D")
+#set($extendsClassName = "DoubleBufferedCanvas")
+$generator.parse("Graph2D.vm", "${className}.java")
+
+#set($package = "JSci.swing")
+#set($api = "Swing")
+#set($className = "JGraph2D")
+#set($extendsClassName = "JDoubleBufferedComponent")
+$generator.parse("Graph2D.vm", "../swing/${className}.java")
+
+
+#set($package = "JSci.awt")
+#set($api = "AWT")
+#set($className = "BarGraph")
+#set($extendsClassName = "CategoryGraph2D")
+$generator.parse("BarGraph.vm", "${className}.java")
+
+#set($package = "JSci.swing")
+#set($api = "Swing")
+#set($className = "JBarGraph")
+#set($extendsClassName = "JCategoryGraph2D")
+$generator.parse("BarGraph.vm", "../swing/${className}.java")
+
+
+#set($package = "JSci.awt")
+#set($api = "AWT")
+#set($className = "LineTrace")
+#set($extendsClassName = "DoubleBufferedCanvas")
+$generator.parse("LineTrace.vm", "${className}.java")
+
+#set($package = "JSci.swing")
+#set($api = "Swing")
+#set($className = "JLineTrace")
+#set($extendsClassName = "JDoubleBufferedComponent")
+$generator.parse("LineTrace.vm", "../swing/${className}.java")
+
+
+#set($package = "JSci.awt")
+#set($api = "AWT")
+#set($className = "PieChart")
+#set($extendsClassName = "CategoryGraph2D")
+$generator.parse("PieChart.vm", "${className}.java")
+
+#set($package = "JSci.swing")
+#set($api = "Swing")
+#set($className = "JPieChart")
+#set($extendsClassName = "JCategoryGraph2D")
+$generator.parse("PieChart.vm", "../swing/${className}.java")
+
+
+#set($package = "JSci.awt")
+#set($api = "AWT")
+#set($className = "LineGraph")
+#set($extendsClassName = "Graph2D")
+$generator.parse("LineGraph.vm", "${className}.java")
+
+#set($package = "JSci.swing")
+#set($api = "Swing")
+#set($className = "JLineGraph")
+#set($extendsClassName = "JGraph2D")
+$generator.parse("LineGraph.vm", "../swing/${className}.java")
+
+
+#set($package = "JSci.awt")
+#set($api = "AWT")
+#set($className = "Histogram")
+#set($extendsClassName = "DoubleBufferedCanvas")
+$generator.parse("Histogram.vm", "${className}.java")
+
+#set($package = "JSci.swing")
+#set($api = "Swing")
+#set($className = "JHistogram")
+#set($extendsClassName = "JDoubleBufferedComponent")
+$generator.parse("Histogram.vm", "../swing/${className}.java")

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Tyrosine</name>
+   <abbreviation>tyr</abbreviation>
+   <symbol>y</symbol>
+   <molecular-formula>C9H11NO3</molecular-formula>
+   <molecular-weight>181.19</molecular-weight>
+   <isoelectric-point>5.66</isoelectric-point>
+   <CAS-registry-number>60-18-4</CAS-registry-number>
+</amino-acid>

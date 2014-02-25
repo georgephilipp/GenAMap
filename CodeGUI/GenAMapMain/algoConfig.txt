@@ -1,0 +1,20 @@
+Network:
+Correlation	CR1	1
+Corr r^2	CR2	1
+SFNetwork	SFN	3
+TOM	TOM	5
+GLasso	GLO	4
+
+Association:
+GfLasso	GF2	12	1
+TreeLasso	TLS	20	1
+Adaptive Multi-Task Lasso	ADL	23	1
+MPGL	MPG	19	2
+In/Out Lasso	IOL	24	3
+PopAnal	PAA	21	2
+PLINK	PNK	16	0
+Lasso	LAS	8	0
+GcLasso_CD	GCL	9	1
+GcLasso	GC2	13	1
+GfLasso_CD	GFL	2	1
+Wilcoxon Sum Rank	WSR	6	0

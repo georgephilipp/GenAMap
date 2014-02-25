@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Isoleucine</name>
+   <abbreviation>ile</abbreviation>
+   <symbol>i</symbol>
+   <molecular-formula>C6H13NO2</molecular-formula>
+   <molecular-weight>131.17</molecular-weight>
+   <isoelectric-point>5.94</isoelectric-point>
+   <CAS-registry-number>73-32-5</CAS-registry-number>
+</amino-acid>

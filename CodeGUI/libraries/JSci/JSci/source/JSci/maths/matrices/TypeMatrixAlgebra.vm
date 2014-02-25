@@ -1,0 +1,52 @@
+/* AUTO-GENERATED */
+package JSci.maths.matrices;
+
+import java.awt.Dimension;
+import java.util.Hashtable;
+import JSci.maths.algebras.Algebra;
+import JSci.maths.fields.Ring;
+import JSci.maths.groups.AbelianGroup;
+
+public final class ${classType}MatrixAlgebra implements Algebra, Ring {
+	private static final Hashtable algebras = new Hashtable();
+	static ${classType}MatrixAlgebra get(int rows, int cols) {
+		Dimension dim = new Dimension(rows, cols);
+		${classType}MatrixAlgebra algebra = (${classType}MatrixAlgebra) algebras.get(dim);
+		if(algebra == null) {
+			algebra = new ${classType}MatrixAlgebra(rows, cols);
+			algebras.put(dim, algebra);
+		}
+		return algebra;
+	}
+
+	private final int rows;
+	private final int cols;
+	private Abstract${classType}Matrix zero;
+	private Abstract${classType}SquareMatrix one;
+	private ${classType}MatrixAlgebra(int rows, int cols) {
+		this.rows = rows;
+		this.cols = cols;
+	}
+	/**
+	 * Returns the (right) identity.
+	 */
+	public Ring.Member one() {
+		if(one == null)
+			one = ${classType}DiagonalMatrix.identity(cols);
+		return one;
+	}
+	public boolean isOne(Ring.Member r) {
+		return one().equals(r);
+	}
+	public AbelianGroup.Member zero() {
+		if(zero == null)
+			zero = new ${classType}Matrix(rows, cols);
+		return zero;
+	}
+	public boolean isZero(AbelianGroup.Member r) {
+		return zero().equals(r);
+	}
+	public boolean isNegative(AbelianGroup.Member a, AbelianGroup.Member b) {
+		return zero().equals(a.add(b));
+	}
+}

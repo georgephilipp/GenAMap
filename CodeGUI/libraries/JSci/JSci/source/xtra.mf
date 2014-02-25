@@ -1,0 +1,6 @@
+Extension-Name: JSci xtra
+Specification-Vendor: Mark Hale
+Specification-Version: 1.0
+Implementation-Vendor-Id: mark.hale@physics.org
+Implementation-Vendor: Mark Hale
+Implementation-Version: 1.0

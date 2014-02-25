@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Lysine</name>
+   <abbreviation>lys</abbreviation>
+   <symbol>k</symbol>
+   <molecular-formula>C6H14N2O2</molecular-formula>
+   <molecular-weight>146.19</molecular-weight>
+   <isoelectric-point>9.59</isoelectric-point>
+   <CAS-registry-number>39665-12-8</CAS-registry-number>
+</amino-acid>

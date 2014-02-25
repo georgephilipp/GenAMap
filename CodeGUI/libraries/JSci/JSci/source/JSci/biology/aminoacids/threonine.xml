@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Threonine</name>
+   <abbreviation>thr</abbreviation>
+   <symbol>t</symbol>
+   <molecular-formula>C4H9NO3</molecular-formula>
+   <molecular-weight>119.12</molecular-weight>
+   <isoelectric-point>5.64</isoelectric-point>
+   <CAS-registry-number>72-19-5</CAS-registry-number>
+</amino-acid>

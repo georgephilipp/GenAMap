@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE math PUBLIC "-//W3C//DTD MathML 2.0//EN" "http://www.w3.org/Math/DTD/mathml2/mathml2.dtd">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<!-- contents is in question-answer pairs -->
+<apply><plus/><cn>5.0</cn><cn>3</cn></apply>
+<cn>8.0</cn>
+<apply><power/><exponentiale/><apply><power/><cn>1.618</cn><cn type="integer">2</cn></apply></apply>
+<apply><exp/><apply><power/><cn>1.618</cn><cn type="integer">2</cn></apply></apply>
+<apply><plus/><apply><times/><cn>2</cn><ci>x</ci></apply><apply><power/><ci>y</ci><cn>2</cn></apply></apply>
+<mtext>((2.0)*(x))+((y)^(y))</mtext>
+</math>

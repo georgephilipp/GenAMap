@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Glutamic Acid</name>
+   <abbreviation>glu</abbreviation>
+   <symbol>e</symbol>
+   <molecular-formula>C5H9NO4</molecular-formula>
+   <molecular-weight>147.13</molecular-weight>
+   <isoelectric-point>3.22</isoelectric-point>
+   <CAS-registry-number>56-86-0</CAS-registry-number>
+</amino-acid>

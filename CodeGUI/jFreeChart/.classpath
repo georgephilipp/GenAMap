@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/sharetonetwork/lib/gnujaxp.jar"/>
+	<classpathentry kind="lib" path="C:/sharetonetwork/lib/iText-2.1.5.jar"/>
+	<classpathentry kind="lib" path="C:/sharetonetwork/lib/jcommon-1.0.16.jar"/>
+	<classpathentry kind="lib" path="C:/sharetonetwork/lib/junit.jar"/>
+	<classpathentry kind="lib" path="C:/sharetonetwork/lib/servlet.jar"/>
+	<classpathentry kind="lib" path="C:/sharetonetwork/lib/swtgraphics2d.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

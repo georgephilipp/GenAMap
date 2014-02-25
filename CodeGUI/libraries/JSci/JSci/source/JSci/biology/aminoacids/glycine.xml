@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Glycine</name>
+   <abbreviation>gly</abbreviation>
+   <symbol>g</symbol>
+   <molecular-formula>C2H5NO2</molecular-formula>
+   <molecular-weight>75.07</molecular-weight>
+   <isoelectric-point>5.97</isoelectric-point>
+   <CAS-registry-number>56-40-6</CAS-registry-number>
+</amino-acid>

@@ -1,0 +1,46 @@
+#set($classType = "Double")
+#set($algebraicType = "Field")
+#set($numericType = "double")
+#set($nativeType = "double")
+
+#set($coords = ["x", "y"])
+#set($dim = 2)
+#set($className = "${classType}${dim}Vector")
+$generator.parse("TypeNVector.vm", "${className}.java")
+
+#set($coords = ["x", "y", "z"])
+#set($dim = 3)
+#set($className = "${classType}${dim}Vector")
+$generator.parse("TypeNVector.vm", "${className}.java")
+
+
+#set($classType = "Integer")
+#set($algebraicType = "Ring")
+#set($numericType = "integer")
+#set($nativeType = "int")
+
+#set($coords = ["x", "y"])
+#set($dim = 2)
+#set($className = "${classType}${dim}Vector")
+$generator.parse("TypeNVector.vm", "${className}.java")
+
+#set($coords = ["x", "y", "z"])
+#set($dim = 3)
+#set($className = "${classType}${dim}Vector")
+$generator.parse("TypeNVector.vm", "${className}.java")
+
+
+#set($classType = "Complex")
+#set($algebraicType = "Field")
+#set($numericType = "complex")
+#set($nativeType = "double")
+
+#set($coords = ["x", "y"])
+#set($dim = 2)
+#set($className = "${classType}${dim}Vector")
+$generator.parse("ComplexNVector.vm", "${className}.java")
+
+#set($coords = ["x", "y", "z"])
+#set($dim = 3)
+#set($className = "${classType}${dim}Vector")
+$generator.parse("ComplexNVector.vm", "${className}.java")

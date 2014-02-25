@@ -1,0 +1,55 @@
+package JSci.awt;
+
+import java.awt.*;
+
+/**
+* A line graph AWT component.
+* There is some support for the handling of NaN values.
+* @version 1.4
+* @author Mark Hale
+*/
+public class LineGraph extends Graph2D {
+        /**
+        * Constructs a line graph.
+        */
+        public LineGraph(Graph2DModel gm) {
+                super(gm);
+        }
+        /**
+        * Draws the graph data.
+        * Override this method to change how the graph data is plotted.
+        */
+        protected void drawData(Graphics g) {
+// lines
+                Point p1, p2;
+                int i;
+                model.firstSeries();
+                if(model.seriesLength() > 0) {
+                        g.setColor(seriesColor[0]);
+                        drawSeries(g);
+                }
+                for(int n=1;model.nextSeries();n++) {
+                        if(model.seriesLength() > 0) {
+                                g.setColor(seriesColor[n]);
+                                drawSeries(g);
+                        }
+                }
+                super.drawData(g);
+        }
+        private void drawSeries(Graphics g) {
+                Point p1 = null;
+                for(int i=0; i<model.seriesLength(); i++) {
+                        final float y = model.getYCoord(i);
+                        if(Float.isNaN(y)) {
+                                p1 = null;
+                        } else if(p1 == null) {
+                                p1 = dataToScreen(model.getXCoord(i), y);
+                        } else {
+                                Point p2 = dataToScreen(model.getXCoord(i), y);
+                                g.drawLine(p1.x, p1.y, p2.x, p2.y);
+                                p1 = p2;
+                        }
+                }
+        }
+}
+

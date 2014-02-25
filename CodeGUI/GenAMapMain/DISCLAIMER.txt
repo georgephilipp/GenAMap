@@ -1,0 +1,11 @@
+GenAMap is a visualization tool and a front end. All algorithms and data storage happen on our machine at CMU.
+
+Your data will be uploaded onto our machine and all algorithms will be run on this machine. We will be able to track which algorithms you run and what errors you encounter. We hope that this will be helpful to keep your jobs going.
+
+Additionally, for some views data will need to be initialized. This may include storing some data in text files on your local machine. This allows GenAMap to have fast access for large datasets. 
+
+Also note that GenAMap is not ready yet for very large datasets. This functionality is coming along soon. :) But, you may encounter some bumps in the mean time.
+
+If there are any problems or concerns, contact rcurtis@cs.cmu.edu
+
+Enjoy GenAMap!!

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Methionine</name>
+   <abbreviation>met</abbreviation>
+   <symbol>m</symbol>
+   <molecular-formula>C5H11NO2S</molecular-formula>
+   <molecular-weight>149.21</molecular-weight>
+   <isoelectric-point>5.74</isoelectric-point>
+   <CAS-registry-number>63-68-3</CAS-registry-number>
+</amino-acid>

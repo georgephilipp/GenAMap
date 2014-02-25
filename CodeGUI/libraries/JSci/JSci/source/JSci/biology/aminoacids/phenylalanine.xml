@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Phenylalanine</name>
+   <abbreviation>phe</abbreviation>
+   <symbol>f</symbol>
+   <molecular-formula>C9H11NO2</molecular-formula>
+   <molecular-weight>165.19</molecular-weight>
+   <isoelectric-point>5.48</isoelectric-point>
+   <CAS-registry-number>63-91-2</CAS-registry-number>
+</amino-acid>

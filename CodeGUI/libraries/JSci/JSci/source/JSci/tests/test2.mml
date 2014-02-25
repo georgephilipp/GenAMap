@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE math PUBLIC "-//W3C//DTD MathML 2.0//EN" "http://www.w3.org/Math/DTD/mathml2/mathml2.dtd">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<!-- contents is in mathml-code pairs -->
+<apply>
+<ln/>
+<apply>
+<divide/>
+<ci>b</ci>
+<ci>x</ci>
+</apply>
+</apply>
+<mtext>b.divide(x).log()</mtext>
+</math>

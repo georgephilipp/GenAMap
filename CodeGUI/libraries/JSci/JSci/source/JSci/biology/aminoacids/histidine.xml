@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Histidine</name>
+   <abbreviation>his</abbreviation>
+   <symbol>h</symbol>
+   <molecular-formula>C6H9N3O2</molecular-formula>
+   <molecular-weight>155.16</molecular-weight>
+   <isoelectric-point>7.47</isoelectric-point>
+   <CAS-registry-number>71-00-1</CAS-registry-number>
+</amino-acid>

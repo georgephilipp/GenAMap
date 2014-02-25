@@ -1,0 +1,246 @@
+##############################################
+##          CREATE STORED PROCEDURES        ##
+##############################################
+
+# Master copy of all stored procedures
+
+delimiter //
+create function trait_count(tsid INT) returns int
+deterministic
+begin
+declare k int;
+select count(*) into k from trait where traitsetid = tsid;
+return k;
+end
+//
+delimiter ;
+
+delimiter //
+create function insert_list(ttvid INT) returns int
+deterministic
+begin
+declare k int;
+insert into traitlist(list) values(',');
+select LAST_INSERT_ID() INTO k;
+update traittreeval set traitlist = k where id = ttvid;
+return k;
+end
+//
+delimiter ;
+
+delimiter //
+create function create_subset(subsetid INT, intlist LONGTEXT) returns int
+deterministic
+begin 
+declare k INT;
+INSERT INTO traitlist(list) VALUES (intlist);
+SELECT LAST_INSERT_ID() INTO k;
+UPDATE traitsubset SET traitlist = k where id = subsetid;
+return k;
+end
+//
+delimiter ;
+
+delimiter //
+create function insert_go_list_trait (ttvid INT) returns int
+deterministic
+begin
+declare k int;
+insert into golist(list) values(',');
+select LAST_INSERT_ID() INTO k;
+update trait set golist = k where id = ttvid;
+return k;
+end
+// 
+delimiter ;
+
+delimiter //
+create function insert_go_list_ttv (ttvid INT) returns int
+deterministic
+begin declare k int;
+insert into golist(list) values(',');
+select LAST_INSERT_ID() INTO k;
+update traittreeval set golist = k where id = ttvid;
+return k;
+end
+//
+delimiter ;
+
+delimiter //
+create function insert_go_list_subset (tssid INT, golst LONGTEXT) returns INT
+deterministic
+begin declare k int;
+SELECT golist INTO k FROM traitsubset WHERE id = tssid;
+IF k = -1 THEN 
+	INSERT INTO golist(list) VALUES (golst);
+	SELECT LAST_INSERT_ID() INTO k;
+END IF;
+UPDATE traitsubset SET golist = k WHERE id = tssid;
+RETURN k;
+end 
+// 
+delimiter ;
+
+delimiter //
+create function insert_go_list_module (modid INT, golst LONGTEXT) returns INT
+deterministic
+begin declare k int;
+INSERT INTO golist(list) VALUES (golst);
+SELECT LAST_INSERT_ID() INTO k;
+UPDATE netmodule SET golistid = k WHERE id = modid;
+RETURN k;
+end
+// 
+delimiter ;
+
+
+delimiter //
+create function get_ts_id(identifier CHAR(30)) returns int
+deterministic
+begin
+declare id int;
+select traitid into id from jobrun, jobstatus where jobrun.jobid = jobstatus.id AND appID = identifier;
+return id;
+end
+//
+delimiter ;
+
+delimiter //
+create function createNetwork(tsid INT, typed CHAR(3)) returns int
+deterministic
+begin
+declare idi int;
+insert into network (ts, type) values (tsid, typed);
+select MAX(id) into idi from network where ts = tsid AND type = typed;
+return idi;
+end
+//
+delimiter ;
+
+delimiter //
+create function createTree(ts INT, nm CHAR(50)) returns int
+deterministic
+begin
+declare idi int;
+insert into traittree (tsid, name) values (ts,nm);
+select MAX(id) into idi from traittree where tsid=ts AND name = nm;
+return idi;
+end
+//
+delimiter ;
+
+delimiter //
+create function createPopStruct(ms INT, nm CHAR(50)) returns int
+deterministic
+begin
+declare idi int;
+insert into popstruct (markersetid, name) values (ms,nm);
+select MAX(id) into idi from popstruct where markersetid=ms AND name = nm;
+return idi;
+end
+//
+delimiter ;
+
+delimiter //
+create function insertTraitIntoTree(tid INT, lv INT, parid INT, tname CHAR(50)) returns int
+deterministic
+begin
+declare idi int;
+declare trid int;
+declare ts int;
+select tsid into ts from traittree where id = tid;
+select id into trid from trait where name = tname AND traitsetid = ts;
+insert into traittreeval (traitid, parentid, level, ttid) VALUES (trid, parid, lv, tid);
+select MAX(id) into idi from traittreeval where parentid = parid AND traitid = trid;
+return idi;
+end
+//
+delimiter ;
+
+delimiter //
+create function insertTraitIdIntoTree(tid INT, lv INT, parid INT, trid INT) returns int
+deterministic
+begin
+declare idi int;
+insert into traittreeval (traitid, parentid, level, ttid) VALUES (trid, parid, lv, tid);
+select MAX(id) into idi from traittreeval where parentid = parid AND traitid = trid;
+return idi;
+end
+//
+delimiter ;
+
+delimiter //
+create function insertIntoTree(tid INT, lv INT, parid INT) returns int
+deterministic
+begin
+declare idi int;
+insert into traittreeval (parentid, level, ttid) VALUES (parid, lv, tid);
+select MAX(id) into idi from traittreeval where parentid = parid;
+return idi;
+end
+//
+delimiter ;
+
+delimiter //
+create function marker_count(msid INT) returns int
+deterministic
+begin
+declare j int;
+select count(*) into j from marker where markersetid = msid;
+return j;
+end
+//
+delimiter ;
+
+delimiter //
+create function get_ms_id(identifier CHAR(30)) returns int
+deterministic
+begin
+declare id int;
+select markerid into id from jobrun, jobstatus where jobrun.jobid = jobstatus.id AND appID = identifier;
+return id;
+end
+//
+delimiter ;
+
+delimiter //
+create function createAssoc(tsi INT, msi INT, thr FLOAT, nm CHAR(30), nid INT, pval BOOL) returns int
+deterministic
+begin
+declare idi int;
+declare pid int;
+select projectid into pid from traitset where id = tsi;
+insert into assocset (tsid, msid, thresh, name, netid, projectid, ispval) values(tsi, msi, thr, nm, nid, pid, pval);
+select MAX(id) into idi from assocset where tsid = tsi AND msid = msi;
+return idi;
+end 
+//
+delimiter ;
+
+delimiter //
+create function createAssoc_noNet(tsi INT, msi INT, thr FLOAT, nm CHAR(30), pval BOOL) returns int
+deterministic
+begin
+declare idi int;
+declare pid int;
+select projectid into pid from traitset where id = tsi;
+insert into assocset (tsid, msid, thresh, name, projectid, ispval) values(tsi, msi, thr, nm, pid, pval);
+select MAX(id) into idi from assocset where tsid = tsi AND msid = msi;
+return idi;
+end 
+//
+delimiter ;
+
+delimiter //
+create function createGTAssoc(gs INT, ts INT, netid1 INT, netid2 INT, aid INT, nm CHAR(30)) returns int
+deterministic
+begin
+declare idi int;
+declare pid int;
+select projectid into pid from traitset where id = gs;
+insert into genetraitassocset (name, geneid, traitid, genenetid, traitnetid, snpassocid) values(nm, gs, ts, netid1, netid2, aid);
+select MAX(id) into idi from genetraitassocset where geneid = gs and traitid = ts;
+return idi;
+end
+//
+delimiter ;

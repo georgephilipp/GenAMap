@@ -1,0 +1,13 @@
+<!-- entities -->
+
+<!-- the top level element -->
+<!ELEMENT amino-acid (name,abbreviation,symbol,molecular-formula,molecular-weight,isoelectric-point,CAS-registry-number)>
+
+<!-- elements -->
+<!ELEMENT name                      (#PCDATA)>
+<!ELEMENT abbreviation              (#PCDATA)>
+<!ELEMENT symbol                    (#PCDATA)>
+<!ELEMENT molecular-formula         (#PCDATA)>
+<!ELEMENT molecular-weight		(#PCDATA)>
+<!ELEMENT isoelectric-point         (#PCDATA)>
+<!ELEMENT CAS-registry-number		(#PCDATA)>

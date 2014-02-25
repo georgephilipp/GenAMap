@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Asparagine</name>
+   <abbreviation>asn</abbreviation>
+   <symbol>n</symbol>
+   <molecular-formula>C4H8N2O3</molecular-formula>
+   <molecular-weight>132.12</molecular-weight>
+   <isoelectric-point>5.41</isoelectric-point>
+   <CAS-registry-number>5794-13-8</CAS-registry-number>
+</amino-acid>

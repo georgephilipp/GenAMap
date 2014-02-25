@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Alanine</name>
+   <abbreviation>ala</abbreviation>
+   <symbol>a</symbol>
+   <molecular-formula>C3H7NO2</molecular-formula>
+   <molecular-weight>89.09</molecular-weight>
+   <isoelectric-point>6.00</isoelectric-point>
+   <CAS-registry-number>56-41-7</CAS-registry-number>
+</amino-acid>

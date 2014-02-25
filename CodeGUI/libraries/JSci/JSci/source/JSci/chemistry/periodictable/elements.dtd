@@ -1,0 +1,35 @@
+<!-- entities -->
+
+<!ENTITY % series-values "alkali-metal|alkali-earth-metal|halogen|noble-gas|non-metal|metal|rare-earth-metal|transition-metal">
+<!ENTITY % properties "electronegativity,ionization-potentials,covalent-radius,atomic-radius,melting-point,boiling-point,density,specific-heat,electrical-conductivity,thermal-conductivity">
+<!ENTITY % potentials "first,second?,third?,fourth?">
+
+<!-- the top level element -->
+
+<!ELEMENT element (name,symbol,atomic-number,mass-number,%properties;,isotopes?)>
+<!ATTLIST element series (%series-values;) #REQUIRED>
+
+<!-- elements -->
+
+<!ELEMENT name                      (#PCDATA)>
+<!ELEMENT symbol                    (#PCDATA)>
+<!ELEMENT atomic-number             (#PCDATA)>
+<!ELEMENT mass-number               (#PCDATA)>
+<!ELEMENT electronegativity         (#PCDATA)>
+<!ELEMENT ionization-potentials     (%potentials;)>
+   <!ELEMENT first    (#PCDATA)>
+   <!ELEMENT second   (#PCDATA)>
+   <!ELEMENT third    (#PCDATA)>
+   <!ELEMENT fourth   (#PCDATA)>
+<!ELEMENT covalent-radius           (#PCDATA)>
+<!ELEMENT atomic-radius             (#PCDATA)>
+<!ELEMENT melting-point             (#PCDATA)>
+<!ELEMENT boiling-point             (#PCDATA)>
+<!ELEMENT density                   (#PCDATA)>
+<!ELEMENT specific-heat             (#PCDATA)>
+<!ELEMENT electrical-conductivity   (#PCDATA)>
+<!ELEMENT thermal-conductivity      (#PCDATA)>
+<!ELEMENT isotopes                  (isotope,isotope+)>
+<!ELEMENT isotope                   (mass-number,abundance)>
+<!ELEMENT abundance                 (#PCDATA)>
+

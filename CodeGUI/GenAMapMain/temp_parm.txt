@@ -1,0 +1,2 @@
+GF2n036 Assoc3PhenGFLassoGLasso 429 n
+vanilla

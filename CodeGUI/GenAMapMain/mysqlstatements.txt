@@ -1,0 +1,234 @@
+##############################################
+##          CREATE TABLES FOR ALL USERS     ##
+##############################################
+
+# Statements to prepare database for use - only applies to 
+#  general use tables.
+
+INSERT INTO status VALUES('CPT');
+INSERT INTO status VALUES('ERR');
+INSERT INTO status VALUES('RUN');
+INSERT INTO status VALUES('PSD');
+INSERT INTO status VALUES('PSN');
+INSERT INTO status VALUES('INI');
+INSERT INTO status VALUES('CNL');
+
+INSERT INTO jobtype (name, nosteps) VALUES('CORNTWRK', 3);
+INSERT INTO jobtype (name, nosteps) VALUES('GFLASSO', 17);
+INSERT INTO jobtype (name, nosteps) VALUES('SFNTWRK', 6);
+INSERT INTO jobtype (name, nosteps) VALUES('GLASSO', 5);
+INSERT INTO jobtype (name, nosteps) VALUES('TOM', 7);
+INSERT INTO jobtype (name, nosteps) VALUES('WSR', 4);
+INSERT INTO jobtype (name, nosteps) VALUES('HCLUSTR', 3);
+insert into jobtype(name, nosteps) values ('LASSO', 6);
+INSERT INTO jobtype (name, nosteps) values('GCLASSO', 17);
+INSERT INTO jobtype (name, nosteps) VALUES('HCTREE', 3);
+INSERT INTO jobtype (name, nosteps) VALUES ('STRUCTURE', 4);
+INSERT INTO jobtype (name, nosteps) VALUES ('GFLASS2', 17);
+INSERT INTO jobtype (name, nosteps) VALUES ('GCLASS2', 17);
+INSERT INTO jobtype (name, nosteps) VALUES ('PLINK', 3);
+INSERT INTO jobtype (name, nosteps) VALUES ('GENEMOD', 4);
+INSERT INTO jobtype (name, nosteps) VALUES ('TREELASSO', 15);
+INSERT INTO jobtype (name, nosteps) VALUES ('POPANAL', 5);
+INSERT INTO jobtype (name, nosteps) VALUES ('GTASSOC', 6);
+INSERT INTO jobtype (name, nosteps) VALUES ('GTASSOC', 6);
+
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CORPREP', 0, '/exe/netFrontEnd', 1);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CRNTWRK', 1, '/exe/netDriv', 1);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CORCMBN', 2, '/exe/netBackEnd', 1);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CORPREP', 0, '/exe/netFrontEnd', 3);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CRNTWRK', 1, '/exe/netDriv', 3);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('SNF1', 2, '/exe/sfn1', 3);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('SFN2', 3, '/exe/sfn2', 3);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('SFN3', 4, '/exe/sfn3', 3);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CORCMBN', 5, '/exe/netBackEnd', 3);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CORPREP', 0, '/exe/netFrontEnd', 5);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CRNTWRK', 1, '/exe/netDriv', 5);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('SFN1', 2, '/exe/sfn1', 5);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('SFN2', 3, '/exe/sfn2', 5);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('SFN3', 4, '/exe/sfn3', 5);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CORCMBN', 6, '/exe/netBackEnd', 5);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('TOM', 5, '/exe/tom', 5);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('ASCPREP', 0, '/exe/assocFrontEnd', 6);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('WSR', 1, '/exe/wsr', 6);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('WSRTHRSH', 2, '/exe/thresh', 6);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('ASCCMBN', 3, '/exe/assocBackEnd', 6);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('ASCPREP', 0, '/exe/assocFrontEnd', 2);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GLMNET1', 1, '/exe/glmnet.sh', 2);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CVGLMN1', 2, '/exe/runmatlab.sh', 2);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CONNCMP', 3, '/exe/conncomp.jar', 2);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GLMNET2', 4, '/exe/glmnet.sh', 2);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CVGLMN2', 5, '/exe/runmatlab.sh', 2);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('MKRPREP', 6, '/exe/runmatlab.sh', 2);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('SCPREPR', 7, '/exe/runmatlab.sh', 2);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('RUNSPCL', 8, '/exe/runmatlab.sh', 2);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLPREP', 9, '/exe/runmatlab.sh', 2);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLASSO',10, '/exe/runmatlab.sh', 2);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLCVA1',11, '/exe/runmatlab.sh', 2);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLASSO',12, '/exe/runmatlab.sh', 2);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLCVA2',13, '/exe/runmatlab.sh', 2);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLASSO',14, '/exe/runmatlab.sh', 2);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLCVA3',15, '/exe/runmatlab.sh', 2);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('ASCCMBN',16, '/exe/assocBackEnd', 2);
+INSERT INTO step(name, pos, exe, jobtypeid) VALUES ('ASCPREP', 0,  '/exe/assocFrontEnd', 8);
+INSERT INTO step(name, pos, exe, jobtypeid) VALUES ('GLMNET1', 1,  '/exe/Lglmnet.sh', 8);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CVGLMNT1', 2, '/exe/runmatlab.sh', 8);
+INSERT INTO step(name, pos, exe, jobtypeid) VALUES ('GLMNET1', 3,  '/exe/Lglmnet.sh', 8);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CVGLMNT2', 4, '/exe/runmatlab.sh', 8);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('ASCCMBN', 5, '/exe/assocBackEnd', 8);
+
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CSTRFRT', 0, '/exe/clusterFrontEnd', 7);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('HCLUSTR', 1, '/exe/cluster_condor', 7);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CSTRBCK', 2, '/exe/clusterBackEnd', 7);
+
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CSTRFRT', 0, '/exe/clusterFrontEnd', 10);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('HCTREEE', 1, '/exe/tree', 10);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CSTRBCK', 2, '/exe/clusterBackEnd', 10);
+
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('ASCPREP', 0, '/exe/assocFrontEnd', 9);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GLMNET1', 1, '/exe/glmnet.sh', 9);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CVGLMN1', 2, '/exe/runmatlab.sh', 9);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CONNCMP', 3, '/exe/conncomp.jar', 9);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GLMNET2', 4, '/exe/glmnet.sh', 9);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CVGLMN2', 5, '/exe/runmatlab.sh', 9);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('MKRPREP', 6, '/exe/runmatlab.sh', 9);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('SCPREPR', 7, '/exe/runmatlab.sh', 9);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('RUNSPCL', 8, '/exe/runmatlab.sh', 9);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLPREP', 9, '/exe/runmatlab.sh', 9);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLASSO',10, '/exe/matlab.sh', 9);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLCVA1',11, '/exe/runmatlab.sh', 9);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLASSO',12, '/exe/runmatlab.sh', 9);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLCVA2',13, '/exe/runmatlab.sh', 9);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLASSO',14, '/exe/runmatlab.sh', 9);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLCVA3',15, '/exe/runmatlab.sh', 9);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('ASCCMBN',16, '/exe/assocBackEnd', 9);
+
+
+
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('ASCPREP', 0, '/exe/assocFrontEnd', 12);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GLMNET1', 1, '/exe/glmnet2.sh', 12);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CVGLMN1', 2, '/exe/runmatlab.sh', 12);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CONNCMP', 3, '/exe/conncomp.jar', 12);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GLMNET2', 4, '/exe/glmnet2.sh', 12);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CVGLMN2', 5, '/exe/runmatlab.sh', 12);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('MKRPREP', 6, '/exe/runmatlab.sh', 12);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('SCPREPR', 7, '/exe/runmatlab.sh', 12);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('RUNSPCL', 8, '/exe/runmatlab.sh', 12);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLPREP', 9, '/exe/runmatlab.sh', 12);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLASSO',10, '/exe/runmatlab.sh', 12);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLCVA1',11, '/exe/runmatlab.sh', 12);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLASSO',12, '/exe/runmatlab.sh', 12);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLCVA2',13, '/exe/runmatlab.sh', 12);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLASSO',14, '/exe/runmatlab.sh', 12);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLCVA3',15, '/exe/runmatlab.sh', 12);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('ASCCMBN',16, '/exe/assocBackEnd', 12);
+
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('ASCPREP', 0, '/exe/assocFrontEnd', 13);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GLMNET1', 1, '/exe/glmnet2.sh', 13);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CVGLMN1', 2, '/exe/runmatlab.sh', 13);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CONNCMP', 3, '/exe/conncomp.jar', 13);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GLMNET2', 4, '/exe/glmnet2.sh', 13);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CVGLMN2', 5, '/exe/runmatlab.sh', 13);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('MKRPREP', 6, '/exe/runmatlab.sh', 13);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('SCPREPR', 7, '/exe/runmatlab.sh', 13);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('RUNSPCL', 8, '/exe/runmatlab.sh', 13);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLPREP', 9, '/exe/runmatlab.sh', 13);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLASSO',10, '/exe/runmatlab.sh', 13);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLCVA1',11, '/exe/runmatlab.sh', 13);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLASSO',12, '/exe/runmatlab.sh', 13);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLCVA2',13, '/exe/runmatlab.sh', 13);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLASSO',14, '/exe/runmatlab.sh', 13);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLCVA3',15, '/exe/runmatlab.sh', 13);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('ASCCMBN',16, '/exe/assocBackEnd', 13);
+
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('ASCPREP', 0, '/exe/assocFrontEnd', 20);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GLMNET1', 1, '/exe/glmnet2.sh', 20);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CVGLMN1', 2, '/exe/runmatlab.sh', 20);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CONNCMP', 3, '/exe/conncomp.jar', 20);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GLMNET2', 4, '/exe/glmnet2.sh', 20);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CVGLMN2', 5, '/exe/runmatlab.sh', 20);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('MKRPREP', 6, '/exe/runmatlab.sh', 20);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('SCPREPR', 7, '/exe/runmatlab.sh', 20);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('RUNSPCL', 8, '/exe/runmatlab.sh', 20);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GFLPREP', 9, '/exe/runmatlab.sh', 20);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('TREELSO',10, '/exe/runmatlab.sh', 20);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('TRECVA1',11, '/exe/runmatlab.sh', 20);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('TREELSO',12, '/exe/runmatlab.sh', 20);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('TRECVA2',13, '/exe/runmatlab.sh', 20);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('ASCCMBN',14, '/exe/assocBackEnd', 20);
+
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GTAFRNT', 0, '/exe/gtassocFrontEnd', 22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GGFPREP', 1, '/exe/runmatlab.sh', 22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('LASSORN', 2, '/exe/simpleLasso.sh',22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('VLDTLSO', 3, '/exe/runmatlab.sh',22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GGFLASO', 4, '/exe/ggflasso', 22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CRSVLDT', 5, '/exe/runmatlab.sh', 22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GGFLASO', 6, '/exe/ggflasso', 22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CRSVLDT', 7, '/exe/runmatlab.sh', 22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GGFLASO', 8, '/exe/ggflasso', 22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CRSVLDT', 9, '/exe/runmatlab.sh', 22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GGFLASO', 10, '/exe/ggflasso', 22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CRSVLDT', 11, '/exe/runmatlab.sh', 22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GGFLASO', 12, '/exe/ggflasso', 22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CRSVLDT', 13, '/exe/runmatlab.sh', 22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GGFLASO', 14, '/exe/ggflasso', 22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CRSVLDT', 15, '/exe/runmatlab.sh', 22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GGFLASO', 16, '/exe/ggflasso', 22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('CRSVLDT', 17, '/exe/runmatlab.sh', 22);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GTABACK', 18, '/exe/gtassocBackEnd', 22);
+
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('ASCPREP', 0, '/exe/assocFrontEnd', 16);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('TRNSPOS', 1, '/exe/transpose.sh', 16);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('TRNSPOS', 2, '/exe/transpose.sh', 16);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('RNPLINK', 3, '/exe/plink', 16);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('ASCCMBN', 4, '/exe/assocBackEnd', 16);
+
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('ASCPREP', 0, '/exe/assocFrontEnd', 21, 5);
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('TRNSPOS', 1, '/exe/transpose.sh', 21, 18);
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('RNPLINK', 2, '/exe/plink', 21, -2);
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('RNTT2X2', 3, '/exe/runmatlab.sh', 21, -3);
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('ASCCMBN', 4, '/exe/popBackEnd', 21, 10);
+
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GMDFRNT', 0, '/exe/genemodFrontEnd', 18);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('MODIDTY', 1, '/exe/runmatlab.sh', 18);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('EQTLCLC', 2, '/exe/runeqtlanal.sh', 18);
+INSERT INTO step (name, pos, exe, jobtypeid) VALUES ('GMDBCED', 3, '/exe/genmodBackEnd', 18);
+
+INSERT INTO SPECIES (name) VALUES ('Arabidopsis thaliana'), ('Bacillus anthracis Ames'), ('Bos taurus'), ('Brachydanio rerio'), ('Caenorhabditis elegans'), ('Campylobacter jejuni RM1221'), ('Coxiella burnetii RSA'), ('Dehalococcoides ethenogenes 195'), ('Drosophila melanogaster'), ('Gallus gallus'), ('Geobacter sulfurreducens PCA'), ('Homo Sapiens'), ('Listeria monocytogenes 4b F2365'), ('Methylococcus capsulatus Bath'), ('Mus musculus'), ('Oryza sativa'), ('Plasmodium falsiparum'), ('Pseudomonas syringae DC3000'), ('Rattus norvegicus'), ('Saccharomyces cerevisiae'),('Schizosaccharomyces pombe'),('Shewanella oneidensis MR-1'),('Silicibacter pomeroyi DSS-3'),('Trypanosoma brucei');
+
+insert into project (id, name, deleted) values (1, 'treeroots', 1);
+insert into traitset (id, name, projectid) values (1, 'treeroots', 1);
+INSERT INTO traittree (tsid, name, loadcmpt) values (1, 'treeroots', 0); 
+INSERT INTO traittreeval (parentid, level, ttid) VALUES (1, 0, 1);
+
+#insert commands
+
+INSERT INTO jobstatus (appid) VALUES ('CR10001');
+INSERT INTO error (jobid, error) VALUES (1, 'Hello world!');
+INSERT INTO step(name, exe, jobtypeid) VALUES ('BOGUS', '/home/rcurtis', 1);
+INSERT INTO jobrun (jobtype, loc, jobid) VALUES (1, '/home/rcurtis/', 1);
+
+CREATE TABLE feature(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(200), markersetid INT NOT NULL, FOREIGN KEY (markersetid) REFERENCES markerset(id) ON DELETE CASCADE) ENGINE=INNODB;
+CREATE TABLE featureval(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,featureid INT NOT NULL, markerid INT NOT NULL, value FLOAT NOT NULL, FOREIGN KEY (featureid) REFERENCES feature(id) ON DELETE CASCADE, FOREIGN KEY (markerid) REFERENCES marker(id) ON DELETE CASCADE) ENGINE=INNODB;
+
+insert into jobtype (name, nosteps) values ('ADL',8);
+
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('ADL', 0, '/exe/assocFrontEnd', 23, 5);
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('ADL', 1, '/exe/conncomp.jar', 23, 5);
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('ADL', 2, '/exe/runmatlab.sh', 23, 5);
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('ADL', 3, '/exe/runmatlab.sh', 23, 5);
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('ADL', 4, '/exe/runmatlab.sh', 23, 5);
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('ADL', 5, '/exe/runmatlab.sh', 23, 5);
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('ADL', 6, '/exe/runmatlab.sh', 23, 5);
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('ADL', 7, '/exe/assocBackEnd', 23, 5);
+
+INSERT INTO jobtype (name, nosteps) VALUES ('IOL', 6);
+
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('IOL', 0, '/exe/assocFrontEnd', 24, 5);
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('IOL', 1, '/exe/runmatlab.sh', 24, 5);
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('IOL', 2, '/exe/runmatlab.sh', 24, 5);
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('IOL', 3, '/exe/runmatlab.sh', 24, 5);
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('IOL', 4, '/exe/runmatlab.sh', 24, 5);
+INSERT INTO step (name, pos, exe, jobtypeid, priority) VALUES ('IOL', 5, '/exe/assocBackEnd', 24, 5);
+
+

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Leucine</name>
+   <abbreviation>leu</abbreviation>
+   <symbol>l</symbol>
+   <molecular-formula>C6H13NO2</molecular-formula>
+   <molecular-weight>131.17</molecular-weight>
+   <isoelectric-point>5.98</isoelectric-point>
+   <CAS-registry-number>61-90-5</CAS-registry-number>
+</amino-acid>

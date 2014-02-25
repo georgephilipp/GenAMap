@@ -1,0 +1,23 @@
+CREATE USER 'assocmap'@'%' IDENTIFIED BY 'Thisisadumbpassword*';
+CREATE USER 'assocmap'@'localhost' IDENTIFIED BY 'Thisisadumbpassword*';
+GRANT SELECT, INSERT ON geneassoc.* TO 'assocmap'@'localhost';
+GRANT SELECT, INSERT ON geneassoc.* TO 'assocmap'@'%';
+GRANT UPDATE ON geneassoc.* TO 'assocmap'@'localhost';
+GRANT UPDATE ON geneassoc.* TO 'assocmap'@'cogito.ml.cmu.edu';
+GRANT UPDATE ON geneassoc.* TO 'assocmap'@'cogito.ml.cmu.edu';
+GRANT DELETE ON geneassoc.* TO 'assocmap'@'cogito.ml.cmu.edu';
+GRANT EXECUTE ON geneassoc.* TO 'assocmap'@'localhost';
+GRANT EXECUTE ON geneassoc.* TO 'assocmap'@'cogito.ml.cmu.edu';
+GRANT UPDATE, EXECUTE ON geneassoc.* TO 'assocmap'@'%';
+
+
+GRANT SELECT, INSERT ON genamap_beta2.* TO 'assocmap'@'localhost';
+GRANT SELECT, INSERT ON genamap_beta2.* TO 'assocmap'@'%';
+GRANT UPDATE ON genamap_beta2.* TO 'assocmap'@'localhost';
+GRANT UPDATE ON genamap_beta2.* TO 'assocmap'@'cogito.ml.cmu.edu';
+GRANT UPDATE ON genamap_beta2.* TO 'assocmap'@'cogito.ml.cmu.edu';
+GRANT DELETE ON genamap_beta2.* TO 'assocmap'@'cogito.ml.cmu.edu';
+GRANT DELETE ON genamap_beta2.* TO 'assocmap'@'localhost';
+GRANT EXECUTE ON genamap_beta2.* TO 'assocmap'@'localhost';
+GRANT EXECUTE ON genamap_beta2.* TO 'assocmap'@'cogito.ml.cmu.edu';
+GRANT UPDATE, EXECUTE ON genamap_beta2.* TO 'assocmap'@'%';

@@ -1,0 +1,3 @@
+Main-Class: service.Driver
+Class-Path: mysql-connector.jar
+

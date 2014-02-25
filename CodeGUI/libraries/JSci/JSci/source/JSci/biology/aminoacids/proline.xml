@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Proline</name>
+   <abbreviation>pro</abbreviation>
+   <symbol>p</symbol>
+   <molecular-formula>C5H9NO2</molecular-formula>
+   <molecular-weight>115.13</molecular-weight>
+   <isoelectric-point>6.30</isoelectric-point>
+   <CAS-registry-number>147-85-3</CAS-registry-number>
+</amino-acid>

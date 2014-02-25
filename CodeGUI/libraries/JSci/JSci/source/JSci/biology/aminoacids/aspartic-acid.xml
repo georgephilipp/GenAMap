@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Aspartic Acid</name>
+   <abbreviation>asp</abbreviation>
+   <symbol>d</symbol>
+   <molecular-formula>C4H7NO4</molecular-formula>
+   <molecular-weight>133.10</molecular-weight>
+   <isoelectric-point>2.77</isoelectric-point>
+   <CAS-registry-number>56-84-8</CAS-registry-number>
+</amino-acid>

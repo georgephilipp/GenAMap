@@ -1,0 +1,562 @@
+/* AUTO-GENERATED */
+package JSci.maths.vectors;
+
+import JSci.GlobalSettings;
+import JSci.maths.Complex;
+import JSci.maths.ComplexMapping;
+import JSci.maths.MathDouble;
+import JSci.maths.MathInteger;
+import JSci.maths.groups.AbelianGroup;
+import JSci.maths.algebras.Module;
+import JSci.maths.algebras.VectorSpace;
+import JSci.maths.algebras.HilbertSpace;
+import JSci.maths.fields.Ring;
+import JSci.maths.fields.Field;
+
+/**
+* An optimised implementation of a ${dim}D ${numericType} vector.
+* @version 2.2
+* @author Mark Hale
+*/
+public final class ${className} extends Abstract${classType}Vector {
+#foreach ($var in $coords)
+        protected ${nativeType} ${var}re, ${var}im;
+#end
+        /**
+        * Constructs an empty ${dim}-vector.
+        */
+        public ${className}() {
+                super(${dim});
+        }
+        /**
+        * Constructs a ${dim}-vector.
+#foreach($var in $coords)
+        * @param ${var} ${var} coordinate.
+#end
+        */
+        public ${className}(#foreach($var in $coords)#if($velocityCount > 1), #end
+final ${classType} ${var}#end) {
+                this();
+#foreach($var in $coords)
+                ${var}re = ${var}.real();
+                ${var}im = ${var}.imag();
+#end
+        }
+        public ${className}(#foreach($var in $coords)#if($velocityCount > 1), #end
+${nativeType} ${var}Re, ${nativeType} ${var}Im#end) {
+                this();
+#foreach($var in $coords)
+                ${var}re = ${var}Re;
+                ${var}im = ${var}Im;
+#end
+        }
+        /**
+        * Compares two ${numericType} vectors for equality.
+        * @param obj a ${numericType} ${dim}-vector
+        */
+	public boolean equals(Object obj, double tol) {
+                if(obj != null && (obj instanceof ${className})) {
+                        final ${className} vec = (${className}) obj;
+#foreach($var in $coords)
+                        ${nativeType} d${var}Re = ${var}re - vec.${var}re;
+                        ${nativeType} d${var}Im = ${var}im - vec.${var}im;
+#end
+                        return (#foreach($var in $coords)
+#if($velocityCount > 1)
+
+                         + #end
+d${var}Re*d${var}Re + d${var}Im*d${var}Im#end
+ <= tol*tol);
+                } else
+                        return false;
+        }
+        /**
+        * Returns a comma delimited string representing the value of this vector.
+        */
+        public String toString() {
+                final StringBuffer buf = new StringBuffer(15);
+                buf#foreach($var in $coords)
+#if($velocityCount > 1).append(',')#end
+.append(Complex.toString(${var}re, ${var}im))#end;
+                return buf.toString();
+        }
+        /**
+        * Returns the real part of this ${numericType} ${dim}-vector.
+        */
+        public AbstractDoubleVector real() {
+                return new Double${dim}Vector(
+#foreach($var in $coords)
+#if($velocityCount > 1),
+#end
+                        ${var}re#end
+
+                );
+        }
+        /**
+        * Returns the imaginary part of this ${numericType} ${dim}-vector.
+        */
+        public AbstractDoubleVector imag() {
+                return new Double${dim}Vector(
+#foreach($var in $coords)
+#if($velocityCount > 1),
+#end
+                        ${var}im#end
+
+                );
+        }
+        /**
+        * Returns a component of this vector.
+        * @param n index of the vector component
+        * @exception VectorDimensionException If attempting to access an invalid component.
+        */
+        public ${classType} getComponent(final int n) {
+                switch(n) {
+#foreach($var in $coords)
+#set($index = $velocityCount - 1)
+                        case ${index} : return new ${classType}(${var}re, ${var}im);
+#end
+                        default : throw new VectorDimensionException("Invalid component.");
+                }
+        }
+        public ${nativeType} getRealComponent(final int n) {
+                switch(n) {
+#foreach($var in $coords)
+#set($index = $velocityCount - 1)
+                        case ${index} : return ${var}re;
+#end
+                        default : throw new VectorDimensionException("Invalid component.");
+                }
+        }
+        public ${nativeType} getImagComponent(final int n) {
+                switch(n) {
+#foreach($var in $coords)
+#set($index = $velocityCount - 1)
+                        case ${index} : return ${var}im;
+#end
+                        default : throw new VectorDimensionException("Invalid component.");
+                }
+        }
+        /**
+        * Sets the value of a component of this vector.
+        * Should only be used to initialise this vector.
+        * @param n index of the vector component
+        * @param z a ${numericType} number
+        * @exception VectorDimensionException If attempting to access an invalid component.
+        */
+        public void setComponent(final int n, final ${classType} z) {
+                switch(n) {
+#foreach($var in $coords)
+#set($index = $velocityCount - 1)
+                        case ${index} : ${var}re = z.real(); ${var}im = z.imag(); break;
+#end
+                        default : throw new VectorDimensionException("Invalid component.");
+                }
+        }
+        /**
+        * Sets the value of a component of this vector.
+        * Should only be used to initialise this vector.
+        * @param n index of the vector component
+        * @param x the real part of a complex number
+        * @param y the imaginary part of a complex number
+        * @exception VectorDimensionException If attempting to access an invalid component.
+        */
+        public void setComponent(final int n, final ${nativeType} x, final ${nativeType} y) {
+                switch(n) {
+#foreach($var in $coords)
+#set($index = $velocityCount - 1)
+                        case ${index} : ${var}re = x; ${var}im = y; break;
+#end
+                        default : throw new VectorDimensionException("Invalid component.");
+                }
+        }
+        /**
+        * Returns the l<sup>2</sup>-norm (magnitude).
+        */
+        public double norm() {
+                return Math.sqrt(#foreach($var in $coords)
+
+                        #if($velocityCount > 1)+#end
+${var}re*${var}re + ${var}im*${var}im#end
+
+                );
+        }
+        /**
+        * Returns the l<sup><img border=0 alt="infinity" src="doc-files/infinity.gif"></sup>-norm.
+        */
+        public double infNorm() {
+                ${nativeType} infNormSq = 0;
+                ${nativeType} modSq;
+#foreach($var in $coords)
+                modSq = ${var}re*${var}re + ${var}im*${var}im;
+                if(modSq > infNormSq)
+                        infNormSq = modSq;
+#end
+                return Math.sqrt(infNormSq);
+        }
+
+//============
+// OPERATIONS
+//============
+
+        /**
+        * Returns the negative of this vector.
+        */
+        public AbelianGroup.Member negate() {
+                return new ${className}(
+#foreach($var in $coords)
+#if($velocityCount > 1),
+#end
+                        -${var}re, -${var}im#end
+
+                );
+        }
+
+// COMPLEX CONJUGATE
+
+        /**
+        * Returns the complex conjugate of this vector.
+        * @return a ${numericType} ${dim}-vector
+        */
+        public Abstract${classType}Vector conjugate() {
+                return new ${className}(
+#foreach($var in $coords)
+#if($velocityCount > 1),
+#end
+                        ${var}re, -${var}im#end
+
+                );
+        }
+
+// ADDITION
+
+        /**
+        * Returns the addition of this vector and another.
+        */
+        public AbelianGroup.Member add(final AbelianGroup.Member vec) {
+                if(vec instanceof Abstract${classType}Vector)
+                        return add((Abstract${classType}Vector)vec);
+                else if(vec instanceof AbstractDoubleVector)
+                        return add((AbstractDoubleVector)vec);
+                else if(vec instanceof AbstractIntegerVector)
+                        return add((AbstractIntegerVector)vec);
+                else
+                        throw new IllegalArgumentException("Member class not recognised by this method.");
+        }
+        /**
+        * Returns the addition of this vector and another.
+        * @param vec a ${numericType} ${dim}-vector
+        */
+        public Abstract${classType}Vector add(final Abstract${classType}Vector vec) {
+                if(vec.N == ${dim}) {
+                        return new ${className}(
+#foreach($var in $coords)
+#set($index = $velocityCount - 1)
+#if($velocityCount > 1),
+#end
+                                ${var}re+vec.getComponent(${index}).real(), ${var}im+vec.getComponent(${index}).imag()#end
+
+                        );
+                } else
+                        throw new VectorDimensionException("Vectors are different sizes.");
+        }
+        /**
+        * Returns the addition of this vector and another.
+        * @param vec a double ${dim}-vector
+        */
+        public Abstract${classType}Vector add(final AbstractDoubleVector vec) {
+                if(vec.N == ${dim}) {
+                        return new ${className}(
+#foreach($var in $coords)
+#set($index = $velocityCount - 1)
+#if($velocityCount > 1),
+#end
+                                ${var}re+vec.getComponent(${index}), ${var}im#end
+
+                        );
+                } else
+                        throw new VectorDimensionException("Vectors are different sizes.");
+        }
+        /**
+        * Returns the addition of this vector and another.
+        * @param vec an integer ${dim}-vector
+        */
+        public Abstract${classType}Vector add(final AbstractIntegerVector vec) {
+                if(vec.N == ${dim}) {
+                        return new ${className}(
+#foreach($var in $coords)
+#set($index = $velocityCount - 1)
+#if($velocityCount > 1),
+#end
+                                ${var}re+vec.getComponent(${index}), ${var}im#end
+
+                        );
+                } else
+                        throw new VectorDimensionException("Vectors are different sizes.");
+        }
+
+// SUBTRACTION
+
+        /**
+        * Returns the subtraction of this vector by another.
+        */
+        public AbelianGroup.Member subtract(final AbelianGroup.Member vec) {
+                if(vec instanceof Abstract${classType}Vector)
+                        return subtract((Abstract${classType}Vector)vec);
+                else if(vec instanceof AbstractDoubleVector)
+                        return subtract((AbstractDoubleVector)vec);
+                else if(vec instanceof AbstractIntegerVector)
+                        return subtract((AbstractIntegerVector)vec);
+                else
+                        throw new IllegalArgumentException("Member class not recognised by this method.");
+        }
+        /**
+        * Returns the subtraction of this vector by another.
+        * @param vec a ${numericType} ${dim}-vector
+        */
+        public Abstract${classType}Vector subtract(final Abstract${classType}Vector vec) {
+                if(vec.N == ${dim}) {
+                        return new ${className}(
+#foreach($var in $coords)
+#set($index = $velocityCount - 1)
+#if($velocityCount > 1),
+#end
+                                ${var}re-vec.getComponent(${index}).real(), ${var}im-vec.getComponent(${index}).imag()#end
+
+                        );
+                } else
+                        throw new VectorDimensionException("Vectors are different sizes.");
+        }
+        /**
+        * Returns the subtraction of this vector by another.
+        * @param vec a double ${dim}-vector
+        */
+        public Abstract${classType}Vector subtract(final AbstractDoubleVector vec) {
+                if(vec.N == ${dim}) {
+                        return new ${className}(
+#foreach($var in $coords)
+#set($index = $velocityCount - 1)
+#if($velocityCount > 1),
+#end
+                                ${var}re-vec.getComponent(${index}), ${var}im#end
+
+                        );
+                } else
+                        throw new VectorDimensionException("Vectors are different sizes.");
+        }
+        /**
+        * Returns the subtraction of this vector by another.
+        * @param vec an integer ${dim}-vector
+        */
+        public Abstract${classType}Vector subtract(final AbstractIntegerVector vec) {
+                if(vec.N == ${dim}) {
+                        return new ${className}(
+#foreach($var in $coords)
+#set($index = $velocityCount - 1)
+#if($velocityCount > 1),
+#end
+                                ${var}re-vec.getComponent(${index}), ${var}im#end
+
+                        );
+                } else
+                        throw new VectorDimensionException("Vectors are different sizes.");
+        }
+
+// SCALAR MULTIPLICATION
+
+        /**
+        * Returns the multiplication of this vector by a scalar.
+        */
+        public Module.Member scalarMultiply(Ring.Member x) {
+                if(x instanceof ${classType})
+                        return scalarMultiply((${classType})x);
+                else if(x instanceof MathDouble)
+                        return scalarMultiply(((MathDouble)x).value());
+                else if(x instanceof MathInteger)
+                        return scalarMultiply(((MathInteger)x).value());
+                else
+                        throw new IllegalArgumentException("Member class not recognised by this method.");
+        }
+        /**
+        * Returns the multiplication of this vector by a scalar.
+        * @param z a ${numericType} number
+        * @return a ${numericType} ${dim}-vector
+        */
+        public Abstract${classType}Vector scalarMultiply(final ${classType} z) {
+                final double real=z.real();
+                final double imag=z.imag();
+                return new ${className}(
+#foreach($var in $coords)
+#if($velocityCount > 1),
+#end
+                        ${var}re*real-${var}im*imag, ${var}re*imag+${var}im*real#end
+
+                );
+        }
+        /**
+        * Returns the multiplication of this vector by a scalar.
+        * @param k a double
+        * @return a ${numericType} ${dim}-vector
+        */
+        public Abstract${classType}Vector scalarMultiply(final double k) {
+                return new ${className}(
+#foreach($var in $coords)
+#if($velocityCount > 1),
+#end
+                        k*${var}re, k*${var}im#end
+
+                );
+        }
+
+// SCALAR DIVISION
+
+        /**
+        * Returns the division of this vector by a scalar.
+        */
+        public VectorSpace.Member scalarDivide(Field.Member x) {
+                if(x instanceof ${classType})
+                        return scalarDivide((${classType})x);
+                else if(x instanceof MathDouble)
+                        return scalarDivide(((MathDouble)x).value());
+                else
+                        throw new IllegalArgumentException("Member class not recognised by this method.");
+        }
+        /**
+        * Returns the division of this vector by a scalar.
+        * @param z a ${numericType} number
+        * @return a ${numericType} ${dim}-vector
+        * @exception ArithmeticException If divide by zero.
+        */
+        public Abstract${classType}Vector scalarDivide(final ${classType} z) {
+                final double real=z.real();
+                final double imag=z.imag();
+                final double a,denom;
+                if(Math.abs(real)<Math.abs(imag)) {
+                        a=real/imag;
+                        denom=real*a+imag;
+                        return new ${className}(
+#foreach($var in $coords)
+#if($velocityCount > 1),
+#end
+                                (${var}re*a+${var}im)/denom, (${var}im*a-${var}re)/denom#end
+
+                        );
+                } else {
+                        a=imag/real;
+                        denom=real+imag*a;
+                        return new ${className}(
+#foreach($var in $coords)
+#if($velocityCount > 1),
+#end
+                                (${var}re+${var}im*a)/denom, (${var}im-${var}re*a)/denom#end
+
+                        );
+                }
+        }
+        /**
+        * Returns the division of this vector by a scalar.
+        * @param k a double
+        * @return a ${numericType} ${dim}-vector
+        * @exception ArithmeticException If divide by zero.
+        */
+        public Abstract${classType}Vector scalarDivide(final double k) {
+                return new ${className}(
+#foreach($var in $coords)
+#if($velocityCount > 1),
+#end
+                        ${var}re/k, ${var}im/k#end
+
+                );
+        }
+
+// SCALAR PRODUCT
+
+        /**
+        * Returns the scalar product of this vector and another.
+        */
+        public ${classType} scalarProduct(HilbertSpace.Member vec) {
+                if(vec instanceof Abstract${classType}Vector)
+                        return scalarProduct((Abstract${classType}Vector)vec);
+                else
+                        throw new IllegalArgumentException("Member class not recognised by this method.");
+        }
+        /**
+        * Returns the scalar product of this vector and another.
+        * @param vec a ${numericType} vector
+        * @exception VectorDimensionException If the vectors are different sizes.
+        */
+        public ${classType} scalarProduct(final Abstract${classType}Vector vec) {
+                if(vec instanceof ${className})
+                        return scalarProduct((${className})vec);
+                else {
+                        if(vec.N == ${dim}) {
+                                return new ${classType}(
+#foreach($var in $coords)
+#set($index = $velocityCount - 1)
+#if($velocityCount > 1)+
+#end
+                                        ${var}re*vec.getComponent(${index}).real()+${var}im*vec.getComponent(${index}).imag()#end,
+#foreach($var in $coords)
+#set($index = $velocityCount - 1)
+#if($velocityCount > 1)+
+#end
+                                        ${var}im*vec.getComponent(${index}).real()-${var}re*vec.getComponent(${index}).imag()#end
+
+                                );
+                        } else
+                                throw new VectorDimensionException("Vectors are different sizes.");
+                }
+        }
+        /**
+        * Returns the scalar product of this vector and another.
+        * @param vec a ${numericType} ${dim}-vector
+        */
+        public ${classType} scalarProduct(final ${className} vec) {
+                return new ${classType}(
+#foreach($var in $coords)
+#if($velocityCount > 1)+
+#end
+                        ${var}re*vec.${var}re+${var}im*vec.${var}im#end,
+#foreach($var in $coords)
+#if($velocityCount > 1)+
+#end
+                        ${var}im*vec.${var}re-${var}re*vec.${var}im#end
+
+                );
+        }
+
+#if($dim == 3)
+// VECTOR PRODUCT
+
+        /**
+        * Returns the vector product of this vector and another.
+        * @param vec a ${numericType} ${dim}-vector
+        */
+        public ${className} multiply(final ${className} vec) {
+                return new ${className}(
+                        yre*vec.zre-yim*vec.zim-zre*vec.yre+zim*vec.yim,
+                        yre*vec.zim+yim*vec.zre-zre*vec.yim-zim*vec.yre,
+                        zre*vec.xre-zim*vec.xim-xre*vec.zre+xim*vec.zim,
+                        zre*vec.xim+zim*vec.xre-xre*vec.zim-xim*vec.zre,
+                        xre*vec.yre-xim*vec.yim-yre*vec.xre+yim*vec.xim,
+                        xre*vec.yim+xim*vec.yre-yre*vec.xim-yim*vec.xre
+                );
+        }
+#end
+
+// MAP COMPONENTS
+
+        /**
+        * Applies a function on all the vector components.
+        * @param mapping a user-defined function
+        * @return a ${numericType} ${dim}-vector
+        */
+        public Abstract${classType}Vector mapComponents(final ${classType}Mapping mapping) {
+                return new ${className}(
+#foreach($var in $coords)
+#if($velocityCount > 1),
+#end
+                        mapping.map(${var}re, ${var}im)#end
+
+                );
+        }
+}

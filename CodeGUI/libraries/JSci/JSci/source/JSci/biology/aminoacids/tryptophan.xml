@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Tryptophan</name>
+   <abbreviation>trp</abbreviation>
+   <symbol>w</symbol>
+   <molecular-formula>C11H12N2O2</molecular-formula>
+   <molecular-weight>204.23</molecular-weight>
+   <isoelectric-point>5.89</isoelectric-point>
+   <CAS-registry-number>73-22-3</CAS-registry-number>
+</amino-acid>

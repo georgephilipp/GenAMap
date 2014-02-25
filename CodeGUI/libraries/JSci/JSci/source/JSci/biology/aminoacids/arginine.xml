@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Arginine</name>
+   <abbreviation>arg</abbreviation>
+   <symbol>r</symbol>
+   <molecular-formula>C6H14N4O2</molecular-formula>
+   <molecular-weight>174.20</molecular-weight>
+   <isoelectric-point>11.15</isoelectric-point>
+   <CAS-registry-number>74-79-3</CAS-registry-number>
+</amino-acid>

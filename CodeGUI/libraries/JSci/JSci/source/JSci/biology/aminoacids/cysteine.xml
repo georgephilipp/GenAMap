@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE amino-acid SYSTEM "aminoacids.dtd">
+<amino-acid>
+   <name>Cysteine</name>
+   <abbreviation>cys</abbreviation>
+   <symbol>c</symbol>
+   <molecular-formula>C3H7NO2S</molecular-formula>
+   <molecular-weight>121.15</molecular-weight>
+   <isoelectric-point>5.02</isoelectric-point>
+   <CAS-registry-number>52-90-4</CAS-registry-number>
+</amino-acid>

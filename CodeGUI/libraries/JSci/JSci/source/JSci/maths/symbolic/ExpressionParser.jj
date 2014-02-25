@@ -1,0 +1,250 @@
+
+options {
+  LOOKAHEAD = 60;
+  CHOICE_AMBIGUITY_CHECK = 2;
+  OTHER_AMBIGUITY_CHECK = 1;
+  STATIC = true;
+  DEBUG_PARSER = false;
+  DEBUG_LOOKAHEAD = false;
+  DEBUG_TOKEN_MANAGER = false;
+  ERROR_REPORTING = true;
+  JAVA_UNICODE_ESCAPE = false;
+  UNICODE_INPUT = false;
+  IGNORE_CASE = false;
+  USER_TOKEN_MANAGER = false;
+  USER_CHAR_STREAM = false;
+  BUILD_PARSER = true;
+  BUILD_TOKEN_MANAGER = true;
+  SANITY_CHECK = true;
+  FORCE_LA_CHECK = false;
+}
+
+PARSER_BEGIN(ExpressionParser)
+
+package JSci.maths.symbolic;
+
+import JSci.maths.*;
+import JSci.maths.fields.*;
+import JSci.maths.groups.*;
+
+import java.io.*;
+import java.util.*;
+
+/** This class has some static methods to create an Expression from 
+ * a string or a text stream.  */
+public class ExpressionParser {
+
+  private static ExpressionParser parser=null;
+
+  private static Map variables;
+
+  /** Create an Expression reading a text from a stream. The text can
+   * be something like "x+y*sin(z)".
+   * @param is a stream
+   * @param vars a Map name / variable; it can 
+   * contain some of the variable names.	
+   * @return the Expression
+   */
+  public synchronized static Expression parse(InputStream is,Map vars) throws ParseException {
+    variables=vars;
+    if (variables==null) variables=new Hashtable();
+    if (parser==null) parser = new ExpressionParser(is);
+    else parser.ReInit(is);
+    return parser.Input();
+  }
+	
+  /** Create an Expression from a String like "x+y*sin(z)". 
+   * @param s	a string 
+   * @param vars a Map name / variable; it can 
+   * contain some of the variable names.
+   * @return the Expression
+   */
+  public static Expression parse(String s,Map vars) throws ParseException {
+    InputStream i=new ByteArrayInputStream(s.getBytes());
+    return parse(i,vars);
+  }
+    
+  /** Create an Expression from a String like "x+y*sin(z)". 
+   * Variables are not accessible.
+   * @param s a string 
+   * @return the Expression
+   */
+  public static Expression parse(String s) throws ParseException {
+    InputStream i=new ByteArrayInputStream(s.getBytes());
+    return parse(i,null);
+  }
+    
+  /** Create an Expression reading a text from a stream. The text can
+   * be something like "x+y*sin(z)". Variables are not accessible.
+   * @param is a stream
+   * @return the Expression
+   */
+  public static Expression parse(InputStream is) throws ParseException {
+    return parse(is,null);
+  }
+
+
+
+}
+
+PARSER_END(ExpressionParser)
+
+Expression Input() :
+{ Expression r=null; }
+{
+  [ r=expressionP0() ] ("\n"|"\r")* <EOF>
+  { return r;}
+}
+
+Expression expressionP0() :
+{ Expression[] arg; Expression argb; }
+{
+  arg=expressionP0l()
+  { if (arg.length==1) return arg[0];
+    else return new Sum(arg[0],arg[1]);  
+  }
+|
+  argb=expressionP1()
+  { return argb; }
+}
+
+Expression[] expressionP0l() :
+{ Expression arga=null; Expression argb[]=null; }
+{
+  arga=expressionP1() "+" argb=expressionP0l()
+  { if (argb.length==2) return new Expression[] {arga,new Sum(argb[0],argb[1])};
+    else return new Expression[] {arga,argb[0]}; 
+  }
+|
+  arga=expressionP1() "-" argb=expressionP0l()
+  { Expression b0neg=Expression.negative(argb[0]);
+    if (argb.length==2) return new Expression[] {arga,new Sum(b0neg,argb[1])};
+    else return new Expression[] {arga,b0neg};
+  }
+|
+  arga=expressionP1()
+  { return new Expression[] {arga}; }
+}
+
+Expression expressionP1() :
+{ Expression[] arg; Expression argb; }
+{
+  arg=expressionP1l()
+  { if (arg.length==1) return arg[0];
+    else return new Product(arg[0],arg[1]);
+  }
+|
+  argb=expressionP2()
+  { return argb; }
+}
+
+Expression[] expressionP1l() :
+{ Expression arga=null; Expression argb[]=null; }
+{
+  arga=expressionP2() "*" argb=expressionP1l()
+  { if (argb.length==2) return new Expression[] {arga,new Product(argb[0],argb[1])}; 
+    else return new Expression[] {arga,argb[0]}; 
+  }
+|
+  arga=expressionP2() "/" argb=expressionP1l()
+  { Expression b0inv=Expression.inverse(argb[0]);
+    if (argb.length==2) return new Expression[] {arga,new Product(b0inv,argb[1])}; 
+    else return new Expression[] {arga,b0inv};
+  }
+|
+  arga=expressionP2()
+  { return new Expression[] {arga}; }
+}
+
+Expression expressionP2() :
+{ Expression arg=null; }
+{
+  "-" arg=expressionP3()
+  { return Expression.negative(arg); }
+|
+  "+" arg=expressionP3()
+  { return arg; } 
+|
+  arg=expressionP3()
+  { return arg; }
+}
+
+Expression expressionP3() :
+{ Expression arga=null; Token f; }
+{
+  arga=expressionP4() "^" f=<INUM>
+  { return new Power(arga,Integer.parseInt(f.toString())); }
+|
+  arga=expressionP4()
+  { return arga; }
+}
+
+Expression expressionP4() :
+{ Token f; Expression arg=null; }
+{
+  f=<DNUM>
+  { return new Constant(new MathDouble(Double.parseDouble(f.toString()))); }
+|
+  f=<INUM>
+  { return new Constant(new MathDouble(Integer.parseInt(f.toString()))); }
+|
+  f=<IDENTIFIER>
+  { Variable v=(Variable)variables.get(f.toString());
+    if (v==null) 
+        v=new Variable(f.toString(),RealField.getInstance());
+    variables.put(f.toString(),v);
+    return v;
+  } 
+|
+  f=<PI>
+  { return new Constant(RealField.PI); }
+|
+  f=<IUNIT>
+  { return new Constant(Complex.I); }
+|
+  f=<ONEARGFUNCTION> "(" arg=expressionP0() ")"
+  { return new Function(f.toString(),arg); } 
+|
+  "(" arg=expressionP0() ")"
+  { return arg; } 
+}
+
+
+SKIP : /* white spaces */
+{
+  " "
+}
+
+TOKEN : /* one arg function */
+{
+  < ONEARGFUNCTION: "sin"|"cos"|"tan"|"asin"|"acos"|"atan"|"sinh"|"cosh"|"tanh"|"asinh"|"acosh"|"atanh"|"exp"|"log"|"sqrt" >
+}
+
+TOKEN : /* pi */
+{
+  < PI: "pi" >
+}
+
+TOKEN : /* immaginary unit */
+{
+  < IUNIT: "i" >
+}
+
+TOKEN : /* identifiers */
+{
+  < IDENTIFIER: <LETTER> (<LETTER>|<DIGIT>)* >
+|
+  < #LETTER: ["a"-"z","A"-"Z"] >
+|
+  < #DIGIT: ["0"-"9"] >
+}
+
+TOKEN : /* integers */
+{
+  < INUM: (<DIGIT>)+ >
+}
+
+TOKEN : /* double */
+{
+  < DNUM: (<DIGIT>)+"."(<DIGIT>)+ >
+}
