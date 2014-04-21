@@ -1,0 +1,5 @@
+Association:
+GcLasso_CD	GCL	9	1
+GfLasso_CD	GFL	2	1
+Wilcoxon Sum Rank	WSR	6	0
+In/Out Lasso	IOL	24	3

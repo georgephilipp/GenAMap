@@ -1,17 +1,18 @@
 package control.importing;
 
 import control.DataAddRemoveHandler;
-import control.itempanel.MarkerItem;
+import control.ExampleFileHandler;
+import control.itempanel.BaseDataItem;
 import control.NewProjectCreator;
 import control.itempanel.ThreadingItemFrame;
 import datamodel.Project;
 import datamodel.Model;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import realdata.DataManager;
 
 /**
  * We will gather the required information to start a marker import through
@@ -23,7 +24,7 @@ public class MarkerImporter extends java.awt.Dialog
     private String fileName = "";
     private JFrame parent;
     private ThreadingItemFrame form;
-    private MarkerItem item;
+    private BaseDataItem item;
 
     /**
      * Creates a new MarkerImporter
@@ -84,7 +85,6 @@ public class MarkerImporter extends java.awt.Dialog
         jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        delimiterTextBox = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         sampleTextBox = new javax.swing.JTextField();
         labelTextBox = new javax.swing.JTextField();
@@ -104,9 +104,11 @@ public class MarkerImporter extends java.awt.Dialog
         nameField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         isHasDataCkBx = new javax.swing.JCheckBox();
+        delimiterComboBox = new javax.swing.JComboBox();
+        chrLocCheckBox = new javax.swing.JCheckBox();
         cancelButton = new javax.swing.JButton();
-        importButton = new javax.swing.JButton();
         errorLabel = new javax.swing.JLabel();
+        importButton = new javax.swing.JButton();
 
         setTitle("Import Data");
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -122,14 +124,7 @@ public class MarkerImporter extends java.awt.Dialog
 
         jLabel2.setText("delimeter");
 
-        delimiterTextBox.setText("w");
-        delimiterTextBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                delimiterTextBoxActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("DejaVu Sans", 1, 18));
+        jLabel3.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
         jLabel3.setText("Marker Import");
 
         sampleTextBox.setEditable(false);
@@ -214,6 +209,15 @@ public class MarkerImporter extends java.awt.Dialog
             }
         });
 
+        delimiterComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tab", "Whitespace", "Comma" }));
+
+        chrLocCheckBox.setText("import w/o chromosome location");
+        chrLocCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chrLocCheckBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -221,44 +225,43 @@ public class MarkerImporter extends java.awt.Dialog
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(31, 31, 31)
-                        .addComponent(projectComboBox, 0, 401, Short.MAX_VALUE))
+                        .addComponent(projectComboBox, 0, 451, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(markerName)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
-                                .addGap(4, 4, 4)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(labelTextBox, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-                                    .addComponent(markerTextBox, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-                                    .addComponent(sampleTextBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-                                    .addComponent(nameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(delimiterTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(256, 256, 256)))
+                            .addComponent(jLabel6)
+                            .addComponent(markerName)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel2))
+                        .addGap(4, 4, 4)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(isHasDataCkBx)
+                            .addComponent(labelTextBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                            .addComponent(markerTextBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                            .addComponent(sampleTextBox, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                            .addComponent(nameField, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(fileButton, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                                    .addComponent(labelButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                                    .addComponent(sampleButton, 0, 0, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(sampleHelpButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                                    .addComponent(fileHelpButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                                    .addComponent(labelHelpButton, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))))))
+                                .addComponent(delimiterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(fileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(sampleButton, 0, 1, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(sampleHelpButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fileHelpButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelHelpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(isHasDataCkBx)
+                            .addComponent(chrLocCheckBox))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -294,13 +297,33 @@ public class MarkerImporter extends java.awt.Dialog
                     .addComponent(labelHelpButton)
                     .addComponent(jLabel7)
                     .addComponent(labelTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(delimiterTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(isHasDataCkBx))
-                .addGap(60, 60, 60))
+                    .addComponent(delimiterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(isHasDataCkBx)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chrLocCheckBox)
+                .addGap(8, 8, 8))
         );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
+        );
+
+        jPanel1.getAccessibleContext().setAccessibleName("Marker name:");
 
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -309,6 +332,9 @@ public class MarkerImporter extends java.awt.Dialog
             }
         });
 
+        errorLabel.setForeground(new java.awt.Color(255, 0, 0));
+        errorLabel.setText("                           ");
+
         importButton.setText("Import");
         importButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -316,51 +342,32 @@ public class MarkerImporter extends java.awt.Dialog
             }
         });
 
-        errorLabel.setForeground(new java.awt.Color(255, 0, 0));
-        errorLabel.setText("                           ");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                            .addComponent(importButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18))
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap()))))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(errorLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(importButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36))
-        );
-
-        jPanel1.getAccessibleContext().setAccessibleName("Marker name:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(importButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6))
+                    .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(errorLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(importButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -379,19 +386,19 @@ public class MarkerImporter extends java.awt.Dialog
     private void fileHelpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileHelpButtonActionPerformed
         String s = "Select the file that contains the marker values for each sample";
         JOptionPane.showMessageDialog(this, s, "Help", JOptionPane.INFORMATION_MESSAGE);
-        openExampleFile("markerExample.txt");
+        openExampleFile("markerVals");
     }//GEN-LAST:event_fileHelpButtonActionPerformed
 
     private void sampleHelpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sampleHelpButtonActionPerformed
         String s = "Select a file with one row for each sample label";
         JOptionPane.showMessageDialog(this, s, "Help", JOptionPane.INFORMATION_MESSAGE);
-        openExampleFile("sampleEx.txt");
+        openExampleFile("sampleLabels");
     }//GEN-LAST:event_sampleHelpButtonActionPerformed
 
     private void labelHelpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labelHelpButtonActionPerformed
         String s = "Select the file with one row for each marker label (three columns - chr name locus)";
         JOptionPane.showMessageDialog(this, s, "Help", JOptionPane.INFORMATION_MESSAGE);
-        openExampleFile("chrLabs.txt");
+        openExampleFile("markerLabels");
     }//GEN-LAST:event_labelHelpButtonActionPerformed
 
     private void fileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileButtonActionPerformed
@@ -444,21 +451,20 @@ public class MarkerImporter extends java.awt.Dialog
             return;
         }
 
-        if (this.delimiterTextBox.getText().equals(""))
-        {
-            String s = "You must select a valid column delimeter.";
-            //JOptionPane.showMessageDialog(this, s, "Input Error", JOptionPane.ERROR_MESSAGE);
-            this.errorLabel.setText(s);
-            return;
-        }
         if (this.nameField.getText().equals(""))
         {
             String s = "You must select a valid Marker name.";
             //JOptionPane.showMessageDialog(this, s, "Input Error", JOptionPane.ERROR_MESSAGE);
             this.errorLabel.setText(s);
             return;
-
-
+        }
+        
+        if( this.nameField.getText().length() > 20 )
+        {
+            String s = "Name can be at most 20 characters.";
+            //JOptionPane.showMessageDialog(this, s, "Input Error", JOptionPane.ERROR_MESSAGE);
+            this.errorLabel.setText(s);
+            return;
         }
 
         if (this.projectComboBox.getSelectedItem().equals("Create New Project"))
@@ -480,7 +486,10 @@ public class MarkerImporter extends java.awt.Dialog
             }
         }
 
-        if (Model.getInstance().getProject(projectComboBox.getSelectedItem().toString()).getMarker(this.nameField.getText()) != null)
+        ArrayList<String> whereArgs = new ArrayList();
+        whereArgs.add("name=\"" + nameField.getText() + "\"");
+        whereArgs.add("projectid=" + Model.getInstance().getProject(this.projectComboBox.getSelectedItem().toString()).getId());
+        if (DataManager.runSelectQuery("id", "markerset", true, whereArgs, null).size() > 0)
         {
             this.errorLabel.setText("This marker set already exists in this project");
             return;
@@ -521,18 +530,28 @@ public class MarkerImporter extends java.awt.Dialog
         {
             myMarkerTextBoxText = null;
         }
-
+       
         form = ThreadingItemFrame.getInstance();
-        item = new MarkerItem(form, nameField.getText(), this.projectComboBox.getSelectedItem().toString(),
-                sampfile, labelTextBox.getText(), myMarkerTextBoxText);
+        item = new BaseDataItem(
+                form, 
+                Integer.toString(Model.getInstance().getProject(this.projectComboBox.getSelectedItem().toString()).getId()),
+                "marker",
+                nameField.getText(),
+                labelTextBox.getText(),
+                sampfile, 
+                myMarkerTextBoxText, 
+                false,
+                this.isHasDataCkBx.isSelected(),
+                false,
+                !this.isHasDataCkBx.isSelected() && sampfile == null,
+                !this.chrLocCheckBox.isSelected(),
+                this.delimiterComboBox.getSelectedItem().toString(),
+                0
+                );
         form.addToThreadList(item);
         form.setVisible(true);
         form.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }//GEN-LAST:event_importButtonActionPerformed
-
-    private void delimiterTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delimiterTextBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_delimiterTextBoxActionPerformed
 
     private void markerTextBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_markerTextBoxMouseClicked
         fileButtonActionPerformed(null);
@@ -564,6 +583,10 @@ public class MarkerImporter extends java.awt.Dialog
         }
     }//GEN-LAST:event_isHasDataCkBxActionPerformed
 
+    private void chrLocCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chrLocCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chrLocCheckBoxActionPerformed
+
     /**
      * Sets the project that will be defaulted to in the marker import.
      * @param project
@@ -580,7 +603,8 @@ public class MarkerImporter extends java.awt.Dialog
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JTextField delimiterTextBox;
+    private javax.swing.JCheckBox chrLocCheckBox;
+    private javax.swing.JComboBox delimiterComboBox;
     private javax.swing.ButtonGroup dimButtonGroup;
     private javax.swing.JLabel errorLabel;
     private javax.swing.JButton fileButton;
@@ -609,25 +633,9 @@ public class MarkerImporter extends java.awt.Dialog
     private javax.swing.JTextField sampleTextBox;
     // End of variables declaration//GEN-END:variables
 
-    private void openExampleFile(String filename)
+    private void openExampleFile(String fileCode)
     {
-        //Open file in notepad or vi or show error message telling the user where to find the file
-        Runtime load = Runtime.getRuntime();
-        try
-        {
-            load.exec("notepad " + filename);
-        }
-        catch (IOException ex)
-        {
-            try
-            {
-                load.exec("vi " + filename);
-            }
-            catch (IOException ex1)
-            {
-                JOptionPane.showMessageDialog(this, "I can't open the example file.\n" +
-                        "Please look in the distribution directory for " + filename);
-            }
-        }
+        if(!ExampleFileHandler.display(fileCode))
+            JOptionPane.showMessageDialog(this, ExampleFileHandler.failMessage);
     }
 }

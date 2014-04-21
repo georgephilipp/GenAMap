@@ -1,0 +1,7 @@
+traita     P2
+traitb     P2
+traitc     P2
+traitd     P3
+traite     P3
+P2    Root
+P3    Root

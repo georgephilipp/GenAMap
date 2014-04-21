@@ -81,8 +81,8 @@ public class NetworkLabelPopupHandler extends AbstractGraphMousePlugin implement
 
         try
         {
-            jp.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             final URL url = new URL("http://www.uniprot.org/uniprot/?query=" + name + "&sort=score");
+            jp.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));    
             URLConnection uc = url.openConnection();
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
@@ -103,13 +103,11 @@ public class NetworkLabelPopupHandler extends AbstractGraphMousePlugin implement
             {
                 int index = inputLine.indexOf("uniprot/");
                 String sub = inputLine.substring(index + 8, index + 9);
-                if (!(sub.equals("?") || sub.equals("\"")))
+                if (!(sub.equals("?") || sub.equals("\"") || inputLine.substring(index + 8, index + 11).equals("by/") ))
                 {
                     urls.add(("http://www.uniprot.org/" + inputLine.substring(index, index + 14) + ".txt"));
                 }
                 inputLine = inputLine.substring(index + 20);
-
-
             }
 
             inputLine = masterLine;
@@ -122,6 +120,9 @@ public class NetworkLabelPopupHandler extends AbstractGraphMousePlugin implement
                 index = inputLine.indexOf("<");
                 names.add(inputLine.substring(1, index));
             }
+            
+            for(int i=urls.size();i<names.size();i++)
+                urls.add("http://www.uniprot.org/uniprot/?query=" + name + "&sort=score");
 
             String inputLine3 = masterLine;
             index = 0;
@@ -150,23 +151,138 @@ public class NetworkLabelPopupHandler extends AbstractGraphMousePlugin implement
             }
         });
 
-        for (int num = 0; num < 10; num++)
+        if (0 < names.size())// && num < species.size())
         {
-
-            if (num < names.size())// && num < species.size())
+            popup.add(new AbstractAction(names.get(0))// + ", " + species.get(num))
             {
-                popup.add(new AbstractAction(names.get(num))// + ", " + species.get(num))
+                public void actionPerformed(ActionEvent e)
                 {
-                    public void actionPerformed(ActionEvent e)
-                    {
-                        BareBonesBrowserLaunch.openURL(urls.get(curNum).replace(".txt", ".html"));
-                        //String function = getFunctionAndGOData(curNum);
+                    String toOpen = urls.get(0).replace(".txt", ".html");
+                    System.out.println("opening URL " + toOpen);
+                    BareBonesBrowserLaunch.openURL(toOpen);
+                    //String function = getFunctionAndGOData(curNum);
 
-                        //TraitInfoFrame tif = new TraitInfoFrame(null, function, names.get(curNum));
-                        //tif.show();
-                    }
-                });
-            }
+                    //TraitInfoFrame tif = new TraitInfoFrame(null, function, names.get(curNum));
+                    //tif.show();
+                }
+            });
+        }
+        
+        if (1 < names.size())// && num < species.size())
+        {
+            popup.add(new AbstractAction(names.get(1))// + ", " + species.get(num))
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    String toOpen = urls.get(1).replace(".txt", ".html");
+                    System.out.println("opening URL " + toOpen);
+                    BareBonesBrowserLaunch.openURL(toOpen);
+                }
+            });
+        }
+        
+        if (2 < names.size())// && num < species.size())
+        {
+            popup.add(new AbstractAction(names.get(2))// + ", " + species.get(num))
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    String toOpen = urls.get(2).replace(".txt", ".html");
+                    System.out.println("opening URL " + toOpen);
+                    BareBonesBrowserLaunch.openURL(toOpen);
+                }
+            });
+        }
+        
+        if (3 < names.size())// && num < species.size())
+        {
+            popup.add(new AbstractAction(names.get(3))// + ", " + species.get(num))
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    String toOpen = urls.get(3).replace(".txt", ".html");
+                    System.out.println("opening URL " + toOpen);
+                    BareBonesBrowserLaunch.openURL(toOpen);
+                }
+            });
+        }
+        
+        if (4 < names.size())// && num < species.size())
+        {
+            popup.add(new AbstractAction(names.get(4))// + ", " + species.get(num))
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    String toOpen = urls.get(4).replace(".txt", ".html");
+                    System.out.println("opening URL " + toOpen);
+                    BareBonesBrowserLaunch.openURL(toOpen);
+                }
+            });
+        }
+        
+        if (5 < names.size())// && num < species.size())
+        {
+            popup.add(new AbstractAction(names.get(5))// + ", " + species.get(num))
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    String toOpen = urls.get(5).replace(".txt", ".html");
+                    System.out.println("opening URL " + toOpen);
+                    BareBonesBrowserLaunch.openURL(toOpen);
+                }
+            });
+        }
+        
+        if (6 < names.size())// && num < species.size())
+        {
+            popup.add(new AbstractAction(names.get(6))// + ", " + species.get(num))
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    String toOpen = urls.get(6).replace(".txt", ".html");
+                    System.out.println("opening URL " + toOpen);
+                    BareBonesBrowserLaunch.openURL(toOpen);
+                }
+            });
+        }
+        
+        if (7 < names.size())// && num < species.size())
+        {
+            popup.add(new AbstractAction(names.get(7))// + ", " + species.get(num))
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    String toOpen = urls.get(7).replace(".txt", ".html");
+                    System.out.println("opening URL " + toOpen);
+                    BareBonesBrowserLaunch.openURL(toOpen);
+                }
+            });
+        }
+        
+        if (8 < names.size())// && num < species.size())
+        {
+            popup.add(new AbstractAction(names.get(8))// + ", " + species.get(num))
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    String toOpen = urls.get(8).replace(".txt", ".html");
+                    System.out.println("opening URL " + toOpen);
+                    BareBonesBrowserLaunch.openURL(toOpen);
+                }
+            });
+        }
+        
+        if (9 < names.size())// && num < species.size())
+        {
+            popup.add(new AbstractAction(names.get(9))// + ", " + species.get(num))
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    String toOpen = urls.get(9).replace(".txt", ".html");
+                    System.out.println("opening URL " + toOpen);
+                    BareBonesBrowserLaunch.openURL(toOpen);
+                }
+            });
         }
 
         if (names.size() == 0)

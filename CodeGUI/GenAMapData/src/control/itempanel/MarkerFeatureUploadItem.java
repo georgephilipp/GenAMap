@@ -1,21 +1,13 @@
 package control.itempanel;
 
 import control.DataAddRemoveHandler;
-import datamodel.AssociationSet;
-import datamodel.Marker;
 import datamodel.MarkerSet;
-import datamodel.Model;
-import datamodel.Network;
-import datamodel.Trait;
-import datamodel.TraitSet;
 import realdata.DataManager;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import control.MatrixParser;
+import java.util.HashSet;
+import javax.swing.JOptionPane;
 
 /**
  * This will upload a read-in association set into the database. The file is
@@ -103,110 +95,193 @@ public class MarkerFeatureUploadItem extends ThreadItem
         Task t = new Task();
         t.start();
     }
+    
+    private String makeOrBlock(ArrayList<String> vals, String field, boolean isString)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append("(");
+        for(int i=0;i<vals.size();i++)
+        {
+            builder.append(field);
+            builder.append("=");
+            if(isString)
+                builder.append("\"");
+            builder.append(vals.get(i));
+            if(isString)
+                builder.append("\"");
+            if(i+1 != vals.size())
+                builder.append(" OR ");
+            else
+                builder.append(")");
+        }  
+        return builder.toString();
+    }
+    
     class Task extends Thread
     {
         @Override
         public void run()
         {
-            try
+            setValue(1);
+            status = "Checking file ...";
+            form.repaint();
+            
+            String msid = Integer.toString(markerSet.getId());
+            
+            MatrixParser mparser = new MatrixParser();
+            mparser.autoSetWidth = true;
+            mparser.hasColHeader = true;
+            mparser.colHeaderType = "String(30)";
+            mparser.entryType = "float";
+            ArrayList<String> whereArgs = new ArrayList<String>();
+            whereArgs.add("markersetid=" + msid);
+            ArrayList<String> markerIds = DataManager.runSelectQuery("id", "marker", true, whereArgs, "idx");
+            int numMarkers = markerIds.size();
+            mparser.length = numMarkers;
+            mparser.delimiter = "Tab";
+            mparser.setup(fileName);
+            
+            String check = mparser.check();
+            
+            if(!check.equals(""))
             {
-                setValue(0);
-                status = "Reading file ...";
-                form.repaint();
-                FileInputStream fstream = new FileInputStream(fileName);
-                DataInputStream in = new DataInputStream(fstream);
-                BufferedReader br = new BufferedReader(new InputStreamReader(in));
-                //read featurenames
-                String strLine = br.readLine();
-                strLine = strLine.trim();
-                strLine = strLine.replaceAll("  ", " ");
-                strLine = strLine.replaceAll("\t", " ");
-                String[] fname = strLine.split(" ");
-                int totalFeatures = fname.length;
-                int[] featureIds = new int[totalFeatures];
-
-                //insert featurenames in the feature table and get the id
-                int j=0;
-                for(int cnt=0; cnt < fname.length; cnt++)
-                {
-                    String featname = fname[cnt];
-                    ArrayList<String> vals = new ArrayList<String>();
-                    ArrayList<String> cols = new ArrayList<String>();
-
-                    cols.add("name");
-                    cols.add("markersetid");
-                    vals.add(featname);
-                    vals.add(""+markerSet.getId());
-
-                    if (!DataManager.runInsertQuery(cols, vals, "feature"))
-                    {
-                         setIsError(true);
-                         errorText = DataManager.getLastError();
-                         return;
-                    }
-
-                    //get feature id
-                    ArrayList<String> whereArgs = new ArrayList<String>();
-                    whereArgs.add("name='" + featname + "'");
-                    whereArgs.add("markersetid=" + markerSet.getId());
-                    String featureID = (String)DataManager.runSelectQuery("id", "feature", true, whereArgs, null).get(0);
-                    featureIds[j++] = Integer.parseInt(featureID);
-                }
-
-                //read features
-                int idx=0;
-                while ((strLine = br.readLine()) != null)
-                {
-                    strLine = strLine.trim();
-                    strLine = strLine.replaceAll("  ", " ");
-                    strLine = strLine.replaceAll("\t", " ");
-                    if(strLine.length() == 0)
-                        continue;
-                    String[] ln = strLine.split(" ");
-                    ////String markerName = ln[0].trim();
-                    //extract marker id for this markername
-                    ArrayList<String> whereArgs = new ArrayList<String>();
-                    ////whereArgs.add("name='" + markerName + "'");
-                    whereArgs.add("idx=" + idx );
-                    whereArgs.add("markersetid=" + markerSet.getId());
-                    String markerID = (String)DataManager.runSelectQuery("id", "marker", true, whereArgs, null).get(0);
-
-                    //now add features
-                    for(int f=0; f < ln.length; f++)//change to f=1 when marker name is there 
-                    {
-
-                        ArrayList<String> vals = new ArrayList<String>();
-                        ArrayList<String> cols = new ArrayList<String>();
-
-                        cols.add("featureid");
-                        cols.add("markerid");
-                        cols.add("value");
-                        vals.add(featureIds[f]+""); //f-1
-                        vals.add(""+markerID);
-                        vals.add(ln[f].trim());
-                        if (!DataManager.runInsertQuery(cols, vals, "featureval"))
-                        {
-                             setIsError(true);
-                             errorText = DataManager.getLastError();
-                             return;
-                        }
-
-
-                    }
-                    idx++;
-                }
-
-
-                DataAddRemoveHandler.getInstance().refreshDisplay();
-                setValue(100);
-
-            }
-            catch (Exception ex)
-            {
-                errorText = ex.getMessage();
+                JOptionPane.showMessageDialog(null, "Error while checking the data file.\n This is likely caused by in incorrectly formatted input file.\n Error message was:\n" + check);
+                errorText = "Error while checking data file";
                 setIsError(true);
+                form.repaint();
                 return;
             }
+            
+            mparser.restart();
+            
+            whereArgs.clear();
+            whereArgs.add("markersetid=" + markerSet.getId());
+            ArrayList<String> curFeatureList = DataManager.runSelectQuery("name", "feature", true, whereArgs, null);
+            HashSet<String> curFeatureSet = new HashSet(curFeatureList);
+            
+            ArrayList<String> featureNames = mparser.readline();
+            featureNames.remove(0);
+            int numFeatures = featureNames.size();
+            for(int i=0;i<featureNames.size();i++)
+            {
+                if(curFeatureSet.contains(featureNames.get(i)))
+                {
+                    JOptionPane.showMessageDialog(null, "Error while checking the data file.\nOne of the feature names in the data file is the name of a feature that already exists for this marker data set." );
+                    errorText = "Error while checking data file";
+                    setIsError(true);
+                    form.repaint();
+                    return;
+                }
+            }
+            
+            ArrayList<String> featureIds = null;
+            boolean inserted = false;
+            
+            try
+            {
+                setValue(2);
+                status = "Inserting feature names into DB ...";
+                form.repaint();
+                
+                ArrayList<String> cols = new ArrayList();
+                cols.add("name");
+                cols.add("markersetid");
+                
+                ArrayList<ArrayList<String> > allVals = new ArrayList();
+                for(String feature : featureNames)
+                {
+                    ArrayList<String> vals = new ArrayList();
+                    vals.add(feature);
+                    vals.add(msid);
+                    allVals.add(vals);
+                }
+                
+                if (!DataManager.runMultipleInsertQuery(cols, allVals, "feature"))
+                {
+                     throw new RuntimeException("failed to insert feature names");
+                }
+                
+                inserted = true;
+                
+                whereArgs.clear();
+                whereArgs.add(makeOrBlock(featureNames, "name", true));
+                whereArgs.add("markersetid=" + msid);
+                featureIds = DataManager.runSelectQuery("id", "feature", true, whereArgs, null);
+                    
+                if(featureIds.size() != numFeatures)
+                {
+                    throw new RuntimeException("failed to get feature ids");
+                }
+                                               
+                setValue(3);
+                status = "Importing features ...";
+                form.repaint();
+                
+                cols.clear();
+                cols.add("featureid");
+                cols.add("markerid");
+                cols.add("value");
+                
+                allVals.clear();
+                for(int i=0;i<numMarkers;i++)
+                {
+                    ArrayList<String> line = mparser.readline();
+                    for(int j=0;j<numFeatures;j++)
+                    {
+                        ArrayList<String> vals = new ArrayList();
+                        vals.add(featureIds.get(j));
+                        vals.add(markerIds.get(i));
+                        vals.add(line.get(j+1));
+                        allVals.add(vals);      
+                        if(allVals.size() >= 1000)
+                        {
+                            if(!DataManager.runMultipleInsertQuery(cols, allVals, "featureval"))
+                            {
+                                throw new RuntimeException("failed to insert feature values");
+                            }
+                            allVals.clear();
+                        }
+                    }
+                    setValue(3+(int)(96.0*((double)i)/((double)numMarkers)));
+                    form.repaint();
+                }
+                if(allVals.size() > 0)
+                {
+                    if(!DataManager.runMultipleInsertQuery(cols, allVals, "featureval"))
+                    {
+                        throw new RuntimeException("failed to insert feature values");
+                    }
+                }
+                else
+                    throw new RuntimeException("bla");
+            }
+            catch (Exception ex)
+            {                              
+                if(featureIds != null)
+                {
+                    whereArgs.clear();
+                    whereArgs.add(makeOrBlock(featureIds, "featureid", false));
+                    whereArgs.add(makeOrBlock(markerIds, "markerid", false));
+                    DataManager.deleteQuery("featureval", whereArgs);
+                }
+                
+                if(inserted)
+                {
+                    whereArgs.clear();
+                    whereArgs.add(makeOrBlock(featureNames, "name", true));
+                    whereArgs.add("markersetid=" + msid);
+                    DataManager.deleteQuery("feature", whereArgs);
+                }
+                                
+                JOptionPane.showMessageDialog(null, "Error while uploading the data file into the database.\nThis is a bug. Please contact the developers.\n Error message was: " + ex.getMessage());
+                errorText = ex.getMessage();
+                setIsError(true);
+                form.repaint();
+                return;
+            }
+            
+            DataAddRemoveHandler.getInstance().refreshDisplay();
+            setValue(100);
         }
     }
 }

@@ -12,6 +12,7 @@ import datamodel.Model;
 import datamodel.Network;
 import datamodel.Population;
 import datamodel.TraitSet;
+import java.io.File;
 import javax.swing.JFrame;
 import realdata.DataManager;
 
@@ -425,6 +426,13 @@ public class AssociationAlgorithmDialog extends java.awt.Dialog
             this.errorLabel.setText(s);
             return;
         }
+        
+        if (this.assocNameTextBox.getText().length() > 27)
+        {
+            String s = "Name may not exceed 27 chars";
+            this.errorLabel.setText(s);
+            return;
+        }
 
         if(this.algorithmComboBox.getSelectedItem().equals("Adaptive Multi-Task Lasso"))
         {
@@ -539,6 +547,14 @@ public class AssociationAlgorithmDialog extends java.awt.Dialog
         }
         else
         {
+            String fileName = this.networkFileBox.getText();
+            File file = new File(fileName);
+            if (!file.exists())
+            {
+                this.errorLabel.setText("File does not exist.");
+                return;
+            }            
+            
             DataAddRemoveHandler.getInstance().addAssociation(ap.getId(), ts, ms, this.assocNameTextBox.getText(), this.networkFileBox.getText(), null);
         }
         this.closeDialog(null);

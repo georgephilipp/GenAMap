@@ -3,6 +3,7 @@ package control.algodialog;
 import algorithm.AlgorithmView;
 import algorithm.StructureParameterObject;
 import control.DataAddRemoveHandler;
+import control.ExampleFileHandler;
 import datamodel.MarkerSet;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -11,6 +12,7 @@ import javax.swing.JFileChooser;
 import java.util.ArrayList;
 import datamodel.Project;
 import datamodel.Model;
+import java.io.File;
 import javax.swing.JOptionPane;
 
 /**
@@ -399,6 +401,13 @@ public class PopulationStructDialog extends java.awt.Dialog
             this.errorLabel.setText(s);
             return;
         }
+        
+        if (this.netNameText.getText().length() > 30)
+        {
+            String s = "Name may be at most 30 characters.";
+            this.errorLabel.setText(s);
+            return;
+        }
 
         String populationName = this.netNameText.getText();
 
@@ -435,6 +444,12 @@ public class PopulationStructDialog extends java.awt.Dialog
         }
         else
         {
+            File file = new File(this.networkFileBox.getText());
+            if (!file.exists())
+            {
+                this.errorLabel.setText("Data file does not exist.");
+                return;
+            }
             DataAddRemoveHandler.getInstance().addPopulation(this.networkFileBox.getText(), projID, markerID, this.netNameText.getText());
         }
         this.closeDialog(null);
@@ -503,23 +518,8 @@ public class PopulationStructDialog extends java.awt.Dialog
     private void exampleBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_exampleBtnActionPerformed
     {//GEN-HEADEREND:event_exampleBtnActionPerformed
         //Open file in notepad or vi or show error message telling the user where to find the file
-        Runtime load = Runtime.getRuntime();
-        try
-        {
-            load.exec("notepad sampleEXAMPLE.txt");
-        }
-        catch (IOException ex)
-        {
-            try
-            {
-                load.exec("vi sampleEXAMPLE.txt");
-            }
-            catch (IOException ex1)
-            {
-                JOptionPane.showMessageDialog(this, "I can't open the example file.\n" +
-                        "Please look in the distribution directory for sampleEXAMPLE.txt");
-            }
-        }
+        if(!ExampleFileHandler.display("populationStructure"))
+            JOptionPane.showMessageDialog(this, ExampleFileHandler.failMessage);
     }//GEN-LAST:event_exampleBtnActionPerformed
 
     private void popComboBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_popComboBoxActionPerformed

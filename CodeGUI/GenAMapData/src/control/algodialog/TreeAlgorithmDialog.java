@@ -3,21 +3,15 @@ package control.algodialog;
 import algorithm.AlgorithmView;
 import algorithm.AssociationParameterObject;
 import control.DataAddRemoveHandler;
+import control.ExampleFileHandler;
 import datamodel.TraitSet;
-import java.io.FileNotFoundException;
 import javax.swing.JFileChooser;
 import datamodel.Project;
 import datamodel.Model;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import javax.swing.JFrame;
-import datamodel.TraitTreeVal;
 import java.util.*;
-
 import datamodel.Network;
+import java.io.File;
 import javax.swing.JOptionPane;
 
 /**
@@ -103,184 +97,7 @@ public class TreeAlgorithmDialog extends java.awt.Dialog
         }
 
     }
-
-    /**
-     * Parses a tree file in the siblings format and returns the root pointer. ((),())
-     * @param fi the file to read in. 
-     * @return
-     * @throws FileNotFoundException
-     * @throws IOException
-     */
-    private TraitTreeVal loadSiblingsTree(String fi) throws FileNotFoundException, IOException
-    {
-        FileInputStream fstream = new FileInputStream(fi);
-        DataInputStream in = new DataInputStream(fstream);
-        BufferedReader br = new BufferedReader(new InputStreamReader(in));
-        String strLine;
-        TraitTreeVal root = null;
-
-        while ((strLine = br.readLine()) != null)
-        {
-            strLine = strLine.trim();
-            int lastParenIndex = strLine.lastIndexOf(")");
-
-            String newLine = strLine.substring(0, lastParenIndex) + ",)";
-            String r = "";
-            for (int i = 0; i < newLine.length(); i++)
-            {
-                if (newLine.charAt(i) != ' ')
-                {
-                    r += newLine.charAt(i);
-                }
-            }
-
-            System.out.println("building " + r);
-            int newLastParen = r.lastIndexOf(")");
-
-            root = buildTree(r, new TraitTreeVal("ROOT"), 0, newLastParen);
-            root.setParent(new TraitTreeVal("rootParent"));
-
-        }//end of file read loop
-        return root;
-
-    }
-
-    /**
-     * Called from reading the siblings format. Puts the tree together. 
-     * @param s
-     * @param parent
-     * @param from
-     * @param to
-     * @return
-     */
-    private TraitTreeVal buildTree(String s, TraitTreeVal parent, int from, int to)
-    {
-        if (s.charAt(from) != '(')
-        {
-            parent.setName(s.substring(from, to));
-            return parent;
-        }
-
-        int b = 0;//bracket counter
-        int x = from; //position marker
-
-        for (int i = from; i < to; i++)
-        {
-            char c = s.charAt(i);
-
-            if (c == '(')
-            {
-                b++;
-            }
-            else if (c == ')')
-            {
-                b--;
-            }
-
-            if (b == 0 || b == 1 && c == ',')
-            {
-                String name = Integer.toString(x + 1) + "to" + i;
-                parent.addChild(buildTree(s, new TraitTreeVal(name), x + 1, i));
-                x = i;
-            }
-        }
-
-        return parent;
-
-    }
-
-    /**
-     * Format being loaded in this function is:
-     * T1   P1
-     * Where values that star with T represent child nodes, which encode Traits, and
-     * values that start with P are intermediate tree nodes which DO NOT represent Traits
-     * @param fi file containing tree in format specified above
-     * @return a list of traittreeeval objects containing the traits specified
-     * @throws FileNotFoundException
-     * @throws IOException
-     */
-    private TraitTreeVal loadTabsTree(String fi) throws FileNotFoundException, IOException
-    {
-        String networkFile = this.treeFileBox.getText();
-        FileInputStream fstream = new FileInputStream(networkFile);
-        DataInputStream in = new DataInputStream(fstream);
-        BufferedReader br = new BufferedReader(new InputStreamReader(in));
-        String strLine;
-        TraitTreeVal root = null;
-
-        //this map keeps track of values we've read in so that:
-        //1. we don't create duplicate TraitTreeEval objects
-        //2. we can assign the same parent object to sibling nodes
-        HashMap<String, TraitTreeVal> nodes = new HashMap<String, TraitTreeVal>();
-
-        //System.out.println("in loadtree b3 while loop");
-        while ((strLine = br.readLine()) != null)
-        {
-            strLine = strLine.trim();
-            String[] ln = strLine.split("\t");
-
-            //System.out.println("line items: "+ln.length+", line read: "+ln[0]+" "+ln[1]);
-            if (strLine.length() > 0)
-            {
-                TraitTreeVal currentNode;
-                TraitTreeVal parentNode;
-
-                //checking if current child node has been created
-                if (!nodes.containsKey(ln[0]))
-                {
-                    currentNode = new TraitTreeVal();
-                    currentNode.setName(ln[0]);
-                    //since this is a child of another node we assume for now that it is a leaf and create a
-                    //trait object for it. as a backup also especifing it in the boolean field
-                }
-                else
-                {
-                    //CAN YOU HAVE MORE THAN ONE PARENT PER NODE?
-                    currentNode = nodes.get(ln[0]);
-                }
-                //check if parent node has been created
-                if (!nodes.containsKey(ln[1]))
-                {
-                    parentNode = new TraitTreeVal();
-                    parentNode.setName(ln[1]);
-
-                    //only leaf nodes can have traits
-                    parentNode.setTrait(null);
-
-                    //if the parent of this node is the root
-                    if (ln[1].toUpperCase().equals("ROOT"))
-                    {
-                        //The root element must have a non-null parent with id 1.
-                        TraitTreeVal rootParent = new TraitTreeVal();
-                        rootParent.setId(1);
-                        rootParent.setName("rootparent");//for debugging purposes.
-                        parentNode.setParent(rootParent);
-
-                        //tree.add(parentNode);
-                        root = parentNode;
-                    }
-                }
-                else
-                {
-                    parentNode = nodes.get(ln[1]);
-                    //we may have encountered this node as a leaf. Because now we encounter it as a parent
-                    //we must make sure it does not have a trait object
-                    parentNode.setTrait(null);
-                }
-
-                //System.out.println("checkpoint 3");
-                currentNode.setParent(parentNode);
-                parentNode.addChild(currentNode);
-
-                nodes.put(ln[0], currentNode);
-                nodes.put(ln[1], parentNode);
-            }
-        }
-        in.close();
-        in = null;
-        return root;
-    }
-
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -570,6 +387,13 @@ public class TreeAlgorithmDialog extends java.awt.Dialog
             this.errorLabel.setText(s);
             return;
         }
+        
+        if(this.treeNameTextBox.getText().length() > 30)
+        {
+            String s = "Name may be at most 30 characters.";
+            this.errorLabel.setText(s);
+            return;
+        }
 
         String projectName;
         String traitName;
@@ -630,52 +454,25 @@ public class TreeAlgorithmDialog extends java.awt.Dialog
         }
         else if (this.loadRadBtn.isSelected())
         {
-            if (this.tabDelButton.isSelected())
+            String fileName = this.treeFileBox.getText();
+            File file = new File(fileName);
+            if (!file.exists())
             {
-                try
-                {
-                    String TreeFile = this.treeFileBox.getText();
-                    TraitTreeVal root = this.loadTabsTree(TreeFile);
-                    if (root == null)
-                    {
-                        this.errorLabel.setText("Error reading in the file.");
-                        return;
-                    }
-                    DataAddRemoveHandler.getInstance().addTraitTree(projID, traitID, this.treeNameTextBox.getText(), root);
-                }
-                catch (Exception e)
-                {
-                    errorLabel.setText("There was an error reading this file.");
-                    return;
-                }
-            }
-            else if (this.SiblingsButton.isSelected())
-            {
-
-                try
-                {
-                    String TreeFile = this.treeFileBox.getText();
-                    TraitTreeVal root = this.loadSiblingsTree(TreeFile);
-                    if (root == null)
-                    {
-                        this.errorLabel.setText("Error reading in this file");
-                        return;
-                    }
-
-                    DataAddRemoveHandler.getInstance().addTraitTree(projID, traitID, this.treeNameTextBox.getText(), root);
-                }
-                catch (Exception ex)
-                {
-                    this.errorLabel.setText("Error reading in this file");
-                    return;
-                }
-            }
-            else
-            {
-                this.errorLabel.setText("You must select a valid file format.");
+                this.errorLabel.setText("File does not exist.");
                 return;
-            }
-
+            }  
+            
+            boolean isSibling = false;
+            if(this.SiblingsButton.isSelected())
+                isSibling = true;
+            String TreeFile = this.treeFileBox.getText();
+            DataAddRemoveHandler.getInstance().addTraitTree(
+                    projID, 
+                    traitID, 
+                    this.treeNameTextBox.getText(), 
+                    TreeFile,
+                    isSibling
+                    );
         }
         this.closeDialog(null);
 }//GEN-LAST:event_importButtonActionPerformed
@@ -773,26 +570,8 @@ public class TreeAlgorithmDialog extends java.awt.Dialog
 
     private void fileButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_fileButton1ActionPerformed
     {//GEN-HEADEREND:event_fileButton1ActionPerformed
-        //Open file in notepad or vi or show error message telling the user where to find the file
-        Runtime load = Runtime.getRuntime();
-        try
-        {
-            load.exec("notepad treeEXAMPLE1.txt");
-            load.exec("notepad treeEXAMPLE2.txt");
-        }
-        catch (Exception ex)
-        {
-            try
-            {
-                load.exec("vi treeEXAMPLE1.txt");
-                load.exec("vi treeEXAMPLE2.txt");
-            }
-            catch (Exception ex1)
-            {
-                JOptionPane.showMessageDialog(this, "I can't open the example file.\n" +
-                        "Please look in the distribution directory for treeEXAMPLE1 and treeEXAMPLE2.txt");
-            }
-        }
+        if(!ExampleFileHandler.display("tree"))
+            JOptionPane.showMessageDialog(this, ExampleFileHandler.failMessage);
     }//GEN-LAST:event_fileButton1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton SiblingsButton;

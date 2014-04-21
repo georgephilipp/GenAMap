@@ -19,7 +19,7 @@ public class Service
 			while(true)
 			{
 				//System.out.println("Hello World! The Service is awake!\n");
-				System.out.println(new Date());
+				Printer.inst.println("" + new Date());
 				//System.out.println("Checking for new jobs to track ... ");
 				ArrayList<Integer> ids = SQLCommander.getInstance().getRunningJobs();
 
@@ -34,20 +34,20 @@ public class Service
 
 					if(!found)
 					{
-						System.out.println("The service is now tracking job: " + 
+						Printer.inst.println("The service is now tracking job: " + 
 							ids.get(i));
 						jobs.add(new Job(ids.get(i)));
 					}
 				}
 
-				System.out.println();
+				Printer.inst.println("");
 
 				for(int i = jobs.size()-1; i >= 0; i --)
 				{
-					System.out.println("Updating job: " + jobs.get(i).jobID);
+					Printer.inst.println("Updating job: " + jobs.get(i).jobID);
 					if(!jobs.get(i).update())
 					{
-						System.out.println("\tNo longer tracking job " + jobs.get(i).jobID);
+						Printer.inst.println("\tNo longer tracking job " + jobs.get(i).jobID);
 						jobs.remove(jobs.get(i));
 					}
 				}
@@ -59,8 +59,8 @@ public class Service
 		}
 		catch(Exception e)
 		{
-			System.out.println("Oh no! We've got problems ! !");
-			System.out.println(e.getMessage());
+			Printer.inst.println("Oh no! We've got problems ! !");
+			Printer.inst.println(e.getMessage());
 		}
 	}
 }

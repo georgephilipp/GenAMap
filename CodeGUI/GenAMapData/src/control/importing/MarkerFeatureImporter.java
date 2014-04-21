@@ -4,6 +4,7 @@ import control.algodialog.*;
 import algorithm.AlgorithmView;
 import algorithm.StructureParameterObject;
 import control.DataAddRemoveHandler;
+import control.ExampleFileHandler;
 import control.itempanel.MarkerFeatureUploadItem;
 import control.itempanel.ThreadingItemFrame;
 import datamodel.MarkerSet;
@@ -355,24 +356,8 @@ public class MarkerFeatureImporter extends java.awt.Dialog
 
     private void fileButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_fileButton1ActionPerformed
     {//GEN-HEADEREND:event_fileButton1ActionPerformed
-                //Open file in notepad or vi or show error message telling the user where to find the file
-        Runtime load = Runtime.getRuntime();
-        try
-        {
-            load.exec("notepad featEXAMPLE.txt");
-        }
-        catch (IOException ex)
-        {
-            try
-            {
-                load.exec("vi featEXAMPLE.txt");
-            }
-            catch (IOException ex1)
-            {
-                JOptionPane.showMessageDialog(this, "I can't open the example file.\n" +
-                        "Please look in the distribution directory for featEXAMPLE.txt");
-            }
-        }
+        if(!ExampleFileHandler.display("features"))
+            JOptionPane.showMessageDialog(this, ExampleFileHandler.failMessage);
     }//GEN-LAST:event_fileButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

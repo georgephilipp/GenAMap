@@ -27,7 +27,7 @@ public class Job
 			if(!SQLCommander.getInstance().setupDBForNewJob(jobID))
                         {
                                 sendJobToError("Could not unpause this job.");
-                                System.out.println("\tCould not manage to unpause this job.");
+                                Printer.inst.println("\tCould not manage to unpause this job.");
                                 return false;
                         }
 
@@ -37,7 +37,7 @@ public class Job
 			homedir = jobInfo.get(2);
 			step = Integer.parseInt(jobInfo.get(3));
 			//System.out.println(homedir);
-			System.out.println("\tReceived info for " + this.jobID + ": " + jobName + ", " + status);
+			Printer.inst.println("\tReceived info for " + this.jobID + ": " + jobName + ", " + status);
 		}
 		if(status.equals("INI"))
 		{
@@ -51,9 +51,9 @@ public class Job
 			{
 				case 0: this.status = "PSN";
 					SQLCommander.getInstance().pauseJob(jobID);
-					System.out.println("\tThis job will be paused at the first opportunity");
+					Printer.inst.println("\tThis job will be paused at the first opportunity");
 					break;
-				case 1: System.out.println("\tJob " + jobID + " will now be KILLED!!!");
+				case 1: Printer.inst.println("\tJob " + jobID + " will now be KILLED!!!");
 					Condor.stopJobs(condorIDs);
 					SQLCommander.getInstance().setJobAsKilled(jobID);
 					endJob("CNL");
@@ -66,15 +66,15 @@ public class Job
 			{
 				String exeloc = (homedir + "/condor_runme_" + step + ".sh");
 				int[] stat = Condor.getStatus(condorIDs, exeloc, jobID, step, currentNumCondorJobs);
-				System.out.print("\t" + stat[0] + " R, " + stat[1] + " H, " + (condorIDs.size() - stat[0] - stat[1]) + " C.  ");
-				updatePerCmpt(stat[0]+stat[1], condorIDs.size()-stat[0]-stat[1]);
+				Printer.inst.print("\t" + stat[0] + " R, " + stat[1] + " H, " + stat[2] + " C.  ");
+				updatePerCmpt(stat[0]+stat[1], stat[2]);
 				if(stat[1] == 0 && stat[0] > 0)
 					return true;
 				if(stat[1] > 0)
 				{
 					//Condor.releaseJobs();
 					//sendJobToError("Condor processes relating to this job were held.");
-					System.out.println("\tJob contains holds on condor jobs.");
+					Printer.inst.println("\tJob contains holds on condor jobs.");
 					return true;
 				}
 				String s = getErrorString();
@@ -85,24 +85,24 @@ public class Job
 					SQLCommander.getInstance().updateStep(jobID, step);
 					if(step == maxStep) //complete
 					{
-						System.out.println("\tJob complete");
+						Printer.inst.println("\tJob complete");
 						SQLCommander.getInstance().updatePerComplete(jobID, 100);
 						endJob("CPT");
 						return false;
 					}
 					if(SQLCommander.getInstance().shouldJobCont(jobID))
 					{
-						System.out.println("\tMoving job to next step.");
+						Printer.inst.println("\tMoving job to next step.");
 						return startJob();
 					}
 					else
 					{
-						System.out.println("\tJob going into hybernation mode.");
+						Printer.inst.println("\tJob going into hybernation mode.");
 						endJob("PSD");
 						return false;
 					}	
 				}
-				else if (s.contains("loadUnable"))
+				/*else if (s.contains("loadUnable"))
 				{
 					step --;
 					if(step < 0)
@@ -113,7 +113,7 @@ public class Job
 					SQLCommander.getInstance().updateStep(jobID, step);
 					System.out.println("\tJob going back a step.");
 					return startJob();
-				}
+				}*/
 				else
 				{
 					sendJobToError(s);
@@ -122,7 +122,7 @@ public class Job
 			}
 			catch (Exception e)
 			{
-				System.out.println(e.getMessage());
+				Printer.inst.println(e.getMessage());
 			}
 		}
 
@@ -141,7 +141,7 @@ public class Job
 		double subDun = (double)(cmpt) / (double)(run + cmpt) * stepSz;
 		//System.out.println(subDun);
 		int perCpt = (int)(1.0 + stepDun + subDun);
-		System.out.println(perCpt+"%");
+		Printer.inst.println(perCpt+"%");
 		SQLCommander.getInstance().updatePerComplete(jobID, perCpt);
 	}
 
@@ -150,11 +150,11 @@ public class Job
 
 		if(Driver.steptorun != -1 && step != Driver.steptorun)
 		{
-			System.out.print("Will not run this step");
+			Printer.inst.print("Will not run this step");
 			throw new RuntimeException();
 		}
 
-		System.out.println("\tStarting job : " + jobID);
+		Printer.inst.println("\tStarting job : " + jobID);
 		//get parms and universe
 		String parmsloc = homedir + "/parms";
 		parmsloc += (step>0?"" + step +".txt":".txt");
@@ -211,7 +211,7 @@ public class Job
 		//System.out.println("exeLoc: " + exeLoc);
 		currentNumCondorJobs = parms.size();
 		String shLoc = Condor.makeCondorRunFiles(universe, homedir + "/.." + exeLoc, parms, step, homedir, prio);
-		ArrayList<CondorJob> jobs = Condor.runCondorSubmitFile(shLoc, jobID, step);
+		/*ArrayList<CondorJob> jobs = */Condor.runCondorSubmitFile(shLoc, jobID, step);
 		//SQLCommander.getInstance().insertCondorIDs(jobID, step, jobs);
 		//SQLCommander.getInstance().updatePerComplete(jobID, 1.0);
 		SQLCommander.getInstance().updateStatus("RUN", jobID);
@@ -225,7 +225,11 @@ public class Job
 		if(errorText.length() > 150)
 			errorText = errorText.substring(0, 140) + "\n...";	
 
-		System.out.println("\tJob will be stopped with the following error: " + errorText);
+		errorText = errorText.replace("\"", "");
+		errorText = errorText.replace("\\", "");
+		errorText = errorText.replace("'", "");
+
+		Printer.inst.println("\tJob will be stopped with the following error: " + errorText);
 
 		SQLCommander.getInstance().insertErrorText(jobID, errorText);
 		endJob("ERR");
@@ -264,7 +268,7 @@ public class Job
 			//System.out.println(homedir + "/err_" + step + ".txt");
 			while((lin = buf.readLine())!= null)
 			{
-				System.out.println("!" + lin);
+				Printer.inst.println("!" + lin);
 				if(lin.length() >= 6)
 				{
 					if(!lin.substring(0, 6).equals("Condor"))
@@ -272,11 +276,11 @@ public class Job
 				}
 			}
 			in2.close();
-			System.out.println(errors);
+			Printer.inst.println(errors);
 		}
 		catch(Exception e)
 		{
-			System.out.println(e.getMessage());
+			Printer.inst.println(e.getMessage());
 			return e.getMessage();
 		}	
 		return errors;

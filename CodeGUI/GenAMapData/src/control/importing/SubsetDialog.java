@@ -17,6 +17,9 @@ import java.io.FileReader;
 import java.util.HashMap;
 import javax.swing.JFrame;
 import realdata.DataManager;
+import control.TableParser;
+import java.util.HashSet;
+import javax.swing.JOptionPane;
 
 /**
  * Has a few processing ways to build a subset in GenAMap. 
@@ -367,6 +370,12 @@ public class SubsetDialog extends java.awt.Dialog
             errorLabel.setText("You must choose a name");
             return;
         }
+        
+        if (this.nameTextBox.getText().length() > 30)
+        {
+            errorLabel.setText("Name may be at most 30 characters");
+            return;
+        }
 
         if (this.projectComboBox.getSelectedItem().equals("<Select Project>"))
         {
@@ -388,6 +397,14 @@ public class SubsetDialog extends java.awt.Dialog
         Project assocProj = Model.getInstance().getProject(projectName);
         TraitSet ts = assocProj.getTrait(traitName);
         if(ts.getSubset(this.nameTextBox.getText()) != null)
+        {
+            this.errorLabel.setText("Name already in existance for these traits");
+            return;
+        }
+        ArrayList<String> whereArgs = new ArrayList();
+        whereArgs.add("name=\"" + this.nameTextBox.getText() + "\"");
+        whereArgs.add("tsid=" + ts.getId());
+        if(DataManager.runSelectQuery("id", "traitsubset", true, whereArgs, null).size() > 0)
         {
             this.errorLabel.setText("Name already in existance for these traits");
             return;
@@ -438,7 +455,7 @@ public class SubsetDialog extends java.awt.Dialog
             {
                 idx.add(traits.get(0));
                 ArrayList<Integer> neighbs = get100NeighborsForTrait(idx.get(0), netid);
-                for(int i = 0; i < 50 && i < neighbs.size(); i ++)
+                for(int i = 0; i < 100 && i < neighbs.size(); i ++)
                 {
                     idx.add(neighbs.get(i));
                 }
@@ -453,9 +470,6 @@ public class SubsetDialog extends java.awt.Dialog
         {
             if (this.loadRadBtn.isSelected())
             {
-                ArrayList<String> whereArgs = new ArrayList<String>();
-                whereArgs.add("traitsetid=" + traitID);
-
                 if (!(new File(networkFileBox.getText()).exists()))
                 {
                     errorLabel.setText("File does not exist.");
@@ -467,65 +481,90 @@ public class SubsetDialog extends java.awt.Dialog
                     errorLabel.setText("Select a format");
                     return;
                 }
+                
+                int id = -1;
 
                 try
                 {
-
-                    BufferedReader in = new BufferedReader(new FileReader(networkFileBox.getText()));
-                    ArrayList<String> ids = new ArrayList<String>();
-                    String str;
-                    while ((str = in.readLine()) != null)
-                    {
-                        ids.add(str);
-
+                    whereArgs.clear();
+                    whereArgs.add("traitsetid=" + traitID);
+                    ArrayList<String> traitIds = DataManager.runSelectQuery("id", "trait", true, whereArgs, "idx");
+                    ArrayList<String> traitNames = DataManager.runSelectQuery("name", "trait", true, whereArgs, "idx");
+                    HashMap<String, String> nameToIdMap = new HashMap();
+                    int numTraits = traitIds.size();
+                    for(int i=0;i<numTraits;i++)
+                        nameToIdMap.put(traitNames.get(i), traitIds.get(i));
+                    
+                    TableParser tparser = new TableParser();
+                    tparser.delimiter = "Tab";
+                    ArrayList<Integer> nameKey = new ArrayList();
+                    nameKey.add(0);
+                    tparser.keys.add(nameKey);
+                    tparser.colTypes.add("special:0");
+                    if(this.nFormatButton.isSelected())
+                    {                     
+                        tparser.regSets.add(new HashSet(traitNames));
                     }
-                    if (this.nFormatButton.isSelected())
+                    else
                     {
-                        ArrayList<Trait> traits = ts.getTraits();
-                        ArrayList<Integer> idx = new ArrayList<Integer>();
-                        for (int i = 0; i < ids.size(); i++)
-                        {
-                            for (int x = 0; x < traits.size(); x++)
-                            {
-                                if (ids.get(i).compareTo(traits.get(x).getName()) == 0)
-                                {
-                                    idx.add(traits.get(x).getId());
-
-
-                                }
-                            }
-                        }
-                        TraitSubset subset = new TraitSubset(ts, idx, this.nameTextBox.getText());
-
-                        ts.addSubset(subset);
-                        DataAddRemoveHandler.getInstance().refreshDisplay();
-                    } else
+                        tparser.regSets.add(new HashSet());
+                        for(Integer i=1;i<=numTraits;i++)
+                            tparser.regSets.get(0).add(i.toString());
+                    }
+                    tparser.setup(this.networkFileBox.getText());
+                    
+                    ArrayList<String> line;
+                    StringBuilder traitListBuilder = new StringBuilder();
+                    
+                    while(true)
                     {
-
-                        ArrayList<Trait> traits = ts.getTraits();
-
-                        ArrayList<Integer> idx = new ArrayList<Integer>();
-                        for (int i = 0; i < ids.size(); i++)
+                        line = tparser.readline();
+                        if(line.size() == 1)
                         {
-                            for (int x = 0; x < traits.size(); x++)
-                            {
-                                if (Integer.parseInt(ids.get(i)) == (traits.get(x).getIdx()))
-                                {
-                                    idx.add(traits.get(x).getId());
-                                    //System.out.println(traits.get(x).getId());
-                                }
-                            }
+                            JOptionPane.showMessageDialog(null, "Error while parsing the data file.\nThis is likely caused by incorrect formatting.\n Error message was: " + line.get(0));
+                            throw new RuntimeException("Incorrect file formatting");
                         }
-                        TraitSubset subset = new TraitSubset(ts, idx, this.nameTextBox.getText());
-
-                        ts.addSubset(subset);
-                        DataAddRemoveHandler.getInstance().refreshDisplay();
-
+                        if(line.get(1) == null)
+                            break;
+                        if(this.nFormatButton.isSelected())
+                            traitListBuilder.append(nameToIdMap.get(line.get(1)));
+                        else
+                            traitListBuilder.append(traitIds.get(Integer.parseInt(line.get(1))-1));
+                        traitListBuilder.append(",");    
+                    }
+                    
+                    ArrayList<String> cols = new ArrayList<String>();
+                    cols.add("name");
+                    cols.add("tsid");
+                    ArrayList<String> vals = new ArrayList<String>();
+                    vals.add(this.nameTextBox.getText());
+                    vals.add(traitID + "");
+                    if(!DataManager.runInsertQuery(cols, vals, "traitsubset"))
+                    {
+                        JOptionPane.showMessageDialog(null, "Error while uploading the data to the DB.\nThis is a bug. Please contact the developers.\n Error message was: " + DataManager.getLastError());
+                        throw new RuntimeException("Importing problem");
                     }
 
+                    ArrayList<String> where = new ArrayList<String>();
+                    where.add("name=\"" + this.nameTextBox.getText() + "\"");
+                    where.add("tsid=" + traitID + "");
+                    id = Integer.parseInt((String)DataManager.runSelectQuery("id", "traitsubset", true, where, null).get(0));
+
+                    String traitList = traitListBuilder.toString();
+                    traitList = traitList.substring(0, traitList.length() - 1);
+                    
+                    vals.clear();
+                    vals.add(id + "");
+                    vals.add(traitList);
+                    int listId = Integer.parseInt(DataManager.runFunction("create_subset", vals));
+                    
+                    TraitSubset subset = new TraitSubset(ts, id, this.nameTextBox.getText(), listId, -1);
+                    ts.addSubset(subset);
+                    DataAddRemoveHandler.getInstance().refreshDisplay();
                     this.setVisible(false);
                     this.dispose();
-                } catch (Exception e)
+                } 
+                catch (Exception e)
                 {
                     this.errorLabel.setText(e.getMessage());
                     return;

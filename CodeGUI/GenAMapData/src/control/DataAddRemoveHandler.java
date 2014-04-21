@@ -6,7 +6,6 @@ import control.itempanel.NetworkUploadItem;
 import control.itempanel.PopulationItem;
 import control.itempanel.TraitTreeUpdateItem;
 import control.itempanel.ThreadingItemFrame;
-import control.itempanel.TraitItem;
 import control.itempanel.TraitTreeItem;
 import datamodel.Population;
 import datamodel.Association;
@@ -873,27 +872,6 @@ public class DataAddRemoveHandler
     }
 
     /**
-     * The method that starts the thread to add the passed in traits to the
-     * database. These traits have already been parsed. 
-     * @param traits The list of already parsed traits.
-     * @param text The name of these parsed traits.
-     * @param project The name of the project these traits will be added to. 
-     */
-    public void addTraits(String text, String project, String dataFile, boolean isKxNFormat,
-            String sampFile, String traitFile, int speciesId, boolean isGenSamps)
-    {
-        Project p = Model.getInstance().getProject(project);
-
-        ThreadingItemFrame form = ThreadingItemFrame.getInstance();
-        TraitItem item = new TraitItem(form, text, Integer.toString(p.getId()),
-                dataFile, isKxNFormat, sampFile, traitFile, speciesId, isGenSamps);
-
-        form.addToThreadList(item);
-        form.setVisible(true);
-        form.setDefaultCloseOperation(HIDE_ON_CLOSE);
-    }
-
-    /**
      * Given the root of a read in tree, this method will call the appropriate
      * places to add the tree to the database. 
      * @param projid the project id of the tree
@@ -901,10 +879,10 @@ public class DataAddRemoveHandler
      * @param name the name of the tree
      * @param root the root of the tree. 
      */
-    public void addTraitTree(int projid, int tsid, String name, TraitTreeVal root)
+    public void addTraitTree(int projid, int tsid, String name, String fileName, boolean format)
     {
         ThreadingItemFrame form = ThreadingItemFrame.getInstance();
-        TraitTreeItem item = new TraitTreeItem(form, name, root, tsid, projid);
+        TraitTreeItem item = new TraitTreeItem(form, name, fileName, tsid, projid, format);
 
         form.addToThreadList(item);
         form.setVisible(true);
@@ -927,28 +905,19 @@ public class DataAddRemoveHandler
      * Calls the threader to add a network item to the database. 
      * @param tsid traitset id
      * @param name name of the network
-     * @param network edges of the network. 
+     * @param isEdgeFormat Whether the network is an edge-by-edge format
      */
-    public void addNetwork(int projID, int tsid, String name, ArrayList<CytoNet> network)
+    public void addNetwork(int projID, int tsid, String name, String fileName, boolean isEdgeFormat)
     {
         ThreadingItemFrame form = ThreadingItemFrame.getInstance();
-        NetworkUploadItem item = new NetworkUploadItem(form, name, network, tsid, projID);
-
-        form.addToThreadList(item);
-        form.setVisible(true);
-        form.setDefaultCloseOperation(HIDE_ON_CLOSE);
-    }
-
-    /**
-     * Calls the threader to add a network item to the database.
-     * @param tsid traitset id
-     * @param name name of the network
-     * @param network matrix file of the network.
-     */
-    public void addNetwork(int projID, int tsid, String name, double[][] network)
-    {
-        ThreadingItemFrame form = ThreadingItemFrame.getInstance();
-        NetworkUploadItem item = new NetworkUploadItem(form, name, network, tsid, projID);
+        NetworkUploadItem item = new NetworkUploadItem(
+                form, 
+                projID,
+                tsid,
+                name,
+                fileName,
+                isEdgeFormat
+                );
 
         form.addToThreadList(item);
         form.setVisible(true);

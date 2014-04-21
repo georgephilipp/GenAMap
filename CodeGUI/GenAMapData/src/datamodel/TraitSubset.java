@@ -88,7 +88,7 @@ public class TraitSubset implements Serializable
     /**
      * Creates a traitsubset from an id and database name.
      */
-    TraitSubset(TraitSet ts, int id, String name, int traitlist, int golist)
+    public TraitSubset(TraitSet ts, int id, String name, int traitlist, int golist)
     {
         this.traitSetId = ts.getId();
         this.name = name;

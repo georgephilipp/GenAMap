@@ -5,8 +5,9 @@
  */
 package control.importing;
 
-import accessories.FileController;
-import control.DataAddRemoveHandler;
+import control.ExampleFileHandler;
+import control.itempanel.BaseDataItem;
+import control.itempanel.ThreadingItemFrame;
 import datamodel.Trait;
 import datamodel.Model;
 import datamodel.Sample;
@@ -14,6 +15,7 @@ import java.io.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JFileChooser;
+import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
 import realdata.DataManager;
 
 /**
@@ -36,21 +38,21 @@ public class TraitImporter extends java.awt.Dialog
         super(null, modal);
         initComponents();
         this.setLocation(parent.getLocation());
-        this.sampleButton.setEnabled(false);
-        this.sampleHelpButton.setEnabled(false);
-        this.sampleTextBox.setEnabled(false);
-        this.labelButton.setEnabled(false);
-        this.labelHelpButton.setEnabled(false);
-        this.labelTextBox.setEnabled(false);
-        this.jLabel6.setEnabled(false);
-        this.jLabel7.setEnabled(false);
+        this.sampleButton.setEnabled(true);
+        this.sampleHelpButton.setEnabled(true);
+        this.sampleTextBox.setEnabled(true);
+        this.labelButton.setEnabled(true);
+        this.labelHelpButton.setEnabled(true);
+        this.labelTextBox.setEnabled(true);
+        this.jLabel6.setEnabled(true);
+        this.jLabel7.setEnabled(true);
         this.nkRadioButton.setSelected(true);
-        this.rcRadioButton.setSelected(true);
+        this.norcRadioButton.setSelected(true);
 
         ArrayList<String> speciesNames = DataManager.runSelectQuery("name", "species", false, null, "id");
         for(String s : speciesNames)
         {
-            this.projectComboBox1.addItem(s);
+            this.speciesComboBox.addItem(s);
         }
 
         ArrayList<String> projectNames = DataManager.runSelectQuery("name", "project", false, null, null);
@@ -103,7 +105,6 @@ public class TraitImporter extends java.awt.Dialog
         rcRadioButton = new javax.swing.JRadioButton();
         norcRadioButton = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
-        delimiterTextBox = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         sampleTextBox = new javax.swing.JTextField();
         labelTextBox = new javax.swing.JTextField();
@@ -121,10 +122,10 @@ public class TraitImporter extends java.awt.Dialog
         traitTextBox = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         traitNameField = new javax.swing.JTextField();
-        phenoRadioButton = new javax.swing.JRadioButton();
         jLabel9 = new javax.swing.JLabel();
-        projectComboBox1 = new javax.swing.JComboBox();
+        speciesComboBox = new javax.swing.JComboBox();
         isHasDataCheck = new javax.swing.JCheckBox();
+        delimiterComboBox = new javax.swing.JComboBox();
         cancelButton = new javax.swing.JButton();
         importButton = new javax.swing.JButton();
         errorLabel = new javax.swing.JLabel();
@@ -142,7 +143,7 @@ public class TraitImporter extends java.awt.Dialog
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.red));
 
         dimButtonGroup.add(nkRadioButton);
-        nkRadioButton.setText("NxK");
+        nkRadioButton.setText("Nxt");
         nkRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nkRadioButtonActionPerformed(evt);
@@ -150,14 +151,14 @@ public class TraitImporter extends java.awt.Dialog
         });
 
         dimButtonGroup.add(knRadioButton);
-        knRadioButton.setText("KxN");
+        knRadioButton.setText("txN");
         knRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 knRadioButtonActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("DejaVu Sans", 1, 18));
+        jLabel1.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
         jLabel1.setText("File Format");
 
         headButtonGroup.add(rcRadioButton);
@@ -178,9 +179,7 @@ public class TraitImporter extends java.awt.Dialog
 
         jLabel2.setText("delimeter");
 
-        delimiterTextBox.setText("w");
-
-        jLabel3.setFont(new java.awt.Font("DejaVu Sans", 1, 18));
+        jLabel3.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
         jLabel3.setText("Trait Import");
 
         sampleTextBox.setEditable(false);
@@ -258,17 +257,9 @@ public class TraitImporter extends java.awt.Dialog
 
         jLabel8.setText("Trait Name:");
 
-        dimButtonGroup.add(phenoRadioButton);
-        phenoRadioButton.setText("Pheno");
-        phenoRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                phenoRadioButtonActionPerformed(evt);
-            }
-        });
-
         jLabel9.setText("Species");
 
-        projectComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Select Species>" }));
+        speciesComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Select Species>" }));
 
         isHasDataCheck.setText("Import w/o data");
         isHasDataCheck.addActionListener(new java.awt.event.ActionListener() {
@@ -276,6 +267,8 @@ public class TraitImporter extends java.awt.Dialog
                 isHasDataCheckActionPerformed(evt);
             }
         });
+
+        delimiterComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tab", "Whitespace", "Comma" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -286,37 +279,34 @@ public class TraitImporter extends java.awt.Dialog
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nkRadioButton)
+                            .addComponent(knRadioButton))
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(norcRadioButton)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nkRadioButton)
-                                    .addComponent(knRadioButton))
-                                .addGap(39, 39, 39)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(norcRadioButton)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(rcRadioButton)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel2)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(delimiterTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(phenoRadioButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 355, Short.MAX_VALUE)
-                                        .addComponent(isHasDataCheck))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(85, 85, 85)
-                                        .addComponent(projectComboBox, 0, 394, Short.MAX_VALUE)))
-                                .addGap(105, 105, 105)))
-                        .addContainerGap())
+                                .addComponent(rcRadioButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(delimiterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(isHasDataCheck))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(85, 85, 85)
+                                .addComponent(projectComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(105, 105, 105))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(85, 85, 85)
-                                .addComponent(projectComboBox1, 0, 279, Short.MAX_VALUE)
+                                .addComponent(speciesComboBox, 0, 312, Short.MAX_VALUE)
                                 .addGap(103, 103, 103))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,15 +316,15 @@ public class TraitImporter extends java.awt.Dialog
                                     .addComponent(jLabel8))
                                 .addGap(48, 48, 48)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(traitNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                                    .addComponent(traitTextBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                                    .addComponent(labelTextBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                                    .addComponent(sampleTextBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
+                                    .addComponent(traitNameField)
+                                    .addComponent(traitTextBox, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(labelTextBox, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(sampleTextBox, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(fileButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(labelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(sampleButton, javax.swing.GroupLayout.Alignment.TRAILING, 0, 0, Short.MAX_VALUE))
+                                    .addComponent(sampleButton, javax.swing.GroupLayout.Alignment.TRAILING, 0, 1, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(sampleHelpButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -342,12 +332,12 @@ public class TraitImporter extends java.awt.Dialog
                                     .addComponent(labelHelpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(115, 115, 115))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addContainerGap(527, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(519, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,23 +372,21 @@ public class TraitImporter extends java.awt.Dialog
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(projectComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(speciesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nkRadioButton)
                     .addComponent(jLabel2)
-                    .addComponent(delimiterTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rcRadioButton))
+                    .addComponent(rcRadioButton)
+                    .addComponent(delimiterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(knRadioButton)
                     .addComponent(norcRadioButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(phenoRadioButton)
-                    .addComponent(isHasDataCheck))
+                .addComponent(isHasDataCheck)
                 .addContainerGap())
         );
 
@@ -416,7 +404,7 @@ public class TraitImporter extends java.awt.Dialog
             }
         });
 
-        errorLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
+        errorLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         errorLabel.setForeground(new java.awt.Color(255, 51, 102));
         errorLabel.setText("                        ");
 
@@ -429,7 +417,7 @@ public class TraitImporter extends java.awt.Dialog
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(errorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                        .addComponent(errorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(importButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -476,9 +464,9 @@ public class TraitImporter extends java.awt.Dialog
     }//GEN-LAST:event_knRadioButtonActionPerformed
 
     private void norcRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_norcRadioButtonActionPerformed
-        this.sampleButton.setEnabled(!this.phenoRadioButton.isSelected());
-        this.sampleHelpButton.setEnabled(!this.phenoRadioButton.isSelected());
-        this.sampleTextBox.setEnabled(!this.phenoRadioButton.isSelected());
+        this.sampleButton.setEnabled(true);
+        this.sampleHelpButton.setEnabled(true);
+        this.sampleTextBox.setEnabled(true);
         this.labelButton.setEnabled(true);
         this.labelHelpButton.setEnabled(true);
         this.labelTextBox.setEnabled(true);
@@ -506,41 +494,25 @@ public class TraitImporter extends java.awt.Dialog
     private void fileHelpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileHelpButtonActionPerformed
         String s = "Select the file that contains the trait values for each sample";
         JOptionPane.showMessageDialog(this, s, "Help", JOptionPane.INFORMATION_MESSAGE);
-        openExampleFile("traitEXAMPLE.txt");
+        openExampleFile("traitVals");
     }//GEN-LAST:event_fileHelpButtonActionPerformed
 
-    private void openExampleFile(String fileName)
+    private void openExampleFile(String fileCode)
     {
-                //Open file in notepad or vi or show error message telling the user where to find the file
-        Runtime load = Runtime.getRuntime();
-        try
-        {
-            load.exec("notepad " + fileName);
-        }
-        catch (IOException ex)
-        {
-            try
-            {
-                load.exec("vi " + fileName);
-            }
-            catch (IOException ex1)
-            {
-                JOptionPane.showMessageDialog(this, "I can't open the example file.\n" +
-                        "Please look in the distribution directory for " + fileName);
-            }
-        }
+        if(!ExampleFileHandler.display(fileCode))
+            JOptionPane.showMessageDialog(this, ExampleFileHandler.failMessage);
     }
 
     private void sampleHelpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sampleHelpButtonActionPerformed
         String s = "Select a file with one row for each sample label";
         JOptionPane.showMessageDialog(this, s, "Help", JOptionPane.INFORMATION_MESSAGE);
-        openExampleFile("sampleEx.txt");
+        openExampleFile("sampleLabels");
     }//GEN-LAST:event_sampleHelpButtonActionPerformed
 
     private void labelHelpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labelHelpButtonActionPerformed
         String s = "Select the file with one row for each trait label";
         JOptionPane.showMessageDialog(this, s, "Help", JOptionPane.INFORMATION_MESSAGE);
-        openExampleFile("labelEX.txt");
+        openExampleFile("traitLabels");
     }//GEN-LAST:event_labelHelpButtonActionPerformed
 
     private void fileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileButtonActionPerformed
@@ -610,35 +582,60 @@ public class TraitImporter extends java.awt.Dialog
             return;
         }
         
-        if (this.delimiterTextBox.getText().equals("") &&
-                !this.isHasDataCheck.isSelected())
-        {
-            String s = "You must select a valid column delimeter.";
-            //JOptionPane.showMessageDialog(this, s, "Input Error", JOptionPane.ERROR_MESSAGE);
-            this.errorLabel.setText(s);
-            return;
-        }
         if (this.traitNameField.getText().equals("") || this.traitNameField.getText().contains("_"))
         {
-            String s = "You must enter a valid name for this Trait.";
+            String s = "You must enter a valid name.";
             //JOptionPane.showMessageDialog(this, s, "Input Error", JOptionPane.ERROR_MESSAGE);
             this.errorLabel.setText(s);
             return;
         }
-
-        if (Model.getInstance().getProject(this.projectComboBox.getSelectedItem().toString()).
-                getTrait(this.traitNameField.getText()) != null)
+        
+        if(this.traitNameField.getText().length() > 20)
+        {
+            String s = "Name may be at most 20 characters.";
+            //JOptionPane.showMessageDialog(this, s, "Input Error", JOptionPane.ERROR_MESSAGE);
+            this.errorLabel.setText(s);
+            return;
+        }
+        
+        ArrayList<String> whereArgs = new ArrayList();
+        whereArgs.add("name=\"" + traitNameField.getText() + "\"");
+        whereArgs.add("projectid=" + Model.getInstance().getProject(this.projectComboBox.getSelectedItem().toString()).getId());
+        if (DataManager.runSelectQuery("id", "traitset", true, whereArgs, null).size() > 0)
         {
             String s = "This trait collection name already exists in this project";
             this.errorLabel.setText(s);
             return;
         }
 
-        File trait = new File(this.traitTextBox.getText());
-        if (!trait.exists() && !this.isHasDataCheck.isSelected())
+        if(!this.isHasDataCheck.isSelected())
         {
-            this.errorLabel.setText("Trait file does not exist.");
-            return;
+            File trait = new File(this.traitTextBox.getText());
+            if (!trait.exists())
+            {
+                this.errorLabel.setText("Trait file does not exist.");
+                return;
+            }
+        }
+        
+        if(this.norcRadioButton.isSelected())
+        {
+            File label = new File(this.labelTextBox.getText());
+            if(!label.exists())
+            {
+                this.errorLabel.setText("Trait label file does not exist.");
+                return;
+            }
+        }
+        
+        if(this.norcRadioButton.isSelected() && !this.isHasDataCheck.isSelected() && this.sampleTextBox.getText() != null && !this.sampleTextBox.getText().equals(""))
+        {
+            File label = new File(this.sampleTextBox.getText());
+            if(!label.exists())
+            {
+                this.errorLabel.setText("Sample label file does not exist.");
+                return;
+            }
         }
 
         /*try
@@ -665,22 +662,34 @@ public class TraitImporter extends java.awt.Dialog
         }
 
         boolean format = getSelectedFormat() == Trait.KXNNO_FORMAT || getSelectedFormat() == Trait.KXN_FORMAT;
-        DataAddRemoveHandler.getInstance().addTraits(
-                this.traitNameField.getText(), this.projectComboBox.getSelectedItem().toString(),
-                this.traitTextBox.getText(), format, this.sampleTextBox.getText(),
-                this.labelTextBox.getText(), this.projectComboBox1.getSelectedIndex(),
-                this.norcRadioButton.isSelected() && ( this.sampleTextBox.getText() == null||this.sampleTextBox.getText().equals("") ));
+        
+        ThreadingItemFrame form = ThreadingItemFrame.getInstance();
+        
+        BaseDataItem item = new BaseDataItem(
+                form, 
+                Integer.toString(Model.getInstance().getProject(this.projectComboBox.getSelectedItem().toString()).getId()),
+                "trait",
+                this.traitNameField.getText(),
+                labelTextBox.getText(),
+                this.sampleTextBox.getText(),
+                this.traitTextBox.getText(), 
+                format,
+                this.isHasDataCheck.isSelected(),
+                !this.isHasDataCheck.isSelected() && this.rcRadioButton.isSelected(),
+                !this.isHasDataCheck.isSelected() && this.norcRadioButton.isSelected() && ( this.sampleTextBox.getText() == null||this.sampleTextBox.getText().equals("") ),
+                false,
+                this.delimiterComboBox.getSelectedItem().toString(),
+                this.speciesComboBox.getSelectedIndex()
+                );
+
+        form.addToThreadList(item);
+        form.setVisible(true);
+        form.setDefaultCloseOperation(HIDE_ON_CLOSE);
 
         this.traits.clear();
         setVisible(false);
         dispose();
     }//GEN-LAST:event_importButtonActionPerformed
-
-    private void phenoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phenoRadioButtonActionPerformed
-        this.sampleButton.setEnabled(false);
-        this.sampleHelpButton.setEnabled(false);
-        this.sampleTextBox.setEnabled(false);
-    }//GEN-LAST:event_phenoRadioButtonActionPerformed
 
     private void nkRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nkRadioButtonActionPerformed
         if (this.norcRadioButton.isSelected())
@@ -699,7 +708,6 @@ public class TraitImporter extends java.awt.Dialog
             this.sampleButton.setEnabled(false);
             this.sampleHelpButton.setEnabled(false);
             this.sampleTextBox.setEnabled(false);
-            this.delimiterTextBox.setEnabled(false);
             this.fileButton.setEnabled(false);
             this.fileHelpButton.setEnabled(false);
             this.jLabel1.setEnabled(false);
@@ -707,7 +715,6 @@ public class TraitImporter extends java.awt.Dialog
             this.knRadioButton.setEnabled(false);
             this.nkRadioButton.setEnabled(false);
             this.norcRadioButton.setEnabled(false);
-            this.phenoRadioButton.setEnabled(false);
             this.rcRadioButton.setEnabled(false);
             this.labelButton.setEnabled(true);
             this.labelHelpButton.setEnabled(true);
@@ -721,7 +728,6 @@ public class TraitImporter extends java.awt.Dialog
             this.sampleButton.setEnabled(this.norcRadioButton.isSelected());
             this.sampleHelpButton.setEnabled(this.norcRadioButton.isSelected());
             this.sampleTextBox.setEnabled(this.norcRadioButton.isSelected());
-            this.delimiterTextBox.setEnabled(true);
             this.fileButton.setEnabled(true);
             this.fileHelpButton.setEnabled(true);
             this.jLabel1.setEnabled(true);
@@ -729,7 +735,6 @@ public class TraitImporter extends java.awt.Dialog
             this.knRadioButton.setEnabled(true);
             this.nkRadioButton.setEnabled(true);
             this.norcRadioButton.setEnabled(true);
-            this.phenoRadioButton.setEnabled(true);
             this.rcRadioButton.setEnabled(true);
             this.labelButton.setEnabled(this.norcRadioButton.isSelected());
             this.labelHelpButton.setEnabled(this.norcRadioButton.isSelected());
@@ -739,22 +744,7 @@ public class TraitImporter extends java.awt.Dialog
         }
     }//GEN-LAST:event_isHasDataCheckActionPerformed
 
-    /**
-     * Replaces all types of white space with a single space. 
-     * @param s
-     * @return
-     */
-    private String processWhiteSpace(String s)
-    {
-        String del = " ";
-        s = s.replace('\t', ' ');
-        while (s.indexOf("  ") >= 0)
-        {
-            s = s.replaceAll("  ", del);
-        }
-        return s;
-    }
-
+    
     /**
      * Given a string of a project name, this project will be selected in the
      * combo box. 
@@ -801,324 +791,10 @@ public class TraitImporter extends java.awt.Dialog
         return format;
     }
 
-    /**
-     * Crazy long method that parses the file to create the object list of
-     * traits for database import. The file is parsed here and will then
-     * be inserted into the database on a separate thread. 
-     * @param format the format the file is in
-     * @param sampleFile the file with the sample labels in it.
-     * @param labelFile the file with the trait labels in it.
-     * @param file the file with the values in it.
-     * @param delimeter the delimeter of the files.
-     * @param samples an array list of the sample labels. 
-     * @throws IllegalArgumentException
-     */
-    protected void loadTraits(int format, String sampleFile, String labelFile, String file, String delimeter, ArrayList<Sample> samples) throws IllegalArgumentException
-    {
-        traits = new ArrayList<Trait>();
-        ArrayList<String> sampleLabels = new ArrayList<String>();
-        ArrayList<String> traitLabels = new ArrayList<String>();
-        boolean needToGenerateSampleLabels = false;
-        boolean needToReadLabels = true;
-        boolean needToGenerateTraitLabels = false;
-
-        //System.out.println("Loading traits..");
-
-        if (this.phenoRadioButton.isSelected())
-        {
-            try
-            {
-                BufferedReader in = new BufferedReader(new FileReader(file));
-                int numTraits;
-                String str;
-                String[] labels;
-                ArrayList<String> names = new ArrayList<String>();
-                ArrayList<ArrayList<String>> vals = new ArrayList<ArrayList<String>>();
-
-                if (this.rcRadioButton.isSelected())
-                {
-                    str = in.readLine();
-                    str = processWhiteSpace(str);
-                    String[] cleanStr = str.split(" ");
-                    numTraits = cleanStr.length - 2;
-
-                    labels = new String[numTraits];
-                    for (int i = 0; i < numTraits; i++)
-                    {
-                        labels[i] = cleanStr[i + 2];
-                    }
-                }
-                else
-                {
-                    if (!labelFile.equals(""))
-                    {
-                        in.close();
-                        in = new BufferedReader(new FileReader(labelFile));
-                        ArrayList<String> labs = new ArrayList<String>();
-                        while ((str = in.readLine()) != null)
-                        {
-                            str = processWhiteSpace(str);
-                            if (str.equals(""))
-                            {
-                                continue;
-                            }
-
-                            labs.add(str);
-                        }
-
-                        numTraits = labs.size();
-
-                        labels = new String[numTraits];
-                        for (int i = 0; i < numTraits; i++)
-                        {
-                            labels[i] = labs.get(i);
-
-                        }
-                        in.close();
-                        in = new BufferedReader(new FileReader(file));
-                    }
-                    else
-                    {
-
-                        str = in.readLine();
-                        str = processWhiteSpace(str);
-
-                        String[] cleanStr = str.split(" ");
-                        numTraits = cleanStr.length - 2;
-
-                        labels = new String[numTraits];
-                        for (int i = 1; i <= numTraits; i++)
-                        {
-                            labels[i - 1] = "T_" + i;
-                            vals.add(new ArrayList<String>());
-                            vals.get(i - 1).add(cleanStr[i + 1]);
-                        }
-                        names.add(cleanStr[0] + "_" + cleanStr[1]);
-                    }
-                }
-
-                for (int i = 0; i < numTraits; i++)
-                {
-                    vals.add(new ArrayList<String>());
-                }
-                while ((str = in.readLine()) != null)
-                {
-                    str = processWhiteSpace(str);
-                    String[] stuff = str.split(" ");
-                    names.add(stuff[0] + "_" + stuff[1]);
-                    for (int i = 2; i < stuff.length; i++)
-                    {
-                        vals.get(i - 2).add(stuff[i]);
-                    }
-                }
-
-                ArrayList<ArrayList<Double>> values = makeTraitVals(vals, numTraits);
-
-                for (int i = 0; i < numTraits; i++)
-                {
-                    Trait t = new Trait(labels[i]);
-                    this.traits.add(t);
-
-                    for (int x = 0; x < values.get(i).size(); x++)
-                    {
-                        String sampleID = names.get(i);
-                        Sample s = this.getSampleByName(samples, sampleID);
-                        if (s == null)
-                        {
-                            s = new Sample(sampleID);
-                            samples.add(s);
-                        }
-                        s.addTrait(t);
-                        t.addSample(s, values.get(i).get(x));
-                    }
-                }
-            }
-            catch (IOException e)
-            {
-            }
-        }
-        else
-        {
-            if (format == Trait.KXNNO_FORMAT || format == Trait.NXKNO_FORMAT)
-            {
-                needToReadLabels = false;
-                if (!sampleFile.equals(""))
-                {
-                    System.out.println("FileController..");
-
-                    sampleLabels = FileController.readLabelFile(sampleFile);
-                    if (sampleLabels == null)
-                    {
-                        throw new IllegalArgumentException("Sample label file does not exist");
-                    }
-                }
-                else
-                {
-                    needToGenerateSampleLabels = true;
-                }
-                if (!labelFile.equals(""))
-                {
-                    traitLabels = FileController.readLabelFile(labelFile);
-                    if (traitLabels == null)
-                    {
-                        throw new IllegalArgumentException("Trait label file does not exist.");
-                    }
-                }
-                else
-                {
-                    needToGenerateTraitLabels = true;
-                }
-            }
-
-            System.out.println("Reading file...");
-            FileController fc = new FileController(file, delimeter, needToReadLabels);
-
-            if (!fc.isValidFile())
-            {
-                throw new IllegalArgumentException("Trait file does not exist or is in an illegal format.");
-            }
-            if (needToReadLabels && format == Trait.KXN_FORMAT)
-            {
-                sampleLabels = fc.getColHeaders();
-                traitLabels = fc.getRowHeaders();
-            }
-            else if (needToReadLabels && format == Trait.NXK_FORMAT)
-            {
-                sampleLabels = fc.getRowHeaders();
-                traitLabels = fc.getColHeaders();
-            }
-
-            if (samples == null)
-            {
-                samples = new ArrayList<Sample>();
-                for (int i = 0; i < sampleLabels.size(); i++)
-                {
-                    samples.add(new Sample(sampleLabels.get(i)));
-                }
-            }
-
-            ArrayList<ArrayList<Object>> values = fc.getMatrix();
-            if (format == Trait.KXNNO_FORMAT || format == Trait.KXN_FORMAT)
-            {
-
-                System.out.println("Num traits  - values : " + values.size());
-
-                for (int i = 0; i < values.size(); i++)
-                {
-                    String traitName;
-                    if (needToGenerateTraitLabels)
-                    {
-                        traitName = "T" + i;
-                    }
-                    else
-                    {
-                        traitName = traitLabels.get(i);
-                    }
-                    Trait t = new Trait(traitName);
-                    this.traits.add(t);
-                    for (int j = 0; j < values.get(i).size(); j++)
-                    {
-                        String sampleID;
-                        if (needToGenerateSampleLabels)
-                        {
-                            sampleID = "S" + j;
-                        }
-                        else
-                        {
-                            sampleID = sampleLabels.get(j);
-                        }
-                        Sample s = this.getSampleByName(samples, sampleID);
-                        if (s == null)
-                        {
-                            s = new Sample(sampleID);
-                            samples.add(s);
-                        }
-                        s.addTrait(t);
-                        t.addSample(s, (Double) values.get(i).get(j));
-                    }
-                }
-            }
-            else
-            {
-
-                System.out.println("Num traits 1 - values (0): " + values.get(0).size());
-
-                for (int i = 0; i < values.get(0).size(); i++)
-                {
-                    String traitName;
-                    if (needToGenerateTraitLabels)
-                    {
-                        traitName = "T" + i;
-                    }
-                    else
-                    {
-                        traitName = traitLabels.get(i);
-                    }
-                    Trait t = new Trait(traitName);
-                    this.traits.add(t);
-                    for (int j = 0; j < values.size(); j++)
-                    {
-                        String sampleID;
-                        if (needToGenerateSampleLabels)
-                        {
-                            sampleID = "S" + j;
-                        }
-                        else
-                        {
-                            sampleID = sampleLabels.get(j);
-                        }
-                        Sample s = this.getSampleByName(samples, sampleID);
-                        if (s == null)
-                        {
-                            s = new Sample(sampleID);
-                            samples.add(s);
-                        }
-                        s.addTrait(t);
-                        t.addSample(s, (Double) values.get(j).get(i));
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Takes an arraylist of strings and returns an arraylist of doubles.
-     * This is just a type conversion. 
-     * @param matrix
-     * @param count
-     * @return
-     */
-    private ArrayList<ArrayList<Double>> makeTraitVals(ArrayList<ArrayList<String>> matrix, int count)
-    {
-        ArrayList<ArrayList<Double>> ret = new ArrayList<ArrayList<Double>>();
-        for (int i = 0; i < count; i++)
-        {
-            ret.add(new ArrayList<Double>());
-            for (int x = 0; x < matrix.get(i).size(); x++)
-            {
-                ret.get(i).add(Double.parseDouble(matrix.get(i).get(x)));
-            }
-
-        }
-        return ret;
-    }
-
-    private Sample getSampleByName(ArrayList<Sample> samples, String sample)
-    {
-        for (int i = 0; i < samples.size(); i++)
-        {
-            if (samples.get(i).getName().equals(sample))
-            {
-                return samples.get(i);
-            }
-        }
-
-        return null;
-    }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JTextField delimiterTextBox;
+    private javax.swing.JComboBox delimiterComboBox;
     private javax.swing.ButtonGroup dimButtonGroup;
     private javax.swing.JLabel errorLabel;
     private javax.swing.JButton fileButton;
@@ -1143,13 +819,12 @@ public class TraitImporter extends java.awt.Dialog
     private javax.swing.JTextField labelTextBox;
     private javax.swing.JRadioButton nkRadioButton;
     private javax.swing.JRadioButton norcRadioButton;
-    private javax.swing.JRadioButton phenoRadioButton;
     private javax.swing.JComboBox projectComboBox;
-    private javax.swing.JComboBox projectComboBox1;
     private javax.swing.JRadioButton rcRadioButton;
     private javax.swing.JButton sampleButton;
     private javax.swing.JButton sampleHelpButton;
     private javax.swing.JTextField sampleTextBox;
+    private javax.swing.JComboBox speciesComboBox;
     private javax.swing.JTextField traitNameField;
     private javax.swing.JTextField traitTextBox;
     // End of variables declaration//GEN-END:variables

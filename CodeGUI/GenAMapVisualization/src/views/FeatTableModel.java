@@ -46,9 +46,10 @@ public class FeatTableModel extends AbstractTableModel {
       columnNames[0]="SNP";
        mapping.put(columnNames[0], Model.colors[0]);
         int ii = 1;
+        int numColors = Model.colors.length;
         for (String f : features) {
             columnNames[ii] = features.get(ii-1);
-            mapping.put(columnNames[ii], Model.colors[ii]);
+            mapping.put(columnNames[ii], Model.colors[ii % numColors]);
             ii++;
         }
 

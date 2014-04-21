@@ -12,10 +12,11 @@ import realdata.DataManager;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import control.MatrixParser;
+import javax.swing.JOptionPane;
 
 /**
  * This will upload a read-in association set into the database. The file is
@@ -117,9 +118,33 @@ public class AssociationUploadItem extends ThreadItem
         @Override
         public void run()
         {
+            String assocSetId = null;
+            
+            setValue(1);
+            status = "Checking file ...";
+            form.repaint();
+            
+            MatrixParser mparser = new MatrixParser();
+            mparser.width = traitSet.getNumTraits();
+            mparser.length = markerSet.getNumMarkers();
+            mparser.entryType = "float";
+            mparser.delimiter = "Tab";
+            mparser.setup(fileName);
+            
+            String check = mparser.check();
+            
+            if(!check.equals(""))
+            {
+                JOptionPane.showMessageDialog(null, "There was an error while checking the data file.\n This is likely caused by an incorrectly formatted input file.\n The error message was:\n" + check);
+                errorText = "Error while checking data file.";
+                setIsError(true);
+                form.repaint();
+                return;             
+            }
+
             try
             {
-                setValue(0);
+                setValue(2);
                 status = "Reading file ...";
                 form.repaint();
                 ArrayList<String> vals = new ArrayList<String>();
@@ -149,7 +174,7 @@ public class AssociationUploadItem extends ThreadItem
                 vals.clear();
                 whereArgs.add("name='" + name + "'");
                 whereArgs.add("projectid=" + projectId);
-                String assocSetId = (String)DataManager.runSelectQuery("id", "assocset", true, whereArgs, null).get(0);
+                assocSetId = (String)DataManager.runSelectQuery("id", "assocset", true, whereArgs, null).get(0);
                 whereArgs.clear();
                 String strLine;
                 FileInputStream fstream = new FileInputStream(fileName);
@@ -221,10 +246,23 @@ public class AssociationUploadItem extends ThreadItem
                 setValue(100);
 
             }
-            catch (IOException ex)
+            catch (Exception e)
             {
-                errorText = ex.getMessage();
+                if(assocSetId != null)
+                {
+                    ArrayList<String> whereArgs = new ArrayList();
+                    whereArgs.add("assocsetid=" + assocSetId);
+                    DataManager.deleteQuery("association", whereArgs);
+                    whereArgs.clear();
+                    whereArgs.add("id=" + assocSetId);
+                    DataManager.deleteQuery("assocset", whereArgs);
+                    whereArgs.clear();
+                }
+                
+                JOptionPane.showMessageDialog(null, "Error uploading data to database.\n This is likely a bug. Please contact the developers\n Error message was:\n" + e.getMessage());
+                errorText = "Error uploading file";
                 setIsError(true);
+                form.repaint();
                 return;
             }
         }

@@ -576,6 +576,13 @@ public class ChromosomeView extends Observable
                 String pval = pops.get(smpl);
                 int pno = pval == null ? -1 : Integer.parseInt(pval);
 
+                double testDouble = Double.parseDouble(val);
+                if(testDouble != 0 && testDouble != 1 && testDouble != 2)
+                {
+                    JOptionPane.showMessageDialog(null, "This feature cannot be used unless marker data only contains values 0,1,2, indicating the number of minor alleles present");
+                    return;
+                }
+                
                 int i = Integer.parseInt(val);
                 if (i >= 0 && i < 3)
                 {
@@ -665,7 +672,13 @@ public class ChromosomeView extends Observable
                 String pval = pops.get(smpl);
                 int pno = pval == null ? -1 : Integer.parseInt(pval);
 
-
+                double testDouble = Double.parseDouble(val);
+                if(testDouble != 0 && testDouble != 1 && testDouble != 2)
+                {
+                    JOptionPane.showMessageDialog(null, "This feature cannot be used unless marker data only contains values 0,1,2, indicating the number of minor alleles present");
+                    return;
+                }
+                
                 int i = Integer.parseInt(val);
                 if (i >= 0 && i < 3)
                 {

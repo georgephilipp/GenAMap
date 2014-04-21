@@ -165,26 +165,26 @@ public class NetModuleGoUpdateItem extends ThreadItem
                 go.autoPerformAnalysis(names);
                 //insert results into database.
                 BiNGOresults2GenAMap res = go.getResults();
-                if (res != null)
+                String stringRes = ",";
+                if(res != null)
+                    stringRes = res.getStringRepresentationOfGoResults();
+                where.clear();
+                int goid = -1;
+                if (goid == -1)
                 {
-                    where.clear();
-                    int goid = -1;
-                    if (goid == -1)
-                    {
-                        ArrayList<String> args = new ArrayList<String>();
-                        args.add(entry);
-                        args.add(res.getStringRepresentationOfGoResults());
-                        goid = Integer.parseInt(DataManager.runFunction("insert_go_list_module", args));
-                    }
-
-                    String subbynm = "module" + (i-1) + "id" + associd + gocode;
-                    where.clear();
-                    where.add("name=\'" + subbynm + "\'");
-                    DataManager.runUpdateQuery("traitsubset", "golist", "" + goid, where);
-
-                    setValue(5 + (int) ((double) i / (double) ids.size() * 92.0));
-                    form.repaint();
+                    ArrayList<String> args = new ArrayList<String>();
+                    args.add(entry);
+                    args.add(stringRes);
+                    goid = Integer.parseInt(DataManager.runFunction("insert_go_list_module", args));
                 }
+
+                String subbynm = "module" + (i-1) + "id" + associd + gocode;
+                where.clear();
+                where.add("name=\'" + subbynm + "\'");
+                DataManager.runUpdateQuery("traitsubset", "golist", "" + goid, where);
+
+                setValue(5 + (int) ((double) i / (double) ids.size() * 92.0));
+                form.repaint();
             }
 
             where.clear();

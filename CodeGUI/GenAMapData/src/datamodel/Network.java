@@ -573,25 +573,34 @@ public class Network implements Serializable
 
         list = list.replace(",", " ");
         list = list.trim();
-        String[] ids = list.split(" ");
-        int min = 100000;
-        int max = 0;
-        for (String s : ids)
-        {
-            int id = Integer.parseInt(s);
-            int idx = cluster.get(id);
-            if (idx < min)
-            {
-                min = idx;
-            }
-            if (idx > max)
-            {
-                max = idx;
-            }
-        }
+        
         ArrayList<Integer> toret = new ArrayList<Integer>();
-        toret.add(min);
-        toret.add(max);
+        if(list.length() == 0)
+        {
+            toret.add(0);
+            toret.add(-1);
+        }
+        else
+        {        
+            String[] ids = list.split(" ");
+            int min = 100000;
+            int max = 0;
+            for (String s : ids)
+            {
+                int id = Integer.parseInt(s);
+                int idx = cluster.get(id);
+                if (idx < min)
+                {
+                    min = idx;
+                }
+                if (idx > max)
+                {
+                    max = idx;
+                }
+            }
+            toret.add(min);
+            toret.add(max);
+        }
         return toret;
     }
 
@@ -708,20 +717,54 @@ public class Network implements Serializable
 
             for (int i = 0; i < tids.size(); i++)
             {
+                Integer traitInd = tids.get(i).getId();
+                ArrayList<String> where = new ArrayList<String>();
+                where.add("netid=" + this.id);
+                where.add("trait1=" + traitInd);
+                ArrayList<String> cols = new ArrayList<String>();
+                cols.add("trait2");
+                cols.add("weight");
+                ArrayList<HashMap<String, String>> res1 = DataManager.runMultiColSelectQuery(cols, "networkval", true, where, null);
+                where = new ArrayList<String>();
+                where.add("netid=" + this.id);
+                where.add("trait2=" + traitInd);
+                cols = new ArrayList<String>();
+                cols.add("trait1");
+                cols.add("weight");
+                ArrayList<HashMap<String, String>> res2 = DataManager.runMultiColSelectQuery(cols, "networkval", true, where, null);
+                HashMap<Integer,String> valMap = new HashMap<Integer, String>();
+                for(int j=0;j<res1.size();j++)
+                {
+                    Integer trait2Ind = Integer.parseInt(res1.get(j).get("trait2"));
+                    if(trait2Ind < traitInd)
+                    {
+                        out.close();
+                        JOptionPane.showMessageDialog(null, "Problem with network formatting found");
+                        return;
+                    }
+                    valMap.put(trait2Ind, res1.get(j).get("weight"));
+                }
+                for(int j=0;j<res2.size();j++)
+                {
+                    Integer trait1Ind = Integer.parseInt(res2.get(j).get("trait1"));
+                    if(traitInd < trait1Ind)
+                    {
+                        out.close();
+                        JOptionPane.showMessageDialog(null, "Problem with network formatting found");
+                        return;
+                    }
+                    valMap.put(trait1Ind, res2.get(j).get("weight"));
+                }
                 for (int j = 0; j < tids.size(); j++)
                 {
-                    ArrayList<String> where = new ArrayList<String>();
-                    where.add("assocsetid = " + this.id);
-                    where.add("markerid=" + tids.get(i).getId());
-                    where.add("traitid=" + tids.get(j).getId());
-                    ArrayList<String> res = DataManager.runSelectQuery("weight", "association", true, where, null);
-                    if (res.size() == 0)
+                    Integer traitInd2 = tids.get(j).getId();
+                    if(valMap.containsKey(traitInd2))
                     {
-                        out.write("0");
+                        out.write(valMap.get(traitInd2));
                     }
                     else
                     {
-                        out.write(res.get(0));
+                        out.write("0");
                     }
                     out.write("\t");
                 }

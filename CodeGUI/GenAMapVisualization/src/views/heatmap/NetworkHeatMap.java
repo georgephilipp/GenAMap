@@ -182,23 +182,26 @@ public class NetworkHeatMap extends HeatMap
             int max = ai.get(1);
             //Point p2 = new Point((int) (min / xPixelsPerTrait), (int) (curChart.getCellHeight() * zValues[0].length - min / yPixelsPerTrait));
             //Point p1 = new Point((int) (max / xPixelsPerTrait), (int) (curChart.getCellHeight() * zValues[0].length - max / yPixelsPerTrait));
-            ArrayList<Point> temp = createOnScreenModPoints(min, max);
-            if (temp == null)
+            if(max >= min)
             {
-                lines.add(new Line2D.Double());
-                lines.add(new Line2D.Double());
-                lines.add(new Line2D.Double());
-                lines.add(new Line2D.Double());
-                continue;
+                ArrayList<Point> temp = createOnScreenModPoints(min, max);
+                if (temp == null)
+                {
+                    lines.add(new Line2D.Double());
+                    lines.add(new Line2D.Double());
+                    lines.add(new Line2D.Double());
+                    lines.add(new Line2D.Double());
+                    continue;
+                }
+                this.drawnBoxes.add(temp);
+                this.drawnIndex.add(i);
+                Point p1 = temp.get(0);
+                Point p2 = temp.get(1);
+                lines.add(new Line2D.Double(new Point(p2.x+0, p2.y), new Point(p1.x+0, p2.y)));
+                lines.add(new Line2D.Double(new Point(p1.x+0, p2.y), new Point(p1.x+0, p1.y)));
+                lines.add(new Line2D.Double(new Point(p2.x+0, p1.y), new Point(p1.x+0, p1.y)));
+                lines.add(new Line2D.Double(new Point(p2.x+0, p2.y), new Point(p2.x+0, p1.y)));
             }
-            this.drawnBoxes.add(temp);
-            this.drawnIndex.add(i);
-            Point p1 = temp.get(0);
-            Point p2 = temp.get(1);
-            lines.add(new Line2D.Double(new Point(p2.x+0, p2.y), new Point(p1.x+0, p2.y)));
-            lines.add(new Line2D.Double(new Point(p1.x+0, p2.y), new Point(p1.x+0, p1.y)));
-            lines.add(new Line2D.Double(new Point(p2.x+0, p1.y), new Point(p1.x+0, p1.y)));
-            lines.add(new Line2D.Double(new Point(p2.x+0, p2.y), new Point(p2.x+0, p1.y)));
         }
         jp.repaint();
     }
@@ -219,12 +222,12 @@ public class NetworkHeatMap extends HeatMap
             }
         }
 
-        if(netStruct.size() == 0)
+        if(netStruct.size() == 0 || min >= max)
         {
             min = 0;
             max = 199;
         }
-
+        
         ArrayList<Integer> ali = new ArrayList<Integer>();
         for (int i = min; i <= max; i++)
         {

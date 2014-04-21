@@ -687,29 +687,55 @@ public class AssociationSet implements Serializable
             ArrayList<Trait> tids = this.traitSet.getTraits();
             FileWriter fstream = new FileWriter("temp1.txt");
             BufferedWriter out = new BufferedWriter(fstream);
-
-            for (int i = 0; i < mids.size(); i++)
+            
+            String header = "# Data is presented as a d by t tab-delimited matrix, where d is the number of markers and t is the number of traits.";
+            header = header + " d is " + mids.size() + ". t is " + tids.size() + ".";
+            if(numPops > 1)
             {
-                for (int j = 0; j < tids.size(); j++)
+                header = "# Data is presented as C seperate d by t tab-delimited matrices. d is the number of markers, t is the number of traits and C is the number of populations. Association matrices for different populations are stacked on top of each other. Hence, this file takes the form of a Cd by t matrix.";
+                header = header + " d is " + mids.size() + ". t is " + tids.size() + ". C is " + numPops + ".";
+            }
+            
+            out.write(header + "\r\n");
+            ArrayList<Integer> poprefs = new ArrayList<Integer>();
+            for(int c=1; c<= numPops;c++)
+                poprefs.add(c);
+            if(numPops == -1)
+                poprefs.add(-1);
+
+            for(int c = 0; c < poprefs.size();c++)
+            {
+                for (int i = 0; i < mids.size(); i++)
                 {
                     ArrayList<String> where = new ArrayList<String>();
                     where.add("assocsetid = " + this.id);
-                    where.add("markerid=" + mids.get(i));
-                    where.add("traitid=" + tids.get(j).getId());
-                    ArrayList<String> res = DataManager.runSelectQuery("value", "association", true, where, null);
-                    if(res.size() == 0)
+                    where.add("markerid=" + mids.get(i));  
+                    where.add("popref=" + poprefs.get(c));
+                    ArrayList<String> cols = new ArrayList<String>();
+                    cols.add("traitid");
+                    cols.add("value");
+                    ArrayList<HashMap<String, String>> res = DataManager.runMultiColSelectQuery(cols, "association", true, where, null);
+                    HashMap<Integer,String> valMap = new HashMap<Integer,String>();
+                    for (int j=0;j < res.size();j++)
                     {
-                        out.write("0");
-                    }
-                    else
+                        valMap.put(Integer.parseInt(res.get(j).get("traitid")), res.get(j).get("value"));
+                    }                
+                    for (int j = 0; j < tids.size(); j++)
                     {
-                        out.write(res.get(0));
+                        int thisId = tids.get(j).getId();
+                        if(valMap.containsKey(thisId))
+                        {
+                            out.write(valMap.get(thisId));
+                        }
+                        else
+                        {
+                            out.write("0");
+                        }
+                        out.write("\t");
                     }
-                    out.write("\t");
+                    out.write("\r\n");
                 }
-                out.write("\r\n");
             }
-
             out.close();
             JOptionPane.showMessageDialog(null,"Export succeeded to temp1.txt");
         }

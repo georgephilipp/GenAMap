@@ -148,7 +148,11 @@ public class TraitSet implements Serializable
     {
         ArrayList<String> where = new ArrayList<String>();
         where.add("id=" + this.speciesId);
-        return (String) DataManager.runSelectQuery("name", "species", true, where, null).get(0);
+        ArrayList<String> qres = DataManager.runSelectQuery("name", "species", true, where, null);
+        if(qres.isEmpty())
+            return "";
+        else
+            return (String) qres.get(0);
     }
 
     /**

@@ -50,7 +50,7 @@ public class SQLCommander
 		}
 		catch(Exception e)
 		{
-			System.err.println("Unable to find and load driver");
+			Printer.inst.println("Unable to find and load driver");
 		}
 
 		try
@@ -65,9 +65,9 @@ public class SQLCommander
 
 	private void displaySQLErrors(SQLException e)
 	{
-		System.out.println("SQLException: " + e.getMessage());
-		System.out.println("SQLState: " + e.getMessage());
-		System.out.println("VendorError: " + e.getErrorCode());
+		Printer.inst.println("SQLException: " + e.getMessage());
+		Printer.inst.println("SQLState: " + e.getMessage());
+		Printer.inst.println("VendorError: " + e.getErrorCode());
 	}
 
 	public String getExeLoc(int jobID, int step)

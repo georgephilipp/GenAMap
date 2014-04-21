@@ -6,7 +6,7 @@ public class Driver
 	public static void main(String[] args)
 	{
 		int argsize = args.length;
-		if( argsize < 1 || argsize > 2 )
+		if( argsize < 1 || argsize > 3 )
 		{
 			System.out.print("Incorrect number of input args");
 			throw new RuntimeException();
@@ -17,7 +17,12 @@ public class Driver
 		if( argsize > 1 )
                     steptorun = Integer.parseInt(args[1]);  
 		else 
-                    steptorun = -1;              
+                    steptorun = -1;           
+
+		if( argsize > 2 )
+			Printer.inst = new Printer(args[2]);
+		else
+			Printer.inst = new Printer("");   
 
 		//System.out.println("Hello wolrd!");
 		SQLCommander.setInstance(db);

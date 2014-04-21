@@ -9,6 +9,7 @@
   </NonVisualComponents>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <Events>
     <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="closeDialog"/>
@@ -96,7 +97,7 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="fileButton" min="-2" pref="31" max="-2" attributes="1"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="fileButton1" pref="83" max="32767" attributes="1"/>
+                                          <Component id="fileButton1" max="32767" attributes="1"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -132,7 +133,7 @@
                       <Component id="traitComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="33" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="treeNameTextBox" alignment="3" min="-2" max="-2" attributes="0"/>

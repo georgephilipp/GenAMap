@@ -17,6 +17,7 @@ import datamodel.Project;
 import datamodel.Model;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -384,7 +385,7 @@ public class NetworkAlgorithmDialog extends java.awt.Dialog
             return;
         }
         traitName = (String) this.traitComboBox.getSelectedItem();
-
+       
         if (this.algorithmComboBox.getSelectedItem().equals("<Select Algorithm>") && !this.loadRadBtn.isSelected())
         {
             String s = "You must select a valid algorithms option.";
@@ -416,117 +417,49 @@ public class NetworkAlgorithmDialog extends java.awt.Dialog
         }
         else if (this.loadRadBtn.isSelected())
         {
-            //start from here
-            FileInputStream fstream = null;
-
-            TraitSet t = Model.getInstance().getProject(projectName).getTrait(traitName);
-
-            ArrayList<String> whereArgs = new ArrayList<String>();
-            whereArgs.add("traitsetid=" + traitID);
-            int traitCount = Integer.parseInt((String) DataManager.runSelectQuery("count(*)", "trait", true, whereArgs, null).get(0));
-
             if (this.netNameText.getText().equals(""))
             {
-                errorLabel.setText("You must choose a name");
+                errorLabel.setText("You must choose a network name");
+                return;
+            }
+            
+            if (this.netNameText.getText().length() > 30)
+            {
+                errorLabel.setText("Name must be at most 30 characters");
                 return;
             }
 
+            boolean isEdgeFormat = true;
             if (this.tabDelButton.isSelected())
-            {
-                try
-                {
-                    String networkFile = this.networkFileBox.getText();
-                    double[][] network = this.loadNetwork(networkFile, traitCount);
-
-                    DataAddRemoveHandler.getInstance().addNetwork(projID, traitID, this.netNameText.getText(), network);
-                }
-                catch (Exception e)
-                {
-                    errorLabel.setText("There was an error reading this file.");
-                    return;
-                }
-            }
-            else if (this.EdgeButton.isSelected())
-            {
-                String networkFile = this.networkFileBox.getText();
-                try
-                {
-                    ArrayList<CytoNet> net = loadCytoFile(networkFile);
-
-                    DataAddRemoveHandler.getInstance().addNetwork(projID, traitID, this.netNameText.getText(), net);
-                }
-                catch (Exception ex)
-                {
-                    this.errorLabel.setText("Error reading in this file");
-                    return;
-                }
-
-
-            }
+                isEdgeFormat = false;
+            else if(this.EdgeButton.isSelected())
+                isEdgeFormat = true;
             else
             {
                 this.errorLabel.setText("You must select a valid file format.");
                 return;
             }
-
+            
+            String networkFile = this.networkFileBox.getText();
+            File file = new File(networkFile);
+            if (!file.exists())
+            {
+                this.errorLabel.setText("File does not exist.");
+                return;
+            }
+            
+            DataAddRemoveHandler.getInstance().addNetwork(
+                    projID, 
+                    traitID, 
+                    this.netNameText.getText(), 
+                    networkFile,
+                    isEdgeFormat
+                    );
+            
         }
         this.closeDialog(null);
 }//GEN-LAST:event_importButtonActionPerformed
-
-    private ArrayList<CytoNet> loadCytoFile(String fi) throws FileNotFoundException, IOException
-    {
-        ArrayList<CytoNet> edges = new ArrayList<CytoNet>();
-
-        FileInputStream fstream = new FileInputStream(fi);
-        DataInputStream in = new DataInputStream(fstream);
-        BufferedReader br = new BufferedReader(new InputStreamReader(in));
-        String strLine;
-
-        while ((strLine = br.readLine()) != null)
-        {
-            strLine = strLine.trim();
-            String[] ln = strLine.split("\t");
-
-            if (strLine.length() > 0)
-            {
-                edges.add(new CytoNet(ln[0], ln[1], Double.parseDouble(ln[2])));
-            }
-        }
-        in.close();
-        in = null;
-        return edges;
-    }
-
-    private double[][] loadNetwork(String fi, int k) throws FileNotFoundException, IOException
-    {
-        double[][] vals = new double[k][k];
-        String networkFile = this.networkFileBox.getText();
-        FileInputStream fstream = new FileInputStream(networkFile);
-        DataInputStream in = new DataInputStream(fstream);
-        BufferedReader br = new BufferedReader(new InputStreamReader(in));
-        String strLine;
-
-        int idx1 = 0;
-        while ((strLine = br.readLine()) != null)
-        {
-            strLine = strLine.trim();
-            String[] ln = strLine.split("\t");
-
-            if (strLine.length() > 0)
-            {
-                for (int i = 0; i < k; i++)
-                {
-                    double temp = Double.parseDouble(ln[i]);
-                    vals[idx1][i] = temp;
-                }
-            }
-            idx1++;
-        }
-        in.close();
-        in = null;
-        return vals;
-    }
-
+  
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         this.closeDialog(null);
 }//GEN-LAST:event_cancelButtonActionPerformed

@@ -440,13 +440,13 @@ public class DatabaseSetup extends java.awt.Dialog
             return;
         }
         String name = this.fullNameTextBox.getText();
-        if (name.length() < 8 || name.length() > 30)
+        if (name.length() < 3 || name.length() > 30)
         {
             this.errorLabel.setText("Are you sure your full name is " + name + "?");
             return;
         }
         String org = this.orgTextBox.getText();
-        if (org.length() < 3)
+        if (org.length() < 2)
         {
             this.errorLabel.setText("Please expound on your organization's name.");
             return;

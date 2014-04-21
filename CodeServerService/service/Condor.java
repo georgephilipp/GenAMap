@@ -43,7 +43,7 @@ public class Condor
 		}
 		catch(Exception e)
 		{
-			System.out.println(e.getMessage());
+			Printer.inst.println(e.getMessage());
 			return null;
 		}
 		return s;
@@ -51,6 +51,7 @@ public class Condor
 
 	public static void stopJobs(ArrayList<CondorJob> jobs)
 	{
+		waitTillCondorRuns();
 		for(int i = 0; i < jobs.size(); i ++)
 		{
 			try
@@ -69,6 +70,7 @@ public class Condor
 
 	public static void releaseJob(int job)
 	{
+		waitTillCondorRuns();
 		try
 		{
 			//if(job != -2)
@@ -83,12 +85,12 @@ public class Condor
 		catch(Exception e){}
 	}
 
-	public static ArrayList<CondorJob> runCondorSubmitFile(String submitFile, int jobID, int step)
+	public static /*ArrayList<CondorJob>*/void runCondorSubmitFile(String submitFile, int jobID, int step)
 	{
-		return runCondorSubmitFile(submitFile, jobID, step, -1, null);
+		runCondorSubmitFile(submitFile, jobID, step, -1/*, null*/);
 	}
 
-	public static ArrayList<CondorJob> runCondorSubmitFile(String submitFile, int jobID, int step, int call, ArrayList<CondorJob> ids)
+	public static /*ArrayList<CondorJob>*/void runCondorSubmitFile(String submitFile, int jobID, int step, int call/*, ArrayList<CondorJob> ids*/)
 	{
 		if(call == -1)
 		{
@@ -98,7 +100,7 @@ public class Condor
 				try
 				{
 					makeExeRunnable(submitFile);
-					ids = runExe(submitFile, jobID, step);
+					/*ids = */runExe(submitFile, jobID, step);
 					//int idx = 0;
 					//File f = new File(submitFile + idx++);
 					//while(f.exists())
@@ -109,11 +111,11 @@ public class Condor
 					//	}
 					//	f = new File(submitFile + idx++);
 					//}
-					return ids;
+					return /*ids*/;
 				}
 				catch(Exception e) {}
 			}
-			return null;
+			//return null;
 		}
 		else
 		{
@@ -123,7 +125,7 @@ public class Condor
 				try
 				{
 					makeExeRunnable(submitFile + call);
-					ArrayList<CondorJob> temp = runExe(submitFile+call, jobID, step);
+					/*ArrayList<CondorJob> temp = */runExe(submitFile+call, jobID, step);
 					/*int begin = 0;
 					for(int j = 0; j < ids.size(); j ++)
 					{
@@ -138,20 +140,21 @@ public class Condor
 						ids.set(j+begin, temp.get(j));
 					}
 					return null;*/
-					ids.addAll(temp);
-					return ids;					
+					//ids.addAll(temp);
+					return /*ids*/;					
 				}
 				catch(Exception e) {}
 			}
 		}
-		return null;
+		//return null;
 	}
 
 	public static int[] getStatus(ArrayList<CondorJob> ids, String submitFile,int jobid, int step, int totalJobs) throws Exception
 	{
-		int[] toRet = new int[2];
+		int[] toRet = new int[3];
 		toRet[0] = 0;
 		toRet[1] = 0;
+		toRet[2] = 0;
 		for(int i = 0; i < ids.size(); i ++)
 		{
 			/*if(ids.get(i).condorid == -2)
@@ -169,6 +172,8 @@ public class Condor
 			{
 				toRet[0] ++;
 			}
+			else
+				toRet[2]++;
 		}
 		//int noJobs = (getNumJobs(submitFile, ids.size()));
 		//System.out.println(noJobs);
@@ -200,7 +205,15 @@ public class Condor
 		}*/
 		int unspawned = totalJobs - ids.size();
 		if( reallyRunning < 20 && unspawned > 0 )
- 			runCondorSubmitFile(submitFile, jobid, step, (ids.size() / 100)-1, ids);
+		{
+			Printer.inst.println("\tRespawning begins");
+ 			runCondorSubmitFile(submitFile, jobid, step, (ids.size() / 100)-1/*, ids*/);
+			ArrayList<CondorJob> newIds = SQLCommander.getInstance().getCondorIDs(jobid, step);
+			if(newIds.size() <= ids.size())
+			    throw new RuntimeException("no new ids generated");
+			Printer.inst.println("\tRespawning ends with old and new job size: " + ids.size() + newIds.size());			
+			return getStatus(newIds, submitFile, jobid, step, totalJobs);
+		}
 
 		return toRet;
 	}
@@ -237,6 +250,7 @@ public class Condor
 
 	private static char getState(CondorJob id) throws Exception
 	{
+		waitTillCondorRuns();
 		if(id.finished)
 			return 'C';
 
@@ -278,8 +292,9 @@ public class Condor
 
 	}
 
-	private static ArrayList<CondorJob> runExe(String exe, int jobID, int step) throws Exception
+	private static /*ArrayList<CondorJob>*/ void runExe(String exe, int jobID, int step) throws Exception
 	{
+		waitTillCondorRuns();
 		String line;
 		ArrayList<CondorJob> toRet = new ArrayList<CondorJob>();
 		Runtime r = Runtime.getRuntime();
@@ -293,7 +308,7 @@ public class Condor
 			{
 				line = line.replace("1 job(s) submitted to cluster ", "");
 				int value = Integer.parseInt(line.replace(".", ""));
-				System.out.println("\t\t" + value);
+				Printer.inst.println("\t\t" + value);
 				toRet.add(new CondorJob(value,0));
 			}
 		}
@@ -304,6 +319,57 @@ public class Condor
 
 		SQLCommander.getInstance().insertCondorIDs(jobID, step, toRet);
 
-		return toRet;
+		//return toRet;
+	}
+
+	private static boolean isCondorRunning()
+	{
+		try
+		{
+			String line;
+			Process p = Runtime.getRuntime().exec("condor_q");
+			p.waitFor();
+		    	p.getErrorStream().close();
+		        p.getOutputStream().close();
+
+			BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			boolean res = true;
+			while((line = input.readLine()) != null)
+			{
+				if(line.toLowerCase().contains("error") || line.toLowerCase().contains("not found") || line.toLowerCase().contains("cannot run"))
+					res = false;
+			}
+			input.close();
+			p.getInputStream().close();
+			return res;
+		}
+		catch(IOException e)
+		{
+			return false;
+		}
+		catch(InterruptedException e2)
+		{
+			return false;
+		}
+	}
+
+	private static void waitTillCondorRuns()
+	{
+	        boolean result = false;
+		while(!result)
+		{
+			result = isCondorRunning();
+			if(!result)
+			{
+				Printer.inst.println("Condor not found to be running. Waiting 5 seconds.");
+				try
+				{
+					Thread.sleep(5000);
+				}
+				catch(InterruptedException e)
+				{
+				}
+			}
+		}
 	}
 }

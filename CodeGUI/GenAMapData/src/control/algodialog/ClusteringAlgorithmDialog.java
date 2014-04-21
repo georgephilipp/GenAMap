@@ -2,6 +2,7 @@ package control.algodialog;
 
 import algorithm.AlgorithmView;
 import algorithm.AssociationParameterObject;
+import control.ExampleFileHandler;
 import javax.swing.JFileChooser;
 import java.util.ArrayList;
 import datamodel.Project;
@@ -17,6 +18,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import control.TableParser;
+import realdata.DataManager;
+import java.io.File;
 
 /**
  * Allows a user to an algorithm that will cluster a network.
@@ -40,7 +44,7 @@ public class ClusteringAlgorithmDialog extends java.awt.Dialog
 
         this.traitComboBox.setEnabled(false);
 
-        this.algorithmComboBox.addItem("Hierarchical Clustering");
+        this.algorithmComboBox.addItem("Agglomerate Hierarchical Clustering");
         
         ArrayList<Project> temp = Model.getInstance().getProjects();
         for(int i = 0; i < temp.size(); i ++)
@@ -371,12 +375,12 @@ public class ClusteringAlgorithmDialog extends java.awt.Dialog
             this.errorLabel.setText(s);
             return;
         }
-
-        if(Model.getInstance().getProject(projectComboBox.getSelectedItem().toString())
-                .getAssociation(this.assocNameTextBox.getText()) != null)
+        
+        if(this.assocNameTextBox.getText().length() > 30)
         {
-            this.errorLabel.setText("This name already exists for this project.");
-            return; 
+            String s = "Name may be at most 30 characters.";
+            this.errorLabel.setText(s);
+            return;
         }
 
         String projectName = projectComboBox.getSelectedItem().toString();
@@ -390,6 +394,16 @@ public class ClusteringAlgorithmDialog extends java.awt.Dialog
         TraitSet ts = ap.getTrait(traitName);
 
         Network net =  (Network)ts.getTraitStructure(networkName);
+        
+        ArrayList<String> whereArgs = new ArrayList();
+        whereArgs.add("name=\"" + this.assocNameTextBox.getText() + "\"");
+        whereArgs.add("traitid=" + ts.getId());
+        if(DataManager.runSelectQuery("id", "cluster", true, whereArgs, null).size() > 0)
+        {
+            String s = "Name already exists for trait set.";
+            this.errorLabel.setText(s);
+            return;
+        }
 
         if (this.createRadBtn.isSelected())
         {
@@ -402,29 +416,53 @@ public class ClusteringAlgorithmDialog extends java.awt.Dialog
         }
         else
         {
-            String filetext = "";
-
             try
             {
-                FileInputStream fstream = new FileInputStream(this.networkFileBox.getText());
-                DataInputStream in = new DataInputStream(fstream);
-                BufferedReader br = new BufferedReader(new InputStreamReader(in));
-                String strLine;
-                while ((strLine = br.readLine()) != null)
+                File file = new File(this.networkFileBox.getText());
+                if(!file.exists())
+                    throw new RuntimeException("File does not exist");                
+                
+                whereArgs.clear();
+                whereArgs.add("traitsetid=" + ts.getId());
+                int numTraits = Integer.parseInt(DataManager.runSelectQuery("count(*)", "trait", true, whereArgs, null).get(0));
+                                
+                TableParser tparser = new TableParser();
+                tparser.colTypes.add("posInt");
+                tparser.delimiter = "Tab";
+                ArrayList<Integer> idxKey = new ArrayList();
+                idxKey.add(0);
+                tparser.keys.add(idxKey);
+                tparser.length = numTraits;
+                tparser.setup(this.networkFileBox.getText());
+                
+                ArrayList<String> line;
+                StringBuilder clustBuilder = new StringBuilder();
+                
+                while(true)
                 {
-                    //System.out.println (strLine);
-                    filetext = filetext + strLine + ",";
+                    line = tparser.readline();
+                    if(line.size() == 1)
+                        throw new RuntimeException(line.get(0));
+                    if(line.get(1) == null)
+                        break;
+                    int idx = Integer.parseInt(line.get(1));
+                    if(idx > numTraits)
+                        throw new RuntimeException("Clustering file contained an index larger than the number of traits in the trait set.");
+                    clustBuilder.append(line.get(1));
+                    clustBuilder.append(",");
                 }
-                filetext = filetext.substring(0, filetext.length() - 1);
-                in.close();
+                
+                String clustString = clustBuilder.toString();
+                clustString = clustString.substring(0, clustString.length() - 1);
+                
+                ts.loadClusterFileIntoDB(this.assocNameTextBox.getText(),-1, clustString);
             }
             catch (Exception e)
             {//Catch exception if any
-                this.errorLabel.setText(e.getMessage());
-            }
-
-            ts.loadClusterFileIntoDB(this.assocNameTextBox.getText(),
-                    -1, filetext);
+                JOptionPane.showMessageDialog(null, "Error while parsing the data file.\nThis is likely caused by incorrect formatting.\n Error message was: " + e.getMessage());
+                this.errorLabel.setText("Error while parsing file");
+                return;
+            }          
         }
         this.closeDialog(null);
 }//GEN-LAST:event_importButtonActionPerformed
@@ -522,23 +560,8 @@ public class ClusteringAlgorithmDialog extends java.awt.Dialog
     private void fileButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_fileButton1ActionPerformed
     {//GEN-HEADEREND:event_fileButton1ActionPerformed
         //Open file in notepad or vi or show error message telling the user where to find the file
-        Runtime load = Runtime.getRuntime();
-        try
-        {
-            load.exec("notepad clustEXAMPLE.txt");
-        }
-        catch (IOException ex)
-        {
-            try
-            {
-                load.exec("vi clustEXAMPLE.txt");
-            }
-            catch (IOException ex1)
-            {
-                JOptionPane.showMessageDialog(this, "I can't open the example file.\n" +
-                        "Please look in the distribution directory for clustEXAMPLE.txt");
-            }
-        }
+        if(!ExampleFileHandler.display("clustering"))
+            JOptionPane.showMessageDialog(this, ExampleFileHandler.failMessage);
     }//GEN-LAST:event_fileButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
