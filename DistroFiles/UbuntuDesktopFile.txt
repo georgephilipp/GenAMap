@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=GenAMap
+Comment=Software for Structured Association Mapping
+Exec=java -jar /usr0/home/gschoenh/Installs/GenAMap3.1/GenAMapMain.jar
+Icon=/usr0/home/gschoenh/Installs/GenAMap3.1/GenAMap.png
+Categories=Application;Development;Java;IDE
+Version=1.0
+Type=Application
+Terminal=0
