@@ -252,8 +252,6 @@ public class MarkerFeatureUploadItem extends ThreadItem
                         throw new RuntimeException("failed to insert feature values");
                     }
                 }
-                else
-                    throw new RuntimeException("bla");
             }
             catch (Exception ex)
             {                              

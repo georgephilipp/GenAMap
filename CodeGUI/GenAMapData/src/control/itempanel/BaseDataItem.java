@@ -639,8 +639,6 @@ public class BaseDataItem extends ThreadItem
                                         
                     setValue(6 + (int) (((double) i / (double) numLines) * 93.0));
                     form.repaint();
-                    
-                    throw new RuntimeException("");
                 }
                 cols.clear();
                 whereArgs.clear();
