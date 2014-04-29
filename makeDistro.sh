@@ -13,8 +13,8 @@ cp DistroFiles/GenAMap.png GenAMapX.Y.Z
 cp DistroFiles/_runGenAMap.bat GenAMapX.Y.Z
 cp DistroFiles/_runGenAMap.sh GenAMapX.Y.Z
 cp DistroFiles/UbuntuDesktopFile.txt GenAMapX.Y.Z
-cp Documentation/README.txt GenAMapX.Y.Z
-cp Documentation/SettingUpGenAMap.pdf GenAMapX.Y.Z/Documentation
+cp DistroFiles/README.txt GenAMapX.Y.Z
+cp Documentation/SetupGuide/SettingUpGenAMap.pdf GenAMapX.Y.Z/Documentation
 cp Documentation/Introduction/IntroductionToGenAMap.pdf GenAMapX.Y.Z/Documentation
 cp Documentation/AlgorithmsGuide/AlgorithmsGuide.pdf GenAMapX.Y.Z/Documentation
 cp Documentation/DataImportingGuide/DataImportingGuide.pdf GenAMapX.Y.Z/Documentation
