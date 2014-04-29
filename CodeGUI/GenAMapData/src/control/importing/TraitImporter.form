@@ -153,22 +153,22 @@
                                       </Group>
                                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="traitNameField" max="32767" attributes="0"/>
-                                          <Component id="traitTextBox" alignment="1" max="32767" attributes="1"/>
+                                          <Component id="sampleTextBox" alignment="0" max="32767" attributes="1"/>
                                           <Component id="labelTextBox" alignment="1" max="32767" attributes="1"/>
-                                          <Component id="sampleTextBox" alignment="1" max="32767" attributes="1"/>
+                                          <Component id="traitTextBox" max="32767" attributes="1"/>
+                                          <Component id="traitNameField" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="fileButton" alignment="1" max="32767" attributes="1"/>
-                                          <Component id="labelButton" alignment="0" max="32767" attributes="1"/>
-                                          <Component id="sampleButton" alignment="1" min="0" pref="0" max="32767" attributes="1"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="sampleButton" pref="41" max="32767" attributes="1"/>
+                                          <Component id="fileButton" max="32767" attributes="1"/>
+                                          <Component id="labelButton" max="32767" attributes="1"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="sampleHelpButton" alignment="0" max="32767" attributes="1"/>
-                                          <Component id="fileHelpButton" alignment="0" max="32767" attributes="1"/>
-                                          <Component id="labelHelpButton" alignment="1" max="32767" attributes="1"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="sampleHelpButton" alignment="1" pref="41" max="32767" attributes="1"/>
+                                          <Component id="fileHelpButton" alignment="1" max="32767" attributes="1"/>
+                                          <Component id="labelHelpButton" max="32767" attributes="1"/>
                                       </Group>
                                   </Group>
                               </Group>

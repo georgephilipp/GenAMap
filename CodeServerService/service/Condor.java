@@ -2,9 +2,12 @@ package service;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Condor
 {
+	static final String condorPath = "/opt/condor/bin/";
+
 	public static String makeCondorRunFiles(
 		String universe, String exe, ArrayList<String> args, int step, String homeDir, String prio)
 	{
@@ -25,7 +28,7 @@ public class Condor
 				}
 				String loc = (homeDir + "/condor_runme_" + step + "_" + i + ".txt");
 				FileWriter fstream = new FileWriter(loc);
-				outo.write("condor_submit " + loc + "\n");
+				outo.write(condorPath + "condor_submit " + loc + "\n");
 				BufferedWriter out = new BufferedWriter(fstream);
 				out.write("Universe = " + universe + "\n");
 				out.write("Log = " + homeDir + "/log_" + step + ".txt\n");
@@ -58,7 +61,7 @@ public class Condor
 			{
 				//if(jobs.get(i).condorid != -2)
 				//{
-					Process p = Runtime.getRuntime().exec("condor_rm " + jobs.get(i).condorid);
+					Process p = Runtime.getRuntime().exec(condorPath + "condor_rm " + jobs.get(i).condorid);
 					p.getInputStream().close();
 					p.getErrorStream().close();
 					p.getOutputStream().close();
@@ -75,7 +78,7 @@ public class Condor
 		{
 			//if(job != -2)
 			//{
-				Process p = Runtime.getRuntime().exec("condor_release " + job);
+				Process p = Runtime.getRuntime().exec(condorPath + "condor_release " + job);
         	                p.getInputStream().close();
                 	        p.getErrorStream().close();
                         	p.getOutputStream().close();
@@ -256,7 +259,7 @@ public class Condor
 
 		String s = "" + id.condorid;
 		String line;
-		Process p = Runtime.getRuntime().exec("condor_q " + s);
+		Process p = Runtime.getRuntime().exec(condorPath + "condor_q " + s);
 		p.waitFor();
             	p.getErrorStream().close();
                 p.getOutputStream().close();
@@ -301,9 +304,16 @@ public class Condor
 		Process p = r.exec(exe);
 		p.waitFor();
 		BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+		BufferedReader input2 = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+		boolean hasError = false;
+		while((line = input2.readLine()) != null)
+		{
+			Printer.inst.println(line);
+			if(!line.equals(""))
+				throw new RuntimeException("Condor submission failed");
+		}
 		while((line = input.readLine()) != null)
 		{
-			//System.out.println(line);
 			if(line.startsWith("1"))
 			{
 				line = line.replace("1 job(s) submitted to cluster ", "");
@@ -312,6 +322,7 @@ public class Condor
 				toRet.add(new CondorJob(value,0));
 			}
 		}
+
 		input.close();
                 p.getInputStream().close();
                 p.getErrorStream().close();
@@ -322,22 +333,22 @@ public class Condor
 		//return toRet;
 	}
 
-	private static boolean isCondorRunning()
+	private static String isCondorRunning()
 	{
 		try
 		{
 			String line;
-			Process p = Runtime.getRuntime().exec("condor_q");
+			Process p = Runtime.getRuntime().exec(condorPath + "condor_q");
 			p.waitFor();
 		    	p.getErrorStream().close();
 		        p.getOutputStream().close();
 
 			BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			boolean res = true;
+			String res = "";
 			while((line = input.readLine()) != null)
 			{
 				if(line.toLowerCase().contains("error") || line.toLowerCase().contains("not found") || line.toLowerCase().contains("cannot run"))
-					res = false;
+					res = line;
 			}
 			input.close();
 			p.getInputStream().close();
@@ -345,23 +356,23 @@ public class Condor
 		}
 		catch(IOException e)
 		{
-			return false;
+			return "ioexception: " + e.getMessage();
 		}
 		catch(InterruptedException e2)
 		{
-			return false;
+			return "interruption exception: " + e2.getMessage();
 		}
 	}
 
 	private static void waitTillCondorRuns()
 	{
-	        boolean result = false;
-		while(!result)
+	        String result = "";
+		while(true)
 		{
 			result = isCondorRunning();
-			if(!result)
+			if(!result.equals(""))
 			{
-				Printer.inst.println("Condor not found to be running. Waiting 5 seconds.");
+				Printer.inst.println("Condor not found to be running. Waiting 5 seconds. Time is: " + new Date() + ". Error was " + result);
 				try
 				{
 					Thread.sleep(5000);
@@ -370,6 +381,8 @@ public class Condor
 				{
 				}
 			}
+			else
+				break;
 		}
 	}
 }

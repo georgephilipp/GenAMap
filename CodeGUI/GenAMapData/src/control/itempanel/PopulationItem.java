@@ -285,9 +285,9 @@ public class PopulationItem extends ThreadItem
                 return;
             }
 
-            //***StructureParameterObject paramOb = new StructureParameterObject("" + popstructid);
-            //***AlgorithmView.getInstance().addAlgorithm("STM", 14, projid, 0, markersetid, paramOb);
-            //***setValue(100);
+            StructureParameterObject paramOb = new StructureParameterObject("" + popstructid);
+            AlgorithmView.getInstance().addAlgorithm("STM", 14, projid, 0, markersetid, paramOb);
+            setValue(100);
         }
     }
 }

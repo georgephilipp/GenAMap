@@ -265,7 +265,7 @@ public class ManhattanPlot implements Serializable
             {
                 for (int j = 0; j < newnumPops; j++)
                 {
-                    renderer2.setSeriesPaint(i + j, Model.colors[0 + j]);
+                    renderer2.setSeriesPaint(i + j, Model.colors[(0 + j) % Model.colors.length]);
                     renderer2.setSeriesStroke(i + j, new BasicStroke(
                             2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND,
                             1.0f, new float[]
@@ -280,7 +280,7 @@ public class ManhattanPlot implements Serializable
             {
                 for (int j = 0; j < manager.getDisplayedTraits().size(); j++)
                 {
-                    renderer2.setSeriesPaint(i + j, Model.colors[0 + j]);
+                    renderer2.setSeriesPaint(i + j, Model.colors[(0 + j) % Model.colors.length]);
                     renderer2.setSeriesStroke(i+j, new BasicStroke(
                             2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND,
                             1.0f, new float[]
@@ -308,7 +308,7 @@ public class ManhattanPlot implements Serializable
         {
             for (int j = 0; j < newnumPops; j++)
             {
-                renderer.setSeriesPaint(i + j, Model.colors[0 + j]);
+                renderer.setSeriesPaint(i + j, Model.colors[(0 + j) % Model.colors.length]);
             }
         }
         for (int i = 0; newnumPops < 2 &&
@@ -317,7 +317,7 @@ public class ManhattanPlot implements Serializable
         {
             for (int j = 0; j < manager.getDisplayedTraits().size(); j++)
             {
-                renderer.setSeriesPaint(i + j, Model.colors[0 + j]);
+                renderer.setSeriesPaint(i + j, Model.colors[(0 + j) % Model.colors.length]);
             }
         }
         /*for (int pr : populationToRemove)

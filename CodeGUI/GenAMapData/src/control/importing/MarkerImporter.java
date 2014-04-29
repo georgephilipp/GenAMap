@@ -45,7 +45,7 @@ public class MarkerImporter extends java.awt.Dialog
         {
             this.projectComboBox.addItem(temp.get(i).getName());
         }
-        JFileChooser c = new JFileChooser(Model.getInstance().GetLastFilePath());
+        /*JFileChooser c = new JFileChooser(Model.getInstance().GetLastFilePath());
 
         int rVal = c.showOpenDialog(parent);
         if (rVal == JFileChooser.APPROVE_OPTION)
@@ -53,7 +53,7 @@ public class MarkerImporter extends java.awt.Dialog
             this.markerTextBox.setText(c.getSelectedFile().getAbsolutePath());
             this.nameField.setText(removeExtension(c.getSelectedFile().getName()));
             Model.getInstance().AccountForLastFilePath(c.getSelectedFile().getAbsolutePath());
-        }
+        }*/
 
     }
 

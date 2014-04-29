@@ -60,14 +60,14 @@ public class TraitImporter extends java.awt.Dialog
         {
             this.projectComboBox.addItem(project);
         }
-        JFileChooser c = new JFileChooser(Model.getInstance().GetLastFilePath());
+        /*JFileChooser c = new JFileChooser(Model.getInstance().GetLastFilePath());
         int rVal = c.showOpenDialog(parent);
         if (rVal == JFileChooser.APPROVE_OPTION)
         {
             this.traitTextBox.setText(c.getSelectedFile().getAbsolutePath());
             this.traitNameField.setText(removeExtension(c.getSelectedFile().getName()));
             Model.getInstance().AccountForLastFilePath(c.getSelectedFile().getAbsolutePath());
-        }
+        }*/
 
         traits = new ArrayList<Trait>();
     }
@@ -316,19 +316,19 @@ public class TraitImporter extends java.awt.Dialog
                                     .addComponent(jLabel8))
                                 .addGap(48, 48, 48)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(traitNameField)
-                                    .addComponent(traitTextBox, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(sampleTextBox)
                                     .addComponent(labelTextBox, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(sampleTextBox, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(traitTextBox)
+                                    .addComponent(traitNameField))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(fileButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(labelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(sampleButton, javax.swing.GroupLayout.Alignment.TRAILING, 0, 1, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(sampleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                                    .addComponent(fileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(labelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(sampleHelpButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(fileHelpButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(sampleHelpButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                                    .addComponent(fileHelpButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(labelHelpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(115, 115, 115))))
             .addGroup(jPanel1Layout.createSequentialGroup()

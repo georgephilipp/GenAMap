@@ -233,7 +233,13 @@ public class AssociationUploadItem extends ThreadItem
                     catch (Exception e)
                     {
                     }
-                    DataManager.runMultipleInsertQuery(cols, mvals, "association");
+                    if(mvals.size() > 0)
+                    {
+                        if(!DataManager.runMultipleInsertQuery(cols, mvals, "association"))
+                        {
+                            throw new RuntimeException("Failed to insert association values into DB");
+                        }
+                    }
                     row++;
                 }
                 ArrayList<String> where = new ArrayList<String>();
