@@ -14,7 +14,8 @@
 \newcommand{\argmin}{\operatorname{argmin}}
 \newcommand{\argmax}{\operatorname{argmax}}
 \usepackage{longtable}
-
+\usepackage{hyperref}
+\usepackage{url}
 
 \bibliographystyle{Algorithms}
 
@@ -25,14 +26,11 @@
 \begin{document}
 
 \maketitle
+\tableofcontents
+\vspace{1cm}
 
+For further questions / comments / suggestions, please contact \url{genamapsupport@cs.cmu.edu}
 
-\begin{raggedright}
-\hyphenpenalty=10000
-\exhyphenpenalty=10000
-For further questions / comments / suggestions, please contact genamapsupport@cs.cmu.edu
-
-\end{raggedright}
 
 
 \section{Definitions}
@@ -62,7 +60,7 @@ For further questions / comments / suggestions, please contact genamapsupport@cs
 
 \section{Network Algorithms}
 
-Network Algorithms compute a Network Data set (a network over traits) given a single Trait Data set as input. A network is a square edge weight matrix of an undirected graph where vertices correspond to traits and the edges correspond to relatedness between traits. A large positive numerical entry in a network corresponds to two highly related traits, a negative numerical entry with large absolute value corresponds to two highly inversely related traits and a numerical entry close to or equal to zero corresponds to unrelated traits.\\
+Network Algorithms compute a Network Data set (a network over traits) given a single Trait Data set as input. A network is a square edge weight matrix of an undirected graph where vertices correspond to traits and the edges correspond to relatedness between traits. A large positive numerical entry in a network corresponds to two highly related traits, a negative numerical entry with large absolute value corresponds to two highly inversely related traits and a numerical entry close to or equal to zero corresponds to unrelated traits.
 
 \subsection{Correlation}
 
@@ -196,7 +194,7 @@ Here, $V$ is the set of tree nodes and $B_{i,v}$ is the vector of entries of $B$
 \item Abbreviation: AMTL
 \item Description: Performs least-squares regression from all markers to all traits, with an $L2$-penalty defined by non-overlapping output groups. The output groups are generated automatically from a Network, which is used as side information. In addition, AMTL puts an $L1$-penalty on each individual component of $B$, as in Lasso. Furthermore, each penalty term is weighted according to additional parameters (which are optimized over) that combine with Feature Data.
 \item Reference: \cite{TreeLasso}
-\item Additional Inputs: Network, Features
+\item Additional Inputs: Network, (any number of) Features
 \item Formula:
 \begin{eqnarray*}
 \hat{B} &=& \argmin_{B} \min_{\omega, \kappa, \sum_f \omega_f = \sum_f \kappa_f = 1} \frac{1}{2}||Y - XB||_2^2 + \lambda \sum_{d,t}(F\omega)_d|B_{d,t}|\\
@@ -244,7 +242,7 @@ Here, $B_{i,j}$ is the vector of entries of $B$ in row $i$ and column $j$, exten
 \item Description: Performs $L1$-penalized least-squares regression from a Trait Data set representing gene expressions to a Trait Data set representing phenotypes, using an additional fusion penalty on the regression coefficients induced both by a Network over the gene expressions and a Network over the phenotypes. Hence, it uses two Networks as side information plus an addition Association Data set between markers and gene expressions, which will be used to prepare additional information for the GenAMap 3-way association visualization.
 \item Reference: \cite{gGFLasso}
 \item Inputs: Trait Data set representing gene expressions, Trait Data set representing phenotypes, Networks for both Trait Data sets an Association Data set between a Marker Data set and the gene expressions.
-\item Outputs: 3-way Association Data
+\item Outputs: Gene-Trait Association Data
 \item Formula:
 \begin{eqnarray*}
 \hat{B} &=& \argmin_{B} \frac{1}{2}||Z - YB||_2^2 + \lambda|B|_1 + \gamma_1\sum_{j,l,m, l < m}|B_{j,l} - \sgn(\rho^Z_{l,m})B_{j,m}| \\
