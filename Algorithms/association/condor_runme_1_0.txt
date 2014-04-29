@@ -1,0 +1,8 @@
+Universe = vanilla
+Log = log_1.txt
+Output = out_1_0.txt
+Error = err_1.txt
+Executable = bin/assocFrontEnd 
+Arguments = GFL4444 assoc_name 115
+Notification = Error
+Queue

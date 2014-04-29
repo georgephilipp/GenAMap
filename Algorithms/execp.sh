@@ -1,0 +1,37 @@
+targetdir=jobs/exe/
+sourcedir=GenAMapAlgos/
+cp ${sourcedir}association/bin/assocBackEnd ${targetdir}assocBackEnd
+cp ${sourcedir}association/bin/assocFrontEnd ${targetdir}assocFrontEnd
+cp ${sourcedir}clustering/bin/cluster_condor ${targetdir}cluster_condor
+cp ${sourcedir}clustering/bin/clusterBackEnd ${targetdir}clusterBackEnd
+cp ${sourcedir}clustering/bin/clusterFrontEnd ${targetdir}clusterFrontEnd
+cp ${sourcedir}NetworkConnComps/conncomp.jar ${targetdir}conncomp.jar
+cp ${sourcedir}genemods/bin/genemodFrontEnd ${targetdir}genemodFrontEnd
+cp ${sourcedir}genemods/bin/genmodBackEnd ${targetdir}genmodBackEnd
+cp ${sourcedir}gGFlasso/bin/ggflasso ${targetdir}ggflasso
+cp ${sourcedir}GLasso/bin/glassoBackEnd ${targetdir}glassoBackEnd
+cp ${sourcedir}GLasso/bin/glassoCorr_2 ${targetdir}glassoCorr_2
+cp ${sourcedir}GLasso/bin/glassoCorr_3 ${targetdir}glassoCorr_3
+cp ${sourcedir}GLasso/bin/glassoFrontEnd ${targetdir}glassoFrontEnd
+cp ${sourcedir}association/bin/gtassocBackEnd ${targetdir}gtassocBackEnd
+cp ${sourcedir}association/bin/gtassocFrontEnd ${targetdir}gtassocFrontEnd
+cp ${sourcedir}GLasso/bin/mergeCC ${targetdir}mergeCC
+cp ${sourcedir}GLasso/bin/mergeGLasso ${targetdir}mergeGLasso
+cp ${sourcedir}GLasso/bin/mergeSC ${targetdir}mergeSC
+cp ${sourcedir}MPGLB/bin/mpglBackEnd ${targetdir}mpglBackEnd
+cp ${sourcedir}MPGLB/bin/mpglFrontEnd ${targetdir}mpglFrontEnd
+cp ${sourcedir}networking/bin/netBackEnd ${targetdir}netBackEnd
+cp ${sourcedir}networking/bin/netDriv ${targetdir}netDriv
+cp ${sourcedir}networking/bin/netFrontEnd ${targetdir}netFrontEnd
+cp ${sourcedir}plink/plink ${targetdir}plink
+cp ${sourcedir}association/bin/popBackEnd ${targetdir}popBackEnd
+cp ${sourcedir}networking/bin/sfn1 ${targetdir}sfn1
+cp ${sourcedir}networking/bin/sfn2 ${targetdir}sfn2
+cp ${sourcedir}networking/bin/sfn3 ${targetdir}sfn3
+cp ${sourcedir}structure/algorithm/structure ${targetdir}structure
+cp ${sourcedir}structure/front_back/bin/structureBackEnd ${targetdir}structureBackEnd
+cp ${sourcedir}structure/front_back/bin/structureFrontEnd ${targetdir}structureFrontEnd
+cp ${sourcedir}association/bin/thresh ${targetdir}thresh
+cp ${sourcedir}networking/bin/tom ${targetdir}tom
+cp ${sourcedir}clustering/bin/tree ${targetdir}tree
+chmod 777 ${targetdir}conncomp.jar

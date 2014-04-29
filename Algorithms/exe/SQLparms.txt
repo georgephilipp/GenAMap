@@ -1,0 +1,4 @@
+cogito.local:4306
+geneassoc
+assocmap
+Thisisadumbpassword*

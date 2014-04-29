@@ -1,0 +1,2 @@
+traitprocessing.m "mask=GFL4444; sc=-1;traitprocessing;"
+vanilla

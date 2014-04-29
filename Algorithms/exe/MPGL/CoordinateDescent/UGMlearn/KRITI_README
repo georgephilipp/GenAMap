@@ -1,0 +1,3 @@
+I added these functions to this package
+groupLasso_CallMe.m : Function that inputs X,Y, lambda, and groups, and outputs w for each lambda in the list
+kriti_groupL1.m : wrapper function used to test the code

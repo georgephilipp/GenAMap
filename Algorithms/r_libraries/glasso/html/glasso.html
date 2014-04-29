@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Graphical lasso</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+
+<table width="100%" summary="page for glasso {glasso}"><tr><td>glasso {glasso}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Graphical lasso</h2>
+
+<h3>Description</h3>
+
+<p>Estimates a sparse inverse covariance matrix using a lasso (L1) penalty
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+glasso(s, rho, zero=NULL, thr=1.0e-4, maxit=1e4,  approx=FALSE, penalize.diagonal=TRUE, start=c("cold","warm"), w.init=NULL,wi.init=NULL, trace=FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>s</code></td>
+<td>
+<p>Covariance matrix:p by p matrix (symmetric)</p>
+</td></tr>
+<tr valign="top"><td><code>rho</code></td>
+<td>
+<p>(Non-negative) regularization parameter for lasso. rho=0 means no regularization. Can be a scalar (usual) or a symmetric p by p matrix, or a vector of length p. In the latter case, the penalty matrix has jkth element sqrt(rho[j]*rho[k]).</p>
+</td></tr>
+<tr valign="top"><td><code>zero</code></td>
+<td>
+<p>(Optional) indices of entries of inverse covariance to be constrained to be zero. The input should be a matrix with two columns, each row indicating
+the indices of elements to be constrained to be zero. The solution must be symmetric, so you need only  specify one of (j,k) and (k,j). An entry in the zero matrix
+overrides any entry in the rho matrix for a given element.</p>
+</td></tr>
+<tr valign="top"><td><code>thr</code></td>
+<td>
+<p>Threshold for convergence. Default value is 1e-4.  Iterations stop when average absolute parameter change is less than thr * ave(abs(offdiag(s)))</p>
+</td></tr>
+<tr valign="top"><td><code>maxit</code></td>
+<td>
+<p>Maximum number of iterations of outer loop. Default 10,000</p>
+</td></tr>
+<tr valign="top"><td><code>approx</code></td>
+<td>
+<p>Approximation flag: if true, computes Meinhausen-Buhlmann(2006)
+approximation</p>
+</td></tr>
+<tr valign="top"><td><code>penalize.diagonal</code></td>
+<td>
+<p>Should diagonal of inverse covariance be penalized?
+Dafault TRUE.</p>
+</td></tr>
+<tr valign="top"><td><code>start</code></td>
+<td>
+<p>Type of start. Cold start is default. Using Warm start, can provide starting values for w and wi</p>
+</td></tr>
+<tr valign="top"><td><code>w.init</code></td>
+<td>
+<p>Optional starting values for estimated covariance matrix (p by p).
+Only needed when start=&quot;warm&quot; is specified</p>
+</td></tr>
+<tr valign="top"><td><code>wi.init</code></td>
+<td>
+<p>Optional starting values for estimated inverse covariance matrix (p by p)
+Only needed when start=&quot;warm&quot; is specified</p>
+</td></tr>
+<tr valign="top"><td><code>trace</code></td>
+<td>
+<p>Flag for printing out information as iterations proceed.
+Default FALSE</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Estimates a sparse inverse covariance matrix using a lasso (L1) penalty,
+using the approach of Friedman, Hastie and Tibshirani (2007).
+The Meinhausen-Buhlmann (2006) approximation is also implemented. 
+The algorithm can also be used to estimate a graph with missing edges,
+by specifying which edges to omit in the zero argument, and setting rho=0.
+Or both fixed zeroes for some elements and regularization on the other elements
+can be specified.
+</p>
+<p>This version 1.7 uses a block diagonal screening rule to speed up
+computations considerably. Details are given in the paper &quot;New insights
+and fast computations for the graphical lasso&quot; by Daniela Witten, Jerry
+Friedman, and Noah Simon, to appear in &quot;Journal of Computational and
+Graphical Statistics&quot;. The idea is as follows: it is possible to quickly
+check whether the solution to the graphical lasso problem will be block
+diagonal, for a given value of the tuning parameter. If so, then one can
+simply apply the graphical lasso algorithm to each block separately,
+leading to massive speed improvements.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with components
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>w</code></td>
+<td>
+<p>Estimated covariance matrix</p>
+</td></tr>
+<tr valign="top"><td><code>wi</code></td>
+<td>
+<p>Estimated inverse covariance matrix</p>
+</td></tr>
+<tr valign="top"><td><code>loglik</code></td>
+<td>
+<p>Value of maximized log-likelihodo+penalty</p>
+</td></tr>
+<tr valign="top"><td><code>errflag</code></td>
+<td>
+<p>Memory allocation error flag: 0 means no error; !=0 means
+memory allocation error - no output returned</p>
+</td></tr>
+<tr valign="top"><td><code>approx</code></td>
+<td>
+<p>Value of input argument approx</p>
+</td></tr>
+<tr valign="top"><td><code>del</code></td>
+<td>
+<p>Change in parameter value at convergence</p>
+</td></tr>
+<tr valign="top"><td><code>niter</code></td>
+<td>
+<p>Number of iterations of outer loop used by algorithm</p>
+</td></tr>
+</table>
+
+
+<h3>References</h3>
+
+<p>Jerome Friedman, Trevor Hastie and Robert Tibshirani (2007).
+Sparse inverse covariance estimation with the lasso.
+Biostatistics 2007. http://www-stat.stanford.edu/~tibs/ftp/graph.pdf
+</p>
+<p>Meinshausen, N. and  Buhlmann, P.(2006)
+High dimensional graphs
+and variable selection with the lasso.
+Annals of Statistics,34, p1436-1462.
+</p>
+<p>Daniela Witten, Jerome Friedman, and Noah Simon (2011). New insights and
+faster computations for the graphical lasso. To appear in Journal of
+Computational and Graphical Statistics.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+set.seed(100)
+
+x&lt;-matrix(rnorm(50*20),ncol=20)
+s&lt;- var(x)
+a&lt;-glasso(s, rho=.01)
+aa&lt;-glasso(s,rho=.02, w.init=a$w, wi.init=a$wi)
+
+# example with structural zeros and no regularization,
+# from Whittaker's Graphical models book  page xxx.
+
+s=c(10,1,5,4,10,2,6,10,3,10)
+S=matrix(0,nrow=4,ncol=4)
+S[row(S)&gt;=col(S)]=s
+S=(S+t(S))
+diag(S)&lt;-10
+zero&lt;-matrix(c(1,3,2,4),ncol=2,byrow=TRUE)
+a&lt;-glasso(S,0,zero=zero)
+</pre>
+
+<hr><div align="center">[Package <em>glasso</em> version 1.7 <a href="00Index.html">Index</a>]</div>
+</body></html>

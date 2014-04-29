@@ -1,0 +1,6 @@
+libzscoreInitialize
+libzscoreInitializeWithHandlers
+libzscoreTerminate
+libzscorePrintStackTrace
+mlxZscore
+zscore

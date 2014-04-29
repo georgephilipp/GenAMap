@@ -1,0 +1,8 @@
+Universe = vanilla
+Log = log_1.txt
+Output = out_1_0.txt
+Error = err_1.txt
+Executable = bin/structureFrontEnd 
+Arguments = STR6003 geneassoc
+Notification = Error
+Queue

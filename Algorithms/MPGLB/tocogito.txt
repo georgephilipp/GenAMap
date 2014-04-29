@@ -1,0 +1,9 @@
+Universe = vanilla
+Log = /home/akgoyal/MPGLB/log_f.txt
+Output = /home/akgoyal/MPGLB/out_f.txt
+Error = /home/akgoyal/MPGLB/err_f.txt
+Executable = /home/akgoyal/MPGLB/bin/mpglFrontEnd
+Arguments = MPL11f8 MPGL_UG 14 1 geneassoc
+initialdir = /home/akgoyal/MPGLB
+Notification = Error
+Queue

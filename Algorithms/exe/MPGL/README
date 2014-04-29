@@ -1,0 +1,68 @@
+
+
+*****************************************
+Multi-Population Group Lasso (MPGL) 
+
+Author : Kriti Puniyani
+------------------------------------------
+
+*******************
+About this code
+-------------------
+
+
+This code implements MPGL, that uses L1/L2 regression, with cross-validation to pick the lambda.
+The code supports both linear and logistic regression, and two optimization techniques : Dual Augmented Lagrangian (DAL) and Coordinate Descent.
+
+DAL is usually the faster and more stable of the two, and should always be preferred.
+While BIC is also supported for paramtere selection, it currently gives bad results, hence cross-validation should always be preferred.
+
+
+**********************
+INPUT FORMATS
+----------------------
+
+We need 6 matrices in this experiment :
+
+Let n be the total number of samples we have in all tasks. For example, if we have 3 tasks, each of which has 300 samples, then n=900.
+Let p be the number of features, and k be the number of tasks
+
+X : n*p matrix of data for ALL tasks.
+Y : vector of length n. If Y is binary, it should take on values {-1,1} only.
+Z : assignment of each sample to a specific population/task. Z must have only k unique values. which must be 1..k.
+
+X_test,Y_test,Z_test : corresponding test data (not validation, but test - validation data is split automatically from the training set)
+
+Additional parameters :
+
+vocab : name of every feature in a cell array, optional
+logistic=true;  % linear or logistic regression
+validationRounds=2; % How many validation rounds must be computed ? 
+percentageSplits=0.25; % In each validation round, what should the split between train and validation data be ? 
+lambdaValues = [ 1:20 ]; % What lambda values should be used ? 
+
+If you use lambda that is too large, you will get all results to have mostly zero weights.
+If you use lambda that is too small, you will get LOTS of features, and very unstable results.
+
+Hence, it is essential that the output of the regression be checked that a good range of non-zeros is obtained.
+For example, if I have 200 features, I need to run the code, and check that I pick lambdaValues, so I get 0 features selected, 1 feature selected, 5 features selected and so on, all the way to 200 features selected. 
+
+
+*****************************************
+HOW TO RUN / PLAY WITH PARAMETERS
+-----------------------------------------
+
+Look at 
+ mainFunction_ParallelRunning (all parameters to play with, including all hard-coding of data file names)
+
+You will have to change the parameter values in mainFunction_ParallelRunning, and redefine readData() to read your own data.
+
+- How to pick lambda :
+	- smaller the lambda, more non-zeros.
+	- however, if you give a very large lambda, you usually get unstable results, with LOTS of non-zeros. 
+		So if you get LOTS of non-zeros, and a "matrix unstable" warning, you might have to reduce lambda or increase it :( 
+	- usually, as p increases, lambda should _____ ? 
+	- as n increases, lambda should decrease
+
+--  Keep dal=true; BIC=false;
+

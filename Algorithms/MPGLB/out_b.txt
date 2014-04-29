@@ -1,0 +1,3091 @@
+MPL11f8
+14
+
+msid=75
+
+tsid=75
+
+read tr_id 
+
+read data.vocab 
+
+read id from database  201 
+
+in for  
+
+readline:
+
+inelse:
+
+readline:7076	 -2.499634e-01
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29889,-0.249963,201,1)
+
+
+readline:7074	 -8.742862e-02
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29889,-0.0874286,201,1)
+
+
+readline:7066	 -5.929058e-02
+
+inelse:
+label -5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29889,-0.0592906,201,1)
+
+
+readline:7081	 -1.870687e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29889,-0.0187069,201,1)
+
+
+readline:7065	 -1.673945e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29889,-0.0167394,201,1)
+
+
+readline:7064	 -1.195502e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29889,-0.011955,201,1)
+
+
+readline:7061	 -7.606311e-03
+
+inelse:
+label -7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7061,29889,-0.00760631,201,1)
+
+
+readline:7075	 2.807112e-03
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29889,0.00280711,201,1)
+
+
+readline:7068	 8.061857e-03
+
+inelse:
+label 8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29889,0.00806186,201,1)
+
+
+readline:7060	 1.057873e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29889,0.0105787,201,1)
+
+
+readline:7070	 1.544045e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29889,0.0154404,201,1)
+
+
+readline:7080	 5.001291e-02
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7080,29889,0.0500129,201,1)
+
+
+readline:7059	 6.485064e-02
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29889,0.0648506,201,1)
+
+
+readline:7077	 6.991710e-02
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29889,0.0699171,201,1)
+
+
+readline:7079	 9.187294e-02
+
+inelse:
+label 9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29889,0.0918729,201,1)
+
+
+readline:7057	 1.543090e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29889,0.154309,201,1)
+
+
+readline:7058	 2.114992e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29889,0.211499,201,1)
+
+
+readline:
+
+inelse:
+
+readline:7074	 -3.469043e-01
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29889,-0.346904,201,2)
+
+
+readline:7079	 -1.114745e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29889,-0.111475,201,2)
+
+
+readline:7065	 -1.911548e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29889,-0.0191155,201,2)
+
+
+readline:7081	 3.797298e-03
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29889,0.0037973,201,2)
+
+
+readline:7070	 4.201075e-03
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29889,0.00420108,201,2)
+
+
+readline:7075	 8.944405e-03
+
+inelse:
+label 8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29889,0.00894441,201,2)
+
+
+readline:7060	 1.453360e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29889,0.0145336,201,2)
+
+
+readline:7064	 2.426046e-02
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29889,0.0242605,201,2)
+
+
+readline:7061	 4.412306e-02
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7061,29889,0.0441231,201,2)
+
+
+readline:7068	 6.654632e-02
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29889,0.0665463,201,2)
+
+
+readline:7077	 7.185251e-02
+
+inelse:
+label 7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29889,0.0718525,201,2)
+
+
+readline:7066	 1.066213e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29889,0.106621,201,2)
+
+
+readline:7080	 1.229479e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7080,29889,0.122948,201,2)
+
+
+readline:7059	 1.546726e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29889,0.154673,201,2)
+
+
+readline:7057	 2.008306e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29889,0.200831,201,2)
+
+
+readline:7076	 2.039188e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29889,0.203919,201,2)
+
+
+readline:7058	 7.317285e-01
+
+inelse:
+label 7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29889,0.731729,201,2)
+
+
+readline:
+
+inelse:
+
+readline:7080	 -2.347808e-01
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7080,29889,-0.234781,201,3)
+
+
+readline:7065	 -1.250040e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29889,-0.125004,201,3)
+
+
+readline:7057	 -9.377745e-02
+
+inelse:
+label -9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29889,-0.0937774,201,3)
+
+
+readline:7081	 -7.512381e-02
+
+inelse:
+label -7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29889,-0.0751238,201,3)
+
+
+readline:7059	 -7.102055e-02
+
+inelse:
+label -7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29889,-0.0710206,201,3)
+
+
+readline:7064	 -4.680974e-02
+
+inelse:
+label -4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29889,-0.0468097,201,3)
+
+
+readline:7074	 -8.502575e-03
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29889,-0.00850258,201,3)
+
+
+readline:7077	 -6.523125e-03
+
+inelse:
+label -6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29889,-0.00652313,201,3)
+
+
+readline:7075	 -1.351173e-03
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29889,-0.00135117,201,3)
+
+
+readline:7068	 3.609463e-03
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29889,0.00360946,201,3)
+
+
+readline:7060	 4.300892e-03
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29889,0.00430089,201,3)
+
+
+readline:7061	 2.399595e-02
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7061,29889,0.0239959,201,3)
+
+
+readline:7070	 2.868165e-02
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29889,0.0286816,201,3)
+
+
+readline:7066	 3.803293e-02
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29889,0.0380329,201,3)
+
+
+readline:7076	 4.683706e-02
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29889,0.0468371,201,3)
+
+
+readline:7079	 1.360948e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29889,0.136095,201,3)
+
+
+readline:7058	 4.667891e-01
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29889,0.466789,201,3)
+
+
+readline:
+
+inelse:
+
+readline:7057	 -3.315642e-01
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29889,-0.331564,201,4)
+
+
+readline:7076	 -2.585606e-01
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29889,-0.258561,201,4)
+
+
+readline:7079	 -2.348431e-01
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29889,-0.234843,201,4)
+
+
+readline:7059	 -1.571105e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29889,-0.15711,201,4)
+
+
+readline:7065	 -1.534228e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29889,-0.153423,201,4)
+
+
+readline:7080	 -1.366334e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7080,29889,-0.136633,201,4)
+
+
+readline:7068	 -7.667127e-02
+
+inelse:
+label -7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29889,-0.0766713,201,4)
+
+
+readline:7077	 -5.654418e-02
+
+inelse:
+label -5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29889,-0.0565442,201,4)
+
+
+readline:7064	 -4.486295e-02
+
+inelse:
+label -4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29889,-0.0448629,201,4)
+
+
+readline:7060	 1.309843e-03
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29889,0.00130984,201,4)
+
+
+readline:7075	 1.352549e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29889,0.0135255,201,4)
+
+
+readline:7061	 4.323467e-02
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7061,29889,0.0432347,201,4)
+
+
+readline:7081	 7.580663e-02
+
+inelse:
+label 7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29889,0.0758066,201,4)
+
+
+readline:7070	 1.004263e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29889,0.100426,201,4)
+
+
+readline:7066	 1.143664e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29889,0.114366,201,4)
+
+
+readline:7074	 2.041380e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29889,0.204138,201,4)
+
+
+readline:7058	 5.441280e-01
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29889,0.544128,201,4)
+
+
+readline:
+
+inelse:
+
+readline:7066	 -8.337541e-02
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29889,-0.0833754,201,5)
+
+
+readline:7081	 -6.083278e-02
+
+inelse:
+label -6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29889,-0.0608328,201,5)
+
+
+readline:7074	 -5.016926e-02
+
+inelse:
+label -5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29889,-0.0501693,201,5)
+
+
+readline:7068	 -1.522682e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29889,-0.0152268,201,5)
+
+
+readline:7061	 -1.411360e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7061,29889,-0.0141136,201,5)
+
+
+readline:7077	 -9.238382e-03
+
+inelse:
+label -9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29889,-0.00923838,201,5)
+
+
+readline:7060	 -3.027825e-03
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29889,-0.00302783,201,5)
+
+
+readline:7075	 -2.057102e-03
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29889,-0.0020571,201,5)
+
+
+readline:7079	 -3.071298e-06
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29889,-3.0713e-06,201,5)
+
+
+readline:7080	 7.144714e-03
+
+inelse:
+label 7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7080,29889,0.00714471,201,5)
+
+
+readline:7065	 2.371675e-02
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29889,0.0237168,201,5)
+
+
+readline:7070	 3.557314e-02
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29889,0.0355731,201,5)
+
+
+readline:7059	 3.930527e-02
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29889,0.0393053,201,5)
+
+
+readline:7064	 7.412548e-02
+
+inelse:
+label 7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29889,0.0741255,201,5)
+
+
+readline:7057	 1.143787e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29889,0.114379,201,5)
+
+
+readline:7076	 1.715973e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29889,0.171597,201,5)
+
+
+readline:7058	 3.453959e-01
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29889,0.345396,201,5)
+
+
+readline:
+
+inelse:
+
+readline:7076	 -5.314314e-01
+
+inelse:
+label -5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29889,-0.531431,201,6)
+
+
+readline:7057	 -3.150501e-01
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29889,-0.31505,201,6)
+
+
+readline:7080	 -2.163923e-01
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7080,29889,-0.216392,201,6)
+
+
+readline:7079	 -1.531632e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29889,-0.153163,201,6)
+
+
+readline:7059	 -1.332888e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29889,-0.133289,201,6)
+
+
+readline:7081	 -9.239387e-02
+
+inelse:
+label -9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29889,-0.0923939,201,6)
+
+
+readline:7070	 -8.623436e-02
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29889,-0.0862344,201,6)
+
+
+readline:7068	 -8.532260e-02
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29889,-0.0853226,201,6)
+
+
+readline:7060	 -9.890602e-03
+
+inelse:
+label -9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29889,-0.0098906,201,6)
+
+
+readline:7075	 4.331977e-03
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29889,0.00433198,201,6)
+
+
+readline:7061	 2.068973e-02
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7061,29889,0.0206897,201,6)
+
+
+readline:7077	 5.855422e-02
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29889,0.0585542,201,6)
+
+
+readline:7064	 6.905912e-02
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29889,0.0690591,201,6)
+
+
+readline:7065	 1.719493e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29889,0.171949,201,6)
+
+
+readline:7066	 1.911817e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29889,0.191182,201,6)
+
+
+readline:7074	 2.074793e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29889,0.207479,201,6)
+
+
+readline:7058	 1.431132e+00
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29889,1.43113,201,6)
+
+
+readline:
+
+inelse:
+
+readline:7059	 -2.237417e-01
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29889,-0.223742,201,7)
+
+
+readline:7074	 -2.008673e-01
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29889,-0.200867,201,7)
+
+
+readline:7077	 -1.240729e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29889,-0.124073,201,7)
+
+
+readline:7064	 -8.792824e-02
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29889,-0.0879282,201,7)
+
+
+readline:7065	 -2.855895e-02
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29889,-0.0285589,201,7)
+
+
+readline:7066	 -2.771825e-02
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29889,-0.0277182,201,7)
+
+
+readline:7075	 -1.522619e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29889,-0.0152262,201,7)
+
+
+readline:7057	 -1.050986e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29889,-0.0105099,201,7)
+
+
+readline:7060	 3.757987e-04
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29889,0.000375799,201,7)
+
+
+readline:7081	 2.370066e-03
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29889,0.00237007,201,7)
+
+
+readline:7068	 4.240098e-02
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29889,0.042401,201,7)
+
+
+readline:7061	 7.578826e-02
+
+inelse:
+label 7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7061,29889,0.0757883,201,7)
+
+
+readline:7070	 9.281384e-02
+
+inelse:
+label 9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29889,0.0928138,201,7)
+
+
+readline:7076	 1.568837e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29889,0.156884,201,7)
+
+
+readline:7080	 1.708193e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7080,29889,0.170819,201,7)
+
+
+readline:7079	 3.467325e-01
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29889,0.346732,201,7)
+
+
+readline:7058	 9.123904e-01
+
+inelse:
+label 9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29889,0.91239,201,7)
+
+
+readline:
+
+inelse:
+
+readline:7079	 -2.358702e-01
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29889,-0.23587,201,8)
+
+
+readline:7081	 -1.247711e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29889,-0.124771,201,8)
+
+
+readline:7068	 -8.947028e-02
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29889,-0.0894703,201,8)
+
+
+readline:7065	 -8.563389e-02
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29889,-0.0856339,201,8)
+
+
+readline:7064	 -8.464035e-02
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29889,-0.0846404,201,8)
+
+
+readline:7059	 -6.006869e-02
+
+inelse:
+label -6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29889,-0.0600687,201,8)
+
+
+readline:7076	 -5.513039e-02
+
+inelse:
+label -5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29889,-0.0551304,201,8)
+
+
+readline:7066	 -4.238253e-02
+
+inelse:
+label -4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29889,-0.0423825,201,8)
+
+
+readline:7077	 -3.080614e-02
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29889,-0.0308061,201,8)
+
+
+readline:7070	 -2.970127e-02
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29889,-0.0297013,201,8)
+
+
+readline:7061	 -6.223203e-04
+
+inelse:
+label -6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7061,29889,-0.00062232,201,8)
+
+
+readline:7060	 5.585222e-03
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29889,0.00558522,201,8)
+
+
+readline:7075	 5.845330e-03
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29889,0.00584533,201,8)
+
+
+readline:7057	 4.224669e-02
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29889,0.0422467,201,8)
+
+
+readline:7080	 1.056762e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7080,29889,0.105676,201,8)
+
+
+readline:7074	 1.903851e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29889,0.190385,201,8)
+
+
+readline:7058	 4.525240e-01
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29889,0.452524,201,8)
+
+
+readline:
+
+inelse:
+
+readline:7080	 -3.365825e-02
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7080,29889,-0.0336583,201,9)
+
+
+readline:7076	 -3.238545e-02
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29889,-0.0323855,201,9)
+
+
+readline:7074	 -1.739155e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29889,-0.0173915,201,9)
+
+
+readline:7065	 -1.640039e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29889,-0.0164004,201,9)
+
+
+readline:7066	 -1.342364e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29889,-0.0134236,201,9)
+
+
+readline:7081	 -1.309449e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29889,-0.0130945,201,9)
+
+
+readline:7064	 -1.155041e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29889,-0.0115504,201,9)
+
+
+readline:7059	 -1.120374e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29889,-0.0112037,201,9)
+
+
+readline:7068	 -3.656423e-03
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29889,-0.00365642,201,9)
+
+
+readline:7075	 5.192363e-04
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29889,0.000519236,201,9)
+
+
+readline:7060	 1.256401e-03
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29889,0.0012564,201,9)
+
+
+readline:7061	 6.447889e-03
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7061,29889,0.00644789,201,9)
+
+
+readline:7058	 8.519704e-03
+
+inelse:
+label 8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29889,0.0085197,201,9)
+
+
+readline:7079	 9.527037e-03
+
+inelse:
+label 9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29889,0.00952704,201,9)
+
+
+readline:7077	 1.017057e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29889,0.0101706,201,9)
+
+
+readline:7070	 1.117271e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29889,0.0111727,201,9)
+
+
+readline:7057	 3.200454e-02
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29889,0.0320045,201,9)
+
+
+readline:
+
+inelse:
+
+in for  
+
+readline:
+
+inelse:
+
+readline:7076	 -3.331800e-01
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29890,-0.33318,201,1)
+
+
+readline:7062	 -2.479944e-01
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7062,29890,-0.247994,201,1)
+
+
+readline:7064	 -2.463208e-01
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29890,-0.246321,201,1)
+
+
+readline:7066	 -1.565744e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29890,-0.156574,201,1)
+
+
+readline:7075	 -1.530999e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29890,-0.1531,201,1)
+
+
+readline:7069	 -1.389722e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7069,29890,-0.138972,201,1)
+
+
+readline:7081	 -1.164597e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29890,-0.11646,201,1)
+
+
+readline:7065	 -6.503829e-02
+
+inelse:
+label -6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29890,-0.0650383,201,1)
+
+
+readline:7074	 -4.511034e-02
+
+inelse:
+label -4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29890,-0.0451103,201,1)
+
+
+readline:7067	 -1.358426e-03
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7067,29890,-0.00135843,201,1)
+
+
+readline:7078	 7.397096e-03
+
+inelse:
+label 7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7078,29890,0.0073971,201,1)
+
+
+readline:7071	 1.675160e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7071,29890,0.0167516,201,1)
+
+
+readline:7068	 4.966104e-02
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29890,0.049661,201,1)
+
+
+readline:7070	 5.358381e-02
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29890,0.0535838,201,1)
+
+
+readline:7077	 7.645833e-02
+
+inelse:
+label 7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29890,0.0764583,201,1)
+
+
+readline:7079	 9.183275e-02
+
+inelse:
+label 9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29890,0.0918328,201,1)
+
+
+readline:7059	 2.278866e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29890,0.227887,201,1)
+
+
+readline:7057	 2.774977e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29890,0.277498,201,1)
+
+
+readline:7073	 3.679681e-01
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29890,0.367968,201,1)
+
+
+readline:7060	 3.757097e-01
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29890,0.37571,201,1)
+
+
+readline:7058	 6.325867e-01
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29890,0.632587,201,1)
+
+
+readline:
+
+inelse:
+
+readline:7069	 -1.271570e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7069,29890,-0.127157,201,2)
+
+
+readline:7081	 -5.466984e-02
+
+inelse:
+label -5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29890,-0.0546698,201,2)
+
+
+readline:7074	 -4.736593e-02
+
+inelse:
+label -4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29890,-0.0473659,201,2)
+
+
+readline:7070	 -1.501750e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29890,-0.0150175,201,2)
+
+
+readline:7071	 -6.906669e-03
+
+inelse:
+label -6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7071,29890,-0.00690667,201,2)
+
+
+readline:7077	 6.895343e-04
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29890,0.000689534,201,2)
+
+
+readline:7078	 3.811484e-03
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7078,29890,0.00381148,201,2)
+
+
+readline:7068	 9.024586e-03
+
+inelse:
+label 9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29890,0.00902459,201,2)
+
+
+readline:7067	 9.743350e-03
+
+inelse:
+label 9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7067,29890,0.00974335,201,2)
+
+
+readline:7065	 1.758222e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29890,0.0175822,201,2)
+
+
+readline:7076	 1.919592e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29890,0.0191959,201,2)
+
+
+readline:7062	 5.813464e-02
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7062,29890,0.0581346,201,2)
+
+
+readline:7066	 5.886307e-02
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29890,0.0588631,201,2)
+
+
+readline:7064	 8.316948e-02
+
+inelse:
+label 8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29890,0.0831695,201,2)
+
+
+readline:7057	 8.533215e-02
+
+inelse:
+label 8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29890,0.0853321,201,2)
+
+
+readline:7079	 1.214588e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29890,0.121459,201,2)
+
+
+readline:7073	 1.828096e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29890,0.18281,201,2)
+
+
+readline:7059	 2.181711e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29890,0.218171,201,2)
+
+
+readline:7075	 2.598940e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29890,0.259894,201,2)
+
+
+readline:7060	 3.474210e-01
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29890,0.347421,201,2)
+
+
+readline:7058	 5.496744e-01
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29890,0.549674,201,2)
+
+
+readline:
+
+inelse:
+
+readline:7075	 -4.378869e-01
+
+inelse:
+label -4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29890,-0.437887,201,3)
+
+
+readline:7059	 -3.145701e-01
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29890,-0.31457,201,3)
+
+
+readline:7062	 -3.112776e-01
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7062,29890,-0.311278,201,3)
+
+
+readline:7069	 -2.343845e-01
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7069,29890,-0.234384,201,3)
+
+
+readline:7065	 -2.047132e-01
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29890,-0.204713,201,3)
+
+
+readline:7064	 -1.838988e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29890,-0.183899,201,3)
+
+
+readline:7068	 -5.173899e-02
+
+inelse:
+label -5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29890,-0.051739,201,3)
+
+
+readline:7066	 -5.144673e-02
+
+inelse:
+label -5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29890,-0.0514467,201,3)
+
+
+readline:7076	 -4.134164e-02
+
+inelse:
+label -4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29890,-0.0413416,201,3)
+
+
+readline:7078	 -3.798353e-02
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7078,29890,-0.0379835,201,3)
+
+
+readline:7081	 -3.774303e-02
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29890,-0.037743,201,3)
+
+
+readline:7070	 -2.823695e-02
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29890,-0.028237,201,3)
+
+
+readline:7071	 -1.456091e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7071,29890,-0.0145609,201,3)
+
+
+readline:7074	 -8.418881e-03
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29890,-0.00841888,201,3)
+
+
+readline:7067	 -7.299214e-03
+
+inelse:
+label -7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7067,29890,-0.00729921,201,3)
+
+
+readline:7077	 4.712876e-02
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29890,0.0471288,201,3)
+
+
+readline:7057	 1.494077e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29890,0.149408,201,3)
+
+
+readline:7079	 2.244106e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29890,0.224411,201,3)
+
+
+readline:7060	 2.431010e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29890,0.243101,201,3)
+
+
+readline:7058	 2.781156e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29890,0.278116,201,3)
+
+
+readline:7073	 4.163121e-01
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29890,0.416312,201,3)
+
+
+readline:
+
+inelse:
+
+readline:7069	 -1.710208e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7069,29890,-0.171021,201,4)
+
+
+readline:7075	 -1.328652e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29890,-0.132865,201,4)
+
+
+readline:7076	 -8.732493e-02
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29890,-0.0873249,201,4)
+
+
+readline:7065	 -7.244499e-02
+
+inelse:
+label -7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29890,-0.072445,201,4)
+
+
+readline:7077	 -5.897386e-02
+
+inelse:
+label -5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29890,-0.0589739,201,4)
+
+
+readline:7057	 -4.345898e-02
+
+inelse:
+label -4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29890,-0.043459,201,4)
+
+
+readline:7078	 -3.604934e-02
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7078,29890,-0.0360493,201,4)
+
+
+readline:7067	 -1.791444e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7067,29890,-0.0179144,201,4)
+
+
+readline:7068	 1.332487e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29890,0.0133249,201,4)
+
+
+readline:7060	 1.716800e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29890,0.017168,201,4)
+
+
+readline:7059	 1.844681e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29890,0.0184468,201,4)
+
+
+readline:7074	 2.322778e-02
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29890,0.0232278,201,4)
+
+
+readline:7079	 2.403510e-02
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29890,0.0240351,201,4)
+
+
+readline:7070	 3.596585e-02
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29890,0.0359659,201,4)
+
+
+readline:7071	 3.653219e-02
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7071,29890,0.0365322,201,4)
+
+
+readline:7064	 4.976678e-02
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29890,0.0497668,201,4)
+
+
+readline:7066	 5.944779e-02
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29890,0.0594478,201,4)
+
+
+readline:7062	 6.388848e-02
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7062,29890,0.0638885,201,4)
+
+
+readline:7081	 1.148748e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29890,0.114875,201,4)
+
+
+readline:7073	 2.512103e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29890,0.25121,201,4)
+
+
+readline:7058	 6.197686e-01
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29890,0.619769,201,4)
+
+
+readline:
+
+inelse:
+
+readline:7069	 -2.063422e-01
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7069,29890,-0.206342,201,5)
+
+
+readline:7075	 -1.879881e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29890,-0.187988,201,5)
+
+
+readline:7062	 -1.061210e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7062,29890,-0.106121,201,5)
+
+
+readline:7081	 -9.338577e-02
+
+inelse:
+label -9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29890,-0.0933858,201,5)
+
+
+readline:7060	 -8.805565e-02
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29890,-0.0880556,201,5)
+
+
+readline:7079	 -5.649253e-02
+
+inelse:
+label -5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29890,-0.0564925,201,5)
+
+
+readline:7065	 -4.013821e-02
+
+inelse:
+label -4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29890,-0.0401382,201,5)
+
+
+readline:7071	 -3.266851e-02
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7071,29890,-0.0326685,201,5)
+
+
+readline:7068	 -1.853139e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29890,-0.0185314,201,5)
+
+
+readline:7066	 -1.376220e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29890,-0.0137622,201,5)
+
+
+readline:7067	 -8.261781e-03
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7067,29890,-0.00826178,201,5)
+
+
+readline:7074	 3.014626e-03
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29890,0.00301463,201,5)
+
+
+readline:7077	 6.242604e-03
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29890,0.0062426,201,5)
+
+
+readline:7057	 1.527774e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29890,0.0152777,201,5)
+
+
+readline:7070	 2.773333e-02
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29890,0.0277333,201,5)
+
+
+readline:7078	 3.124196e-02
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7078,29890,0.031242,201,5)
+
+
+readline:7073	 1.586167e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29890,0.158617,201,5)
+
+
+readline:7064	 1.669497e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29890,0.16695,201,5)
+
+
+readline:7076	 2.232450e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29890,0.223245,201,5)
+
+
+readline:7059	 2.368302e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29890,0.23683,201,5)
+
+
+readline:7058	 3.404385e-01
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29890,0.340438,201,5)
+
+
+readline:
+
+inelse:
+
+readline:7079	 -9.743885e-01
+
+inelse:
+label -9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29890,-0.974388,201,6)
+
+
+readline:7062	 -5.072906e-01
+
+inelse:
+label -5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7062,29890,-0.507291,201,6)
+
+
+readline:7060	 -4.270911e-01
+
+inelse:
+label -4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29890,-0.427091,201,6)
+
+
+readline:7075	 -3.598174e-01
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29890,-0.359817,201,6)
+
+
+readline:7069	 -3.216942e-01
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7069,29890,-0.321694,201,6)
+
+
+readline:7065	 -2.737615e-01
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29890,-0.273761,201,6)
+
+
+readline:7076	 -2.147890e-01
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29890,-0.214789,201,6)
+
+
+readline:7066	 -1.567553e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29890,-0.156755,201,6)
+
+
+readline:7081	 -1.116908e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29890,-0.111691,201,6)
+
+
+readline:7070	 -8.314906e-02
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29890,-0.0831491,201,6)
+
+
+readline:7068	 -2.686018e-02
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29890,-0.0268602,201,6)
+
+
+readline:7067	 2.755839e-03
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7067,29890,0.00275584,201,6)
+
+
+readline:7078	 1.333768e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7078,29890,0.0133377,201,6)
+
+
+readline:7071	 4.177716e-02
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7071,29890,0.0417772,201,6)
+
+
+readline:7057	 4.575232e-02
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29890,0.0457523,201,6)
+
+
+readline:7077	 5.376197e-02
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29890,0.053762,201,6)
+
+
+readline:7074	 6.256009e-02
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29890,0.0625601,201,6)
+
+
+readline:7059	 1.229500e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29890,0.12295,201,6)
+
+
+readline:7073	 1.389096e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29890,0.13891,201,6)
+
+
+readline:7064	 1.703546e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29890,0.170355,201,6)
+
+
+readline:7058	 2.215724e+00
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29890,2.21572,201,6)
+
+
+readline:
+
+inelse:
+
+readline:7065	 -4.301168e-01
+
+inelse:
+label -4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29890,-0.430117,201,7)
+
+
+readline:7075	 -2.656405e-01
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29890,-0.265641,201,7)
+
+
+readline:7059	 -1.429188e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29890,-0.142919,201,7)
+
+
+readline:7079	 -7.020103e-02
+
+inelse:
+label -7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29890,-0.070201,201,7)
+
+
+readline:7070	 -6.423772e-02
+
+inelse:
+label -6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29890,-0.0642377,201,7)
+
+
+readline:7071	 -5.666622e-02
+
+inelse:
+label -5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7071,29890,-0.0566662,201,7)
+
+
+readline:7074	 -4.448021e-02
+
+inelse:
+label -4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29890,-0.0444802,201,7)
+
+
+readline:7060	 -3.026911e-02
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29890,-0.0302691,201,7)
+
+
+readline:7068	 5.409855e-03
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29890,0.00540985,201,7)
+
+
+readline:7067	 6.775368e-03
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7067,29890,0.00677537,201,7)
+
+
+readline:7077	 1.772827e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29890,0.0177283,201,7)
+
+
+readline:7064	 2.489341e-02
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29890,0.0248934,201,7)
+
+
+readline:7078	 3.876997e-02
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7078,29890,0.03877,201,7)
+
+
+readline:7066	 6.396219e-02
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29890,0.0639622,201,7)
+
+
+readline:7062	 6.592086e-02
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7062,29890,0.0659209,201,7)
+
+
+readline:7081	 7.161424e-02
+
+inelse:
+label 7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29890,0.0716142,201,7)
+
+
+readline:7076	 8.583953e-02
+
+inelse:
+label 8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29890,0.0858395,201,7)
+
+
+readline:7057	 9.347769e-02
+
+inelse:
+label 9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29890,0.0934777,201,7)
+
+
+readline:7069	 3.221341e-01
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7069,29890,0.322134,201,7)
+
+
+readline:7073	 4.216749e-01
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29890,0.421675,201,7)
+
+
+readline:7058	 1.294796e+00
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29890,1.2948,201,7)
+
+
+readline:
+
+inelse:
+
+readline:7064	 -1.812911e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29890,-0.181291,201,8)
+
+
+readline:7079	 -1.533536e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29890,-0.153354,201,8)
+
+
+readline:7069	 -1.425351e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7069,29890,-0.142535,201,8)
+
+
+readline:7081	 -1.200478e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29890,-0.120048,201,8)
+
+
+readline:7060	 -1.007129e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29890,-0.100713,201,8)
+
+
+readline:7065	 -8.461767e-02
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29890,-0.0846177,201,8)
+
+
+readline:7070	 -5.944234e-02
+
+inelse:
+label -5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29890,-0.0594423,201,8)
+
+
+readline:7068	 -3.563758e-02
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29890,-0.0356376,201,8)
+
+
+readline:7076	 -3.407449e-02
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29890,-0.0340745,201,8)
+
+
+readline:7071	 -2.522528e-02
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7071,29890,-0.0252253,201,8)
+
+
+readline:7078	 -1.436345e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7078,29890,-0.0143634,201,8)
+
+
+readline:7067	 -8.050155e-03
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7067,29890,-0.00805015,201,8)
+
+
+readline:7073	 8.497579e-03
+
+inelse:
+label 8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29890,0.00849758,201,8)
+
+
+readline:7074	 1.991058e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29890,0.0199106,201,8)
+
+
+readline:7077	 2.636507e-02
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29890,0.0263651,201,8)
+
+
+readline:7062	 5.447910e-02
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7062,29890,0.0544791,201,8)
+
+
+readline:7059	 5.776465e-02
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29890,0.0577647,201,8)
+
+
+readline:7066	 5.928588e-02
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29890,0.0592859,201,8)
+
+
+readline:7057	 7.024159e-02
+
+inelse:
+label 7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29890,0.0702416,201,8)
+
+
+readline:7075	 2.101115e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29890,0.210112,201,8)
+
+
+readline:7058	 3.833733e-01
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29890,0.383373,201,8)
+
+
+readline:
+
+inelse:
+
+readline:7066	 -1.083807e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7066,29890,-0.108381,201,9)
+
+
+readline:7075	 -8.406425e-02
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7075,29890,-0.0840642,201,9)
+
+
+readline:7076	 -7.849018e-02
+
+inelse:
+label -7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7076,29890,-0.0784902,201,9)
+
+
+readline:7081	 -7.267569e-02
+
+inelse:
+label -7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7081,29890,-0.0726757,201,9)
+
+
+readline:7058	 -5.256334e-02
+
+inelse:
+label -5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29890,-0.0525633,201,9)
+
+
+readline:7064	 -3.904203e-02
+
+inelse:
+label -3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7064,29890,-0.039042,201,9)
+
+
+readline:7065	 -1.895886e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7065,29890,-0.0189589,201,9)
+
+
+readline:7069	 -1.850145e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7069,29890,-0.0185014,201,9)
+
+
+readline:7074	 -1.786438e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7074,29890,-0.0178644,201,9)
+
+
+readline:7078	 -1.167398e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7078,29890,-0.011674,201,9)
+
+
+readline:7079	 -8.679671e-03
+
+inelse:
+label -8
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29890,-0.00867967,201,9)
+
+
+readline:7068	 -7.204904e-03
+
+inelse:
+label -7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7068,29890,-0.0072049,201,9)
+
+
+readline:7067	 -1.795445e-03
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7067,29890,-0.00179544,201,9)
+
+
+readline:7060	 -2.013406e-04
+
+inelse:
+label -2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7060,29890,-0.000201341,201,9)
+
+
+readline:7070	 1.981488e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7070,29890,0.0198149,201,9)
+
+
+readline:7071	 2.826878e-02
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7071,29890,0.0282688,201,9)
+
+
+readline:7059	 3.375134e-02
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7059,29890,0.0337513,201,9)
+
+
+readline:7077	 4.576937e-02
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7077,29890,0.0457694,201,9)
+
+
+readline:7073	 9.172499e-02
+
+inelse:
+label 9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29890,0.091725,201,9)
+
+
+readline:7057	 1.406699e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7057,29890,0.14067,201,9)
+
+
+readline:7062	 1.922932e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7062,29890,0.192293,201,9)
+
+
+readline:
+
+inelse:
+
+in for  
+
+readline:
+
+inelse:
+
+readline:7079	 -1.453822e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29891,-0.0145382,201,1)
+
+
+readline:7073	 1.998273e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29891,0.0199827,201,1)
+
+
+readline:7058	 1.207486e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29891,0.120749,201,1)
+
+
+readline:
+
+inelse:
+
+readline:7079	 -6.089414e-05
+
+inelse:
+label -6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29891,-6.08941e-05,201,2)
+
+
+readline:7073	 3.970076e-02
+
+inelse:
+label 3
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29891,0.0397008,201,2)
+
+
+readline:7058	 1.295656e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29891,0.129566,201,2)
+
+
+readline:
+
+inelse:
+
+readline:7079	 6.795981e-03
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29891,0.00679598,201,3)
+
+
+readline:7073	 7.727557e-02
+
+inelse:
+label 7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29891,0.0772756,201,3)
+
+
+readline:7058	 1.754028e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29891,0.175403,201,3)
+
+
+readline:
+
+inelse:
+
+readline:7079	 -7.562260e-04
+
+inelse:
+label -7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29891,-0.000756226,201,4)
+
+
+readline:7073	 6.856564e-03
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29891,0.00685656,201,4)
+
+
+readline:7058	 2.911532e-01
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29891,0.291153,201,4)
+
+
+readline:
+
+inelse:
+
+readline:7079	 -1.801049e-03
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29891,-0.00180105,201,5)
+
+
+readline:7073	 1.751773e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29891,0.0175177,201,5)
+
+
+readline:7058	 7.508481e-02
+
+inelse:
+label 7
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29891,0.0750848,201,5)
+
+
+readline:
+
+inelse:
+
+readline:7073	 -1.448850e-01
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29891,-0.144885,201,6)
+
+
+readline:7079	 -4.455268e-02
+
+inelse:
+label -4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29891,-0.0445527,201,6)
+
+
+readline:7058	 5.442701e-01
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29891,0.54427,201,6)
+
+
+readline:
+
+inelse:
+
+readline:7079	 1.557831e-02
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29891,0.0155783,201,7)
+
+
+readline:7073	 6.722601e-02
+
+inelse:
+label 6
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29891,0.067226,201,7)
+
+
+readline:7058	 5.309730e-01
+
+inelse:
+label 5
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29891,0.530973,201,7)
+
+
+readline:
+
+inelse:
+
+readline:7079	 -9.156239e-03
+
+inelse:
+label -9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29891,-0.00915624,201,8)
+
+
+readline:7073	 -9.045662e-03
+
+inelse:
+label -9
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29891,-0.00904566,201,8)
+
+
+readline:7058	 1.488586e-01
+
+inelse:
+label 1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29891,0.148859,201,8)
+
+
+readline:
+
+inelse:
+
+readline:7079	 -1.249526e-02
+
+inelse:
+label -1
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7079,29891,-0.0124953,201,9)
+
+
+readline:7058	 2.004696e-02
+
+inelse:
+label 2
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7058,29891,0.020047,201,9)
+
+
+readline:7073	 4.789615e-02
+
+inelse:
+label 4
+
+query:INSERT INTO association (markerid, traitid, value, assocsetid,popref) VALUES(7073,29891,0.0478961,201,9)
+
+
+readline:
+
+inelse:
+

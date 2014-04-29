@@ -1,0 +1,2 @@
+GFL4444_tp GFL4444_mp 100 25 30 GFL4444_glmentbetas.txt  GFL_1.config GFL4444_ntwrk GFL4444_1
+vanilla

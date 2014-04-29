@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Elastic net model paths for some generalized linear models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+
+<table width="100%" summary="page for glmnet-package {glmnet}"><tr><td>glmnet-package {glmnet}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+Elastic net model paths for some generalized linear models
+</h2>
+
+<h3>Description</h3>
+
+<p>This package fits lasso and elastic-net model paths for regression, logistic
+and multinomial regression using coordinate descent. The algorithm is
+extremely fast, and exploits sparsity in the input x matrix where it
+exists. A variety of predictions can be made from the fitted models.
+</p>
+
+
+<h3>Details</h3>
+
+
+<table summary="Rd table">
+<tr>
+ <td align="left">
+Package: </td><td align="left"> glmnet</td>
+</tr>
+<tr>
+ <td align="left">
+Type: </td><td align="left"> Package</td>
+</tr>
+<tr>
+ <td align="left">
+Version: </td><td align="left"> 1.0</td>
+</tr>
+<tr>
+ <td align="left">
+Date: </td><td align="left"> 2008-05-14</td>
+</tr>
+<tr>
+ <td align="left">
+License: </td><td align="left"> What license is it under?</td>
+</tr>
+<tr>
+ <td align="left">
+</td>
+</tr>
+
+</table>
+
+<p>Very simple to use. Accepts <code>x,y</code> data for regression models, and
+produces the regularization path over a grid of values for the tuning
+parameter <code>lambda</code>. Only 5 functions:
+<code>glmnet</code><br>
+<code>predict.glmnet</code><br>
+<code>plot.glmnet</code><br>
+<code>print.glmnet</code><br>
+<code>coef.glmnet</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jerome Friedman, Trevor Hastie and Rob Tibshirani<br>
+Maintainer: Trevor Hastie  &lt;hastie@stanford.edu&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Friedman, J., Hastie, T. and Tibshirani, R. (2008)
+<EM>Regularization Paths for Generalized Linear Models via Coordinate
+Descent</EM>,   <a href="http://www.stanford.edu/~hastie/Papers/glmnet.pdf">http://www.stanford.edu/~hastie/Papers/glmnet.pdf</a><br>
+<EM>Journal of Statistical Software, Vol. 33(1), 1-22 Feb 2010</EM><br>
+<a href="http://www.jstatsoft.org/v33/i01/">http://www.jstatsoft.org/v33/i01/</a><br>
+Simon, N., Friedman, J., Hastie, T., Tibshirani, R. (2011)
+<EM>Regularization Paths for Cox's Proportional Hazards Model via
+Coordinate Descent, Journal of Statistical Software, Vol. 39(5)
+1-13</EM><br>
+<a href="http://www.jstatsoft.org/v39/i05/">http://www.jstatsoft.org/v39/i05/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+x=matrix(rnorm(100*20),100,20)
+y=rnorm(100)
+g2=sample(1:2,100,replace=TRUE)
+g4=sample(1:4,100,replace=TRUE)
+fit1=glmnet(x,y)
+predict(fit1,newx=x[1:5,],s=c(0.01,0.005))
+predict(fit1,type="coef")
+plot(fit1,xvar="lambda")
+fit2=glmnet(x,g2,family="binomial")
+predict(fit2,type="response",newx=x[2:5,])
+predict(fit2,type="nonzero")
+fit3=glmnet(x,g4,family="multinomial")
+predict(fit3,newx=x[1:3,],type="response",s=0.01)
+</pre>
+
+<hr><div align="center">[Package <em>glmnet</em> version 1.9-5 <a href="00Index.html">Index</a>]</div>
+</body></html>
