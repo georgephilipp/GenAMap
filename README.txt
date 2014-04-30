@@ -14,12 +14,12 @@ The developer package has the following items:
  - Documentation: This is a repository for various documents created over time describing how to use / develop GenAMap. Only some of the contents of this folder are contained in the user package.
  - DistroFiles: These files are only relevant for the user package and are used by makeDistro.sh. In particular, this folder contains another README which is meant primarily for GenAMap users but is also useful for GenAMap developers.
  - CodeServerService: This is the process run by the remote cluster that runs algorithms. This cluster must have access to the SQL database as well as the condor scheduler. 
- - CodeGUI: This is the GenAMap GUI client. Inside the CodeGUI folder, there are four folders whose names start with `GenAMap'. These contain most of code that was written by GenAMap developers in the past. The other folders contain external libraries, some of which may have been edited / extended for use with GenAMap. 
+ - CodeGUI: This is the GenAMap GUI client. Inside the CodeGUI folder, the folder `GenAMap' contain most of code that was written by GenAMap developers in the past. The other folders contain external libraries, some of which may have been edited / extended for use with GenAMap. 
  - Algorithms: This is the code that contains the algorithms that can be run by GenAMap. The folder contains a subfolder exe. That subfolder contains scripts. All other folders contain source code that can be compiled with the various makefiles in these folders.  
 
 *****Developing the GUI*****
 
-Each of the four sub-folder of CodeGUI whose name starts with `GenAMap' are NetBeans projects. Hence, it is convenient to continue developing GenAMap in NetBeans. Also, `JUNGGraphFix', `GPLClasses' and `libraries/javastat' are NetBeans projects. (I know that `GPLClasses' has already been edited through NetBeans.)
+The important code in CodeGUI/GenAMap is a NetBeans project. Hence, it is convenient to continue developing GenAMap in NetBeans. Also, `JUNGGraphFix', `GPLClasses' and `libraries/javastat' are NetBeans projects. (I know that `GPLClasses' has already been edited through NetBeans.)
 
 If you want to move the code off NetBeans, you can still load the projects into NetBeans to determine the dependencies amongst them and the dependencies on other libraries. These dependencies can be viewed in the `Projects' tab in NetBeans.
 

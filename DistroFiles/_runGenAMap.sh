@@ -1,1 +1,1 @@
-java -jar -Xmx1024m GenAMapMain.jar $@
+java -jar -Xmx1024m GenAMap.jar $@

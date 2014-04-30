@@ -2,6 +2,9 @@ Dear User,
 
 Thank you for downloading GenAMap. To run GenAMap, please follow the instructions in Documentation/SettingUpGenAMap.pdf.
 
+For LICENSE information, please view LICENSE.txt.
+Please also view DISCLAIMER.txt.
+
 A description of how GenAMap works and the features available can be found in Documentation/IntroductionToGenAmap.pdf. Video tutorials of individual features and other documentation can be found online under http://sailing.cs.cmu.edu/genamap/tutorials.html.
 
 One of trickiest aspects of using GenAMap is to format data correctly for importing it into the software. Please refer to Documentation/DataImportingGuide.pdf for detailed descriptions and Documentation/ExampleData for data file templates. 

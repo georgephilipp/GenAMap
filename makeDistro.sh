@@ -1,14 +1,14 @@
 mkdir GenAMapX.Y.Z
 mkdir GenAMapX.Y.Z/Documentation
-cp CodeGUI/GenAMapMain/algoConfig.txt GenAMapX.Y.Z
-cp CodeGUI/GenAMapMain/bingo_gui.properties GenAMapX.Y.Z
-cp CodeGUI/GenAMapMain/DISCLAIMER.txt GenAMapX.Y.Z
-cp CodeGUI/GenAMapMain/LICENSE.txt GenAMapX.Y.Z
-cp -r CodeGUI/GenAMapMain/goOntologies GenAMapX.Y.Z
-cp -r CodeGUI/GenAMapMain/goSpecies GenAMapX.Y.Z
-cp -r CodeGUI/GenAMapMain/quickExamples GenAMapX.Y.Z
-cp CodeGUI/GenAMapMain/dist/GenAMapMain.jar GenAMapX.Y.Z
-cp -r CodeGUI/GenAMapMain/dist/lib GenAMapX.Y.Z
+cp CodeGUI/GenAMap/algoConfig.txt GenAMapX.Y.Z
+cp CodeGUI/GenAMap/bingo_gui.properties GenAMapX.Y.Z
+cp CodeGUI/GenAMap/DISCLAIMER.txt GenAMapX.Y.Z
+cp CodeGUI/GenAMap/LICENSE.txt GenAMapX.Y.Z
+cp -r CodeGUI/GenAMap/goOntologies GenAMapX.Y.Z
+cp -r CodeGUI/GenAMap/goSpecies GenAMapX.Y.Z
+cp -r CodeGUI/GenAMap/quickExamples GenAMapX.Y.Z
+cp CodeGUI/GenAMap/dist/GenAMap.jar GenAMapX.Y.Z
+cp -r CodeGUI/GenAMap/dist/lib GenAMapX.Y.Z
 cp DistroFiles/GenAMap.png GenAMapX.Y.Z
 cp DistroFiles/_runGenAMap.bat GenAMapX.Y.Z
 cp DistroFiles/_runGenAMap.sh GenAMapX.Y.Z

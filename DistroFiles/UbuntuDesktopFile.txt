@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=GenAMap
 Comment=Software for Structured Association Mapping
-Exec=java -jar /usr0/home/gschoenh/Installs/GenAMap3.1/GenAMapMain.jar
+Exec=java -jar /usr0/home/gschoenh/Installs/GenAMap3.1/GenAMap.jar
 Icon=/usr0/home/gschoenh/Installs/GenAMap3.1/GenAMap.png
 Categories=Application;Development;Java;IDE
 Version=1.0
