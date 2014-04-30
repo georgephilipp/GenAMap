@@ -11,6 +11,8 @@ CodeGUI/GenAMap/dist/*
 CodeGUI/GPLClasses/dist/*
 CodeGUI/JUNGGraphFix/dist/*
 CodeGUI/libraries/javastat/dist/*
+CodeGUI/GenAMap/temp1.txt
+CodeGUI/GenAMap/temp_parm.txt
 CodeServerService/dist/*
 Documentation/QuickOverview.pdf
 Documentation/SettingUpGenAMap.pdf
