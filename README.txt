@@ -33,7 +33,7 @@ The web server must host the PHP scripts in the `phps_genamap' folder. Currently
 
 The database has to be accessible by both the web server and by the remote cluster. The web server accesses it through the php scripts, and the cluster accesses it via the service and also via the Algorithms. To change the location of the database, you need to edit the php scripts (of which there are only a few) to reflect that new address. Also, to ensure that the algorithms find the new location of the database, you must edit Algorithms/exe/SQLparms.txt. The four lines in that file represent address of the SQL server (including port), the name of the database, the username used to log into the server and the password used to log into the server. Editing Algorithms/exe/SQLparms.txt SHOULD make all the algorithms find the new database, but I have never tried to move the database so there may be issues. Finally, edit the database call in CodeServerService/service/SQLCommander.java.
 
-Currently, the SQL server is running on cogito.ml.cmu.edu. To access it, log into cogito as `genamap' and type "mysql -u assocmap -p". The password is Thisisadumbpassword*. The name of the database is `geneassoc'. There is also a root account for this SQL server. Please contact authorized developers to obtain it.  
+Currently, the SQL server is running on cogito.ml.cmu.edu. To access it, log into cogito as `genamap' and type "mysql -u assocmap -p" or log into cogito as anyone else and type "mysql  --host=127.0.0.1  --port=4306  --user=assocmap  -p". The password is Thisisadumbpassword*. The name of the database is `geneassoc'. There is also a root account for this SQL server. Please contact authorized developers to obtain it.  
 
 *****Setting up the remote cluster*****
 
