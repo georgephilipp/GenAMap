@@ -156,12 +156,18 @@ public class AssociationObjectTabs extends javax.swing.JPanel
         jScrollPane1 = new javax.swing.JScrollPane();
         assocTree = new javax.swing.JTree();
 
+        setBackground(null);
+
         tabs.setMinimumSize(new java.awt.Dimension(75, 15));
         tabs.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 tabsStateChanged(evt);
             }
         });
+
+        markerTab.setBackground(null);
+
+        jScrollPane3.setBackground(null);
 
         markerTree.setMaximumSize(new java.awt.Dimension(39998, 39998));
         markerTree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
@@ -183,6 +189,10 @@ public class AssociationObjectTabs extends javax.swing.JPanel
         );
 
         tabs.addTab("Markers", markerTab);
+
+        traitTab.setBackground(null);
+
+        jScrollPane2.setBackground(null);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Projects");
         traitTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -206,6 +216,10 @@ public class AssociationObjectTabs extends javax.swing.JPanel
         );
 
         tabs.addTab("Traits", traitTab);
+
+        assocTab.setBackground(null);
+
+        jScrollPane1.setBackground(null);
 
         assocTree.setMaximumSize(new java.awt.Dimension(39998, 39998));
         assocTree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
@@ -232,11 +246,11 @@ public class AssociationObjectTabs extends javax.swing.JPanel
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+            .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+            .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -760,7 +760,7 @@ public class DataManager
      * @param name The user's name
      * @param team The team that the user will join. 
      */
-    public static void createUser(String uid, String pwd, String org,
+    public static boolean createUser(String uid, String pwd, String org,
             String email, String name, String team)
     {
         String data;
@@ -804,12 +804,14 @@ public class DataManager
                     }
                 }
             }
+            return true;
         }
         catch (Exception ex)
         {
             //isConnected = false;
             error = ex.getMessage();
             System.err.println(error);
+            return false;
         }
         //isConnected = false;
     }

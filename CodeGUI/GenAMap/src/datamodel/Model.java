@@ -27,6 +27,11 @@ import java.util.Collections;
  */
 public class Model implements Serializable
 {
+     /*
+     * temporary variable for switching from one code version to the next
+     */
+    public static boolean isNewCode = false;
+    
 
     /**
      * The colors that will be used to display the different populations, GO categories, etc.
@@ -326,16 +331,19 @@ public class Model implements Serializable
      */
     private static void createNewModel()
     {
-        deserializeSettings();
-        if (!Tester.testConnection())
+        if(!isNewCode)
         {
-            DatabaseSetup ds = new DatabaseSetup(null, true);
-            ds.setVisible(true);
-        }
-        if (!Tester.testConnection())
-        {
-            System.err.println("Application cannot run without valid db settings.");
-            return;
+            deserializeSettings();
+            if (!Tester.testConnection())
+            {
+                DatabaseSetup ds = new DatabaseSetup(null, true);
+                ds.setVisible(true);
+            }
+            if (!Tester.testConnection())
+            {
+                System.err.println("Application cannot run without valid db settings.");
+                return;
+            }
         }
 
         /////////////////////////////////////garbage
