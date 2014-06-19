@@ -1,6 +1,6 @@
 package algorithm;
 
-import control.algodialog.IOFilesForIOLasso;
+import ui.IOFilesForIOLasso;
 import datamodel.Network;
 import datamodel.Population;
 import java.util.ArrayList;

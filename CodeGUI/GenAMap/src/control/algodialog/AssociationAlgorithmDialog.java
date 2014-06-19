@@ -15,6 +15,7 @@ import datamodel.TraitSet;
 import java.io.File;
 import javax.swing.JFrame;
 import realdata.DataManager;
+import ui.IOFilesForIOLasso;
 
 /**
  * Allows a user to choose an algorithm that will create an association set.
@@ -522,7 +523,7 @@ public class AssociationAlgorithmDialog extends java.awt.Dialog
             IOFilesForIOLasso ioffio = null;
             if(structtype == 3)
             {
-                ioffio = new IOFilesForIOLasso(parent, true);
+                ioffio = new IOFilesForIOLasso(parent);
 
                 ioffio.setVisible(true);
 

@@ -265,6 +265,18 @@ public class AssociationGUI extends javax.swing.JFrame
      */
     public static void main(String args[])
     {
+        if(args.length > 0)
+        {
+            if(args[0].equals("newscreen"))
+            {
+                String[] newargs = new String[args.length - 1];
+                for(int i=0;i<args.length-1;i++)
+                    newargs[i] = args[i+1];                
+                ui.GenAMapLoginWindow.main(newargs);
+                return;
+            }
+        }        
+        
         java.awt.EventQueue.invokeLater(new Runnable()
         {
 
