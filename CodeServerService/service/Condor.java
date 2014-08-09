@@ -1,8 +1,34 @@
 package service;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
+
+class StreamGobbler extends Thread
+{
+    InputStream is;
+    public List content;
+    
+    StreamGobbler(InputStream is)
+    {
+        this.is = is;
+        this.content = new ArrayList();
+    }
+    
+    public void run()
+    {
+        try
+        {
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            String line=null;
+            while ( (line = br.readLine()) != null)
+                content.add(line);    
+            } catch (IOException ioe)
+              {
+                ioe.printStackTrace();  
+              }
+    }
+}
 
 public class Condor
 {
@@ -339,18 +365,25 @@ public class Condor
 		{
 			String line;
 			Process p = Runtime.getRuntime().exec(condorPath + "condor_q");
-			p.waitFor();
-		    	p.getErrorStream().close();
-		        p.getOutputStream().close();
 
-			BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+           	        StreamGobbler errorGobbler = new StreamGobbler(p.getErrorStream());            
+            
+            		StreamGobbler outputGobbler = new StreamGobbler(p.getInputStream());
+                
+          	 	errorGobbler.start();
+            		outputGobbler.start();
+
+		        p.getOutputStream().close();
+			p.waitFor();
 			String res = "";
-			while((line = input.readLine()) != null)
+
+			for(Object o : outputGobbler.content)
 			{
-				if(line.toLowerCase().contains("error") || line.toLowerCase().contains("not found") || line.toLowerCase().contains("cannot run"))
+    				line = (String)o;
+    				if(line.toLowerCase().contains("error") || line.toLowerCase().contains("not found") || line.toLowerCase().contains("cannot run"))
 					res = line;
-			}
-			input.close();
+              		}
+
 			p.getInputStream().close();
 			return res;
 		}
